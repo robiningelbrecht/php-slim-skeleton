@@ -1,7 +1,5 @@
 <?php
 
-
-use DI\ContainerBuilder;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
@@ -15,14 +13,16 @@ use Symfony\Component\Console\Application;
 
 const APP_ROOT = __DIR__ . '/..';
 
-$builder = new ContainerBuilder();
-$builder->addDefinitions([
+return [
+    // Twig Environment.
     Environment::class => new Environment(new FilesystemLoader(APP_ROOT . '/templates')),
+    // Doctrine Dbal.
     Connection::class => static function (ContainerInterface $c): Connection {
         $settings = $c->get('settings');
 
         return DriverManager::getConnection($settings['doctrine']['connection']);
     },
+    // Doctrine EntityManager.
     EntityManager::class => static function (ContainerInterface $c): EntityManager {
         $settings = $c->get('settings');
 
@@ -57,6 +57,4 @@ $builder->addDefinitions([
     'settings' => function () {
         return require APP_ROOT . '/config/settings.php';
     },
-]);
-
-return $builder->build();
+];

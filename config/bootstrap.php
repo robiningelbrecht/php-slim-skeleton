@@ -1,8 +1,9 @@
 <?php
 
-use Slim\App;
-
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$container = require_once __DIR__ . '/container.php';
+use App\Infrastructure\ContainerFactory;
+use Slim\App;
+
+$container = ContainerFactory::create();
 return $container->get(App::class);
