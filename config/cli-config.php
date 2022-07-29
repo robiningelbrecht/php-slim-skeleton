@@ -8,7 +8,7 @@ use Doctrine\Migrations\DependencyFactory;
 use Doctrine\Migrations\Configuration\EntityManager\ExistingEntityManager;
 
 /** @var \DI\Container $container */
-$container = require_once __DIR__ . '/../bootstrap.php';
+$container = require_once __DIR__ . '/container.php';
 
 return DependencyFactory::fromEntityManager(
     new ConfigurationArray($container->get('settings')['doctrine']['migrations']),
