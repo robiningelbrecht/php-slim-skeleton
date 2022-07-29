@@ -4,8 +4,11 @@ namespace App\Controller;
 
 use App\Domain\WriteModel\Pokemon\Pokemon;
 use App\Domain\WriteModel\Pokemon\PokemonRepository;
+use App\Domain\WriteModel\Vote\Vote;
+use App\Domain\WriteModel\Vote\VoteRepository;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Ramsey\Uuid\Rfc4122\UuidV4;
 use Ramsey\Uuid\Uuid;
 use Slim\Routing\RouteContext;
 use Twig\Environment;
@@ -15,6 +18,7 @@ class ChooseCoolestPokemonController
     public function __construct(
         private readonly Environment $twig,
         private readonly PokemonRepository $pokemonRepository,
+        private readonly VoteRepository $voteRepository,
     )
     {
     }
@@ -30,13 +34,13 @@ class ChooseCoolestPokemonController
                 throw new \RuntimeException('Dirty little cheater');
             }
             $upvotedPoke = $this->pokemonRepository->findByUuid(Uuid::fromString($previousPokemonUpvotedUuid));
-            $upvotedPoke->incrementImpressions();
-            $upvotedPoke->incrementUpVotes();
-            $this->pokemonRepository->save($upvotedPoke);
-
             $notUpvotedPoke = $this->pokemonRepository->findByUuid(Uuid::fromString($previousPokemonNotUpvotedUuid));
-            $notUpvotedPoke->incrementImpressions();
-            $this->pokemonRepository->save($notUpvotedPoke);
+
+            $this->voteRepository->add(Vote::create(
+                UuidV4::uuid4(),
+                $upvotedPoke->getUuid(),
+                $notUpvotedPoke->getUuid()
+            ));
 
             // Redirect to index.
             $routeParser = RouteContext::fromRequest($request)->getRouteParser();

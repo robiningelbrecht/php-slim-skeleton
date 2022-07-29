@@ -29,16 +29,16 @@ class Result
         return $this->numberOfVotes;
     }
 
-    public static function fromPokemon(Pokemon $pokemon): self
+    public static function fromPokemonAndVotes(Pokemon $pokemon, int $impressions, int $upVotes): self
     {
         $score = 0;
-        if ($pokemon->getImpressions() > 0) {
-            $score = round(($pokemon->getUpVotes() / $pokemon->getImpressions()) * 100);
+        if ($impressions > 0) {
+            $score = round(($upVotes / $impressions) * 100);
         }
         return new self(
             $pokemon,
             $score,
-            $pokemon->getUpVotes(),
+            $upVotes,
         );
     }
 }

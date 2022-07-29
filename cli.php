@@ -5,8 +5,10 @@ if (php_sapi_name() !== 'cli') {
 }
 
 use Ahc\Cli\Application;
-use App\Domain\Pokemon\Pokemon;
-use App\Domain\Pokemon\PokemonRepository;
+use App\Domain\WriteModel\Pokemon\Pokemon;
+use App\Domain\WriteModel\Pokemon\PokemonRepository;
+use App\Domain\WriteModel\Vote\VoteRepository;
+
 use GuzzleHttp\Client;
 
 require __DIR__ . '/vendor/autoload.php';
@@ -37,7 +39,9 @@ $app
     ->command('pokemon:reset', 'Empty complete DB, votes will be deleted as well')
     ->action(function () use ($container) {
         $pokemonRepository = $container->get(PokemonRepository::class);
-        $pokemonRepository->truncate();;
+        $pokemonRepository->truncate();
+        $voteRepository = $container->get(VoteRepository::class);
+        $voteRepository->truncate();;
     });
 
 $app->handle($_SERVER['argv']);

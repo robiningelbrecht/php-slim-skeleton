@@ -36,10 +36,6 @@ class Pokemon
         private readonly array $stats,
         #[Column(type: "json", nullable: true)]
         private readonly array $sprites,
-        #[Column(type: "integer", nullable: false)]
-        private int $impressions = 0,
-        #[Column(type: "integer", nullable: false)]
-        private int $upVotes = 0
     )
     {
 
@@ -129,30 +125,6 @@ class Pokemon
         throw new \RuntimeException('Sprite not found');
     }
 
-    public function getImpressions(): int
-    {
-        return $this->impressions;
-    }
-
-    public function getUpVotes(): int
-    {
-        return $this->upVotes;
-    }
-
-    public function incrementImpressions(): self
-    {
-        $this->impressions++;
-
-        return $this;
-    }
-
-    public function incrementUpVotes(): self
-    {
-        $this->upVotes++;
-
-        return $this;
-    }
-
     public function toArray(): array
     {
         return [
@@ -167,8 +139,6 @@ class Pokemon
             'types' => json_encode($this->getTypes()),
             'stats' => json_encode($this->getStats()),
             'sprites' => json_encode($this->getSprites()),
-            'impressions' => $this->getImpressions(),
-            'upVotes' => $this->getUpVotes(),
         ];
     }
 
@@ -186,8 +156,6 @@ class Pokemon
             json_decode($state['types'], true),
             json_decode($state['stats'], true),
             json_decode($state['sprites'], true),
-            $state['impressions'],
-            $state['upVotes'],
         );
     }
 
