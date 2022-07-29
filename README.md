@@ -12,6 +12,7 @@ To Run on your local machine:
 
 * `git clone git@github.com:robiningelbrecht/the-coolest-pokemon.git`
 * `docker-composer up -d`
+* Navigate to `localhost:8080`
 
 <h2 align="center">Voting example</h2>
 <p align="center">
