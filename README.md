@@ -11,9 +11,10 @@ This repository is a simple example on how to use <a href="https://github.com/sl
 To Run on your local machine:
 
 * Run `git clone git@github.com:robiningelbrecht/the-coolest-pokemon.git`
-* Run `composer install`
-* Run `docker-composer up -d`
-* Run `docker-compose run --rm php-cli vendor/bin/doctrine-migrations migrate`
+* Run `composer install` to install dependencies
+* Run `docker-composer up -d --build` to up and build Docker containers
+* Run `docker-compose run --rm php-cli vendor/bin/doctrine-migrations migrate` to bring db schema up to date.
+* Run `docker-compose run --rm php-cli php cli.php pokemon:cache` to store Pokemon in database.
 * Navigate to `http://localhost:8080`
 
 <h2 align="center">Voting example</h2>
