@@ -1,0 +1,295 @@
+:root {
+    --pokemon-default-color: #bbbbbb;
+    --pokemon-bug-color: #94bc4a;
+    --pokemon-dark-color: #736c75;
+    --pokemon-dragon-color: #6a7baf;
+    --pokemon-electric-color: #e5c531;
+    --pokemon-fairy-color: #e397d1;
+    --pokemon-fighting-color: #cb5f48;
+    --pokemon-fire-color: #ea7a3c;
+    --pokemon-flying-color: #7da6de;
+    --pokemon-ghost-color: #846ab6;
+    --pokemon-grass-color: #71c558;
+    --pokemon-ground-color: #cc9f4f;
+    --pokemon-ice-color: #70cbd4;
+    --pokemon-normal-color: #aab09f;
+    --pokemon-poison-color: #b468b7;
+    --pokemon-psychic-color: #e5709b;
+    --pokemon-rock-color: #b2a061;
+    --pokemon-steel-color: #89a1b0;
+    --pokemon-water-color: #539ae2;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+p {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    background-color: #eee;
+    font-family: Poppins, sans-serif;
+    min-height: 100vh;
+    color: #222;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .battle{
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.container .battle .vs{
+    font-weight: 600;
+}
+
+img {
+    max-width: 100%;
+}
+
+div.pokemon {
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-weight: bold;
+    color: rgb(24 23 31);
+    padding: 0.5em;
+    border-radius: 0.3em;
+}
+
+div.pokemon img {
+    height: 130px;
+    margin: 0.5em 0;
+}
+
+div.pokemon div.hp {
+    place-self: flex-end;
+    width: 60px;
+    background-color: #ffffff;
+    text-align: center;
+    padding: 8px 0;
+    border-radius: 30px;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+div.pokemon div.name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+div.pokemon div.types {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin: 15px 0;
+}
+
+div.pokemon div.types .type {
+    font-size: 10px;
+    font-weight: 500;
+    padding: 5px 15px;
+    border-radius: 15px;
+    color: #ffffff;
+}
+
+div.pokemon div.stats {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    text-align: center;
+}
+
+div.pokemon div.stats h3 {
+    margin: 0;
+    font-size: 10px;
+    font-weight: 400;
+}
+
+div.pokemon.type {
+    background: radial-gradient(circle at 50% -35%, var(--pokemon-default-color) 50%, #fff 36%);
+    border: 3px solid var(--pokemon-default-color);
+}
+
+div.pokemon .types .type {
+    background-color: var(--pokemon-default-color);
+}
+
+div.pokemon.type--bug {
+    background: radial-gradient(circle at 50% -35%, var(--pokemon-bug-color) 50%, #fff 36%);
+    border: 3px solid var(--pokemon-bug-color);
+}
+
+div.pokemon .types .type--bug {
+    background-color: var(--pokemon-bug-color);
+}
+
+div.pokemon.type--dark {
+    background: radial-gradient(circle at 50% -35%, var(--pokemon-dark-color) 50%, #fff 36%);
+    border: 3px solid var(--pokemon-dark-color);
+}
+
+div.pokemon .types .type--dark {
+    background-color: var(--pokemon-dark-color);
+}
+
+div.pokemon.type--dragon {
+    background: radial-gradient(circle at 50% -35%, var(--pokemon-dragon-color) 50%, #fff 36%);
+    border: 3px solid var(--pokemon-dragon-color);
+}
+
+div.pokemon .types .type--dragon {
+    background-color: var(--pokemon-dragon-color);
+}
+
+div.pokemon.type--electric {
+    background: radial-gradient(circle at 50% -35%, var(--pokemon-electric-color) 50%, #fff 36%);
+    border: 3px solid var(--pokemon-electric-color);
+}
+
+div.pokemon .types .type--electric {
+    background-color: var(--pokemon-electric-color);
+}
+
+div.pokemon.type--fairy {
+    background: radial-gradient(circle at 50% -35%, var(--pokemon-fairy-color) 50%, #fff 36%);
+    border: 3px solid var(--pokemon-fairy-color);
+}
+
+div.pokemon .types .type--fairy {
+    background-color: var(--pokemon-fairy-color);
+}
+
+div.pokemon.type--fighting {
+    background: radial-gradient(circle at 50% -35%, var(--pokemon-fighting-color) 50%, #fff 36%);
+    border: 3px solid var(--pokemon-fighting-color);
+}
+
+div.pokemon .types .type--fighting {
+    background-color: var(--pokemon-fighting-color);
+}
+
+div.pokemon.type--fire {
+    background: radial-gradient(circle at 50% -35%, var(--pokemon-fire-color) 50%, #fff 36%);
+    border: 3px solid var(--pokemon-fire-color);
+}
+
+div.pokemon .types .type--fire {
+    background-color: var(--pokemon-fire-color);
+}
+
+div.pokemon.type--flying {
+    background: radial-gradient(circle at 50% -35%, var(--pokemon-flying-color) 50%, #fff 36%);
+    border: 3px solid var(--pokemon-flying-color);
+}
+
+div.pokemon .types .type--flying {
+    background-color: var(--pokemon-flying-color);
+}
+
+div.pokemon.type--ghost {
+    background: radial-gradient(circle at 50% -35%, var(--pokemon-ghost-color) 50%, #fff 36%);
+    border: 3px solid var(--pokemon-ghost-color);
+}
+
+div.pokemon .types .type--ghost {
+    background-color: var(--pokemon-ghost-color);
+}
+
+div.pokemon.type--grass {
+    background: radial-gradient(circle at 50% -35%, var(--pokemon-grass-color) 50%, #fff 36%);
+    border: 3px solid var(--pokemon-grass-color);
+}
+
+div.pokemon .types .type--grass {
+    background-color: var(--pokemon-grass-color);
+}
+
+div.pokemon.type--ground {
+    background: radial-gradient(circle at 50% -35%, var(--pokemon-ground-color) 50%, #fff 36%);
+    border: 3px solid var(--pokemon-ground-color);
+}
+
+div.pokemon .types .type--ground {
+    background-color: var(--pokemon-ground-color);
+}
+
+div.pokemon.type--ice {
+    background: radial-gradient(circle at 50% -35%, var(--pokemon-ice-color) 50%, #fff 36%);
+    border: 3px solid var(--pokemon-ice-color);
+}
+
+div.pokemon .types .type--ice {
+    background-color: var(--pokemon-ice-color);
+}
+
+div.pokemon.type--normal {
+    background: radial-gradient(circle at 50% -35%, var(--pokemon-normal-color) 50%, #fff 36%);
+    border: 3px solid var(--pokemon-normal-color);
+}
+
+div.pokemon .types .type--normal {
+    background-color: var(--pokemon-normal-color);
+}
+
+div.pokemon.type--poison {
+    background: radial-gradient(circle at 50% -35%, var(--pokemon-poison-color) 50%, #fff 36%);
+    border: 3px solid var(--pokemon-poison-color);
+}
+
+div.pokemon .types .type--poison {
+    background-color: var(--pokemon-poison-color);
+}
+
+div.pokemon.type--psychic {
+    background: radial-gradient(circle at 50% -35%, var(--pokemon-psychic-color) 50%, #fff 36%);
+    border: 3px solid var(--pokemon-psychic-color);
+}
+
+div.pokemon .types .type--psychic {
+    background-color: var(--pokemon-psychic-color);
+}
+
+div.pokemon.type--rock {
+    background: radial-gradient(circle at 50% -35%, var(--pokemon-rock-color) 50%, #fff 36%);
+    border: 3px solid var(--pokemon-rock-color);
+}
+
+div.pokemon .types .type--rock {
+    background-color: var(--pokemon-rock-color);
+}
+
+div.pokemon.type--steel {
+    background: radial-gradient(circle at 50% -35%, var(--pokemon-steel-color) 50%, #fff 36%);
+    border: 3px solid var(--pokemon-steel-color);
+}
+
+div.pokemon .types .type--steel {
+    background-color: var(--pokemon-steel-color);
+}
+
+div.pokemon.type--water {
+    background: radial-gradient(circle at 50% -35%, var(--pokemon-water-color) 50%, #fff 36%);
+    border: 3px solid var(--pokemon-water-color);
+}
+
+div.pokemon .types .type--water {
+    background-color: var(--pokemon-water-color);
+}

@@ -1,0 +1,26 @@
+<a href="{{ voteUri }}">
+    <div class="pokemon type type--{{ pokemon.getMainType() }}">
+        <div class="hp">HP {{ pokemon.getStat('hp') }}</div>
+        <img src="{{ pokemon.getSpriteUri() }}">
+        <div class="name">#{{ pokemon.getId() }} {{ pokemon.getName()|capitalize }}</div>
+        <div class="types">
+            {% for type in pokemon.getTypes() %}
+                <div class="type type--{{ type }}">{{ type|capitalize }}</div>
+            {% endfor %}
+        </div>
+        <div class="stats">
+            <div>
+                <p>{{ pokemon.getStat('attack') }}</p>
+                <h3>Attack</h3>
+            </div>
+            <div>
+                <p>{{ pokemon.getStat('defense') }}</p>
+                <h3>Defense</h3>
+            </div>
+            <div>
+                <p>{{ pokemon.getStat('speed') }}</p>
+                <h3>Speed</h3>
+            </div>
+        </div>
+    </div>
+</a>
