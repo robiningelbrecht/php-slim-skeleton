@@ -11,7 +11,8 @@ use Slim\Factory\ServerRequestCreatorFactory;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-AppFactory::setContainer(Container::build());
+$container = require_once __DIR__ . '/../bootstrap.php';
+AppFactory::setContainer($container);
 $app = appFactory::create();
 
 $callableResolver = $app->getCallableResolver();

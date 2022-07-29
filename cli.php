@@ -7,12 +7,11 @@ if (php_sapi_name() !== 'cli') {
 use Ahc\Cli\Application;
 use App\Domain\Pokemon\Pokemon;
 use App\Domain\Pokemon\PokemonRepository;
-use App\Infrastructure\Container;
 use GuzzleHttp\Client;
 
 require __DIR__ . '/vendor/autoload.php';
 
-$container = Container::build();
+$container = require_once __DIR__ . '/bootstrap.php';
 $app = new Application('The coolest Pokémon', '0.0.1');
 
 $app

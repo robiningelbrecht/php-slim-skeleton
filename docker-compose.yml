@@ -1,12 +1,43 @@
 version: '1.0'
 
 services:
+  mysql:
+    container_name: mysql
+    image: mysql:8.0
+    command: --sort_buffer_size=512K
+    volumes:
+      - ./docker/mysql/mysql.databases.sql:/docker-entrypoint-initdb.d/01-databases.sql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3.8-management
+    ports:
+      - 5672:5672
+      - 15672:15672
+    environment:
+      RABBITMQ_DEFAULT_USER: rabbitmq
+      RABBITMQ_DEFAULT_PASS: rabbitmq
+      RABBITMQ_DEFAULT_VHOST: app
+
+  php-cli:
+    build: ./docker/php-cli
+    container_name: php-cli
+    volumes:
+      - ./:/var/www/
+    working_dir: /var/www
+
   php-fpm:
-    image: php:8.1-fpm
+    build: ./docker/php-fpm
     container_name: php-fpm
     volumes:
       - ./:/var/www/
     working_dir: /var/www
+    depends_on:
+      - mysql
 
   nginx:
     image: nginx:stable-alpine

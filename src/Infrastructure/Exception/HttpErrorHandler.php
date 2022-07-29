@@ -60,6 +60,7 @@ class HttpErrorHandler extends ErrorHandler
             'error' => [
                 'type' => $type,
                 'description' => $description,
+                'trace' => $exception->getTraceAsString(),
             ],
         ];
 

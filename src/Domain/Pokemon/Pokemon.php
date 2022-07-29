@@ -4,27 +4,45 @@ namespace App\Domain\Pokemon;
 
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\Id;
 
+#[Entity]
 class Pokemon
 {
     public const MAX_ID = 251;
 
     private function __construct(
-        private readonly string $id,
+        #[Id, Column(type: "guid", unique: true, nullable: false)]
         private readonly UuidInterface $uuid,
+        #[Column(type: 'integer')]
+        private readonly string $id,
+        #[Column(type: "string", nullable: false)]
         private readonly string $name,
+        #[Column(type: "smallint", nullable: false)]
         private readonly int $baseExperience,
+        #[Column(type: "smallint", nullable: false)]
         private readonly int $height,
+        #[Column(type: "smallint", nullable: false)]
         private readonly int $weight,
+        #[Column(type: "json", nullable: true)]
         private readonly array $abilities,
+        #[Column(type: "json", nullable: true)]
         private readonly array $moves,
+        #[Column(type: "json", nullable: true)]
         private readonly array $types,
+        #[Column(type: "json", nullable: true)]
         private readonly array $stats,
+        #[Column(type: "json", nullable: true)]
         private readonly array $sprites,
+        #[Column(type: "integer", nullable: false)]
         private int $impressions = 0,
+        #[Column(type: "integer", nullable: false)]
         private int $upVotes = 0
     )
     {
+
     }
 
     public function getUuid(): UuidInterface
@@ -144,11 +162,11 @@ class Pokemon
             'baseExperience' => $this->getBaseExperience(),
             'height' => $this->getHeight(),
             'weight' => $this->getWeight(),
-            'abilities' => $this->getAbilities(),
-            'moves' => $this->getMoves(),
-            'types' => $this->getTypes(),
-            'stats' => $this->getStats(),
-            'sprites' => $this->getSprites(),
+            'abilities' => json_encode($this->getAbilities()),
+            'moves' => json_encode($this->getMoves()),
+            'types' => json_encode($this->getTypes()),
+            'stats' => json_encode($this->getStats()),
+            'sprites' => json_encode($this->getSprites()),
             'impressions' => $this->getImpressions(),
             'upVotes' => $this->getUpVotes(),
         ];
@@ -157,17 +175,17 @@ class Pokemon
     public static function fromState(array $state): self
     {
         return new self(
-            $state['id'],
             Uuid::fromString($state['uuid']),
+            $state['id'],
             $state['name'],
             (int)$state['baseExperience'],
             (int)$state['height'],
             (int)$state['weight'],
-            $state['abilities'],
-            $state['moves'],
-            $state['types'],
-            $state['stats'],
-            $state['sprites'],
+            json_decode($state['abilities'], true),
+            json_decode($state['moves'], true),
+            json_decode($state['types'], true),
+            json_decode($state['stats'], true),
+            json_decode($state['sprites'], true),
             $state['impressions'],
             $state['upVotes'],
         );
@@ -176,8 +194,8 @@ class Pokemon
     public static function fromApi(array $data): self
     {
         return new self(
-            $data['id'],
             Uuid::uuid5('4bdbe8ec-5cb5-11ea-bc55-0242ac130003', $data['id']),
+            $data['id'],
             $data['name'],
             (int)$data['base_experience'],
             (int)$data['height'],
