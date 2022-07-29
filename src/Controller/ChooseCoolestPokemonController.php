@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Domain\Pokemon\Pokemon;
-use App\Domain\Pokemon\PokemonRepository;
+use App\Domain\WriteModel\Pokemon\Pokemon;
+use App\Domain\WriteModel\Pokemon\PokemonRepository;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Ramsey\Uuid\Uuid;

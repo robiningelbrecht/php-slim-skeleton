@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Domain\Result;
+namespace App\Domain\ReadModel\Result;
 
-use App\Domain\Pokemon\Pokemon;
+use App\Domain\WriteModel\Pokemon\Pokemon;
 use Doctrine\DBAL\Connection;
-use SleekDB\Store;
 
-class ResultRepository
+class PokemonBasedResultRepository
 {
     public function __construct(
         private readonly Connection $connection

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domain\Result;
+namespace App\Domain\ReadModel\Result;
 
-use App\Domain\Pokemon\Pokemon;
+use App\Domain\WriteModel\Pokemon\Pokemon;
 
 class Result
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Pokemon;
+namespace App\Domain\WriteModel\Pokemon;
 
 use App\Infrastructure\Exception\EntityNotFound;
 use Doctrine\DBAL\Connection;

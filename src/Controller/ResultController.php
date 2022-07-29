@@ -2,9 +2,8 @@
 
 namespace App\Controller;
 
-use App\Domain\Pokemon\Pokemon;
-use App\Domain\Pokemon\PokemonRepository;
-use App\Domain\Result\ResultRepository;
+use App\Domain\ReadModel\Result\PokemonBasedResultRepository;
+use App\Domain\WriteModel\Pokemon\Pokemon;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Twig\Environment;
@@ -13,7 +12,7 @@ class ResultController
 {
     public function __construct(
         private readonly Environment $twig,
-        private readonly ResultRepository $resultRepository,
+        private readonly PokemonBasedResultRepository $resultRepository,
     )
     {
     }

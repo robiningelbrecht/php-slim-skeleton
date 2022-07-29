@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Pokemon;
+namespace App\Domain\WriteModel\Pokemon;
 
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
