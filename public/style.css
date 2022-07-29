@@ -30,6 +30,9 @@ p {
 
 a {
     text-decoration: none;
+    color: #222;
+    font-size: 10px;
+    font-weight: 600;
 }
 
 body {
@@ -51,6 +54,7 @@ body {
     display: flex;
     align-items: center;
     gap: 1em;
+    margin-bottom: 10px;
 }
 
 .container .battle .vs{
