@@ -57,6 +57,14 @@ body {
     font-weight: 600;
 }
 
+.container .results{
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
+}
+
 img {
     max-width: 100%;
 }
@@ -78,8 +86,14 @@ div.pokemon img {
     margin: 0.5em 0;
 }
 
-div.pokemon div.hp {
-    place-self: flex-end;
+div.pokemon div.header{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+div.pokemon div.hp,
+div.pokemon div.place{
     width: 60px;
     background-color: #ffffff;
     text-align: center;
@@ -93,6 +107,12 @@ div.pokemon div.name {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    text-align: center;
+}
+
+div.pokemon div.score {
+    font-size: 10px;
+    text-align: center;
 }
 
 div.pokemon div.types {

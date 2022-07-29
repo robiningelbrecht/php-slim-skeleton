@@ -33,6 +33,12 @@ $app
             }
 
         }
+    })
+    ->tap()
+    ->command('pokemon:reset', 'Empty complete DB, votes will be deleted as well')
+    ->action(function () use ($container) {
+        $pokemonRepository = $container->get(PokemonRepository::class);
+        $pokemonRepository->truncate();;
     });
 
 $app->handle($_SERVER['argv']);

@@ -43,4 +43,9 @@ class PokemonRepository
     {
         $this->store->update($pokemon->toArray());
     }
+
+    public function truncate(): void
+    {
+        $this->store->deleteStore();
+    }
 }

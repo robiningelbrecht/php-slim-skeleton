@@ -2,7 +2,6 @@
 
 namespace App\Domain\Pokemon;
 
-use Ramsey\Uuid\Rfc4122\UuidV5;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 

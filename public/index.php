@@ -2,6 +2,7 @@
 
 use App\Infrastructure\Container;
 use App\Controller\ChooseCoolestPokemonController;
+use App\Controller\ResultController;
 use App\Infrastructure\Exception\HttpErrorHandler;
 use App\Infrastructure\Exception\ShutdownHandler;
 use Slim\Handlers\Strategies\RequestResponseArgs;
@@ -38,5 +39,8 @@ $routeCollector->setDefaultInvocationStrategy(new RequestResponseArgs());
 $app
     ->get('/[{previousPokemonUpvotedUuid}/{previousPokemonNotUpvotedUuid}]', ChooseCoolestPokemonController::class . ':handle')
     ->setName('index');
+$app
+    ->get('/results', ResultController::class . ':handle')
+    ->setName('results');
 
 $app->run();

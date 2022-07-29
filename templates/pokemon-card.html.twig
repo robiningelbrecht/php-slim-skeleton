@@ -1,8 +1,20 @@
+{% if voteUri %}
 <a href="{{ voteUri }}">
+    {% endif %}
     <div class="pokemon type type--{{ pokemon.getMainType() }}">
-        <div class="hp">HP {{ pokemon.getStat('hp') }}</div>
+        <div class="header">
+            {% if result %}
+                <div class="place">#{{ place }}</div>
+            {% else %}
+                <div></div>
+            {% endif %}
+            <div class="hp">HP {{ pokemon.getStat('hp') }}</div>
+        </div>
         <img src="{{ pokemon.getSpriteUri() }}">
         <div class="name">#{{ pokemon.getId() }} {{ pokemon.getName()|capitalize }}</div>
+        {% if result %}
+            <div class="score">scored {{ result.getScore() }}% with {{ result.getNumberOfVotes() }} vote{{ result.getNumberOfVotes() > 1 ? 's' : '' }}</div>
+        {% endif %}
         <div class="types">
             {% for type in pokemon.getTypes() %}
                 <div class="type type--{{ type }}">{{ type|capitalize }}</div>
@@ -23,4 +35,6 @@
             </div>
         </div>
     </div>
+    {% if voteUri %}
 </a>
+{% endif %}
