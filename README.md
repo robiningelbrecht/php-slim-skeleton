@@ -4,6 +4,10 @@
 <a href="https://github.com/robiningelbrecht/the-coolest-pokemon/blob/master/LICENSE"><img src="https://img.shields.io/github/license/robiningelbrecht/the-coolest-pokemon?color=428f7e&logo=open%20source%20initiative&logoColor=white" alt="License"></a>
 </p>
 
+---
+
+This repository is a simple example on how to use <a href="https://github.com/slimphp/Slim">Slim Framework</a> and <a href="https://github.com/PHP-DI/PHP-DI">PHP-DI</a>
+
 To Run on your local machine:
 
 * `git clone git@github.com:robiningelbrecht/the-coolest-pokemon.git`
