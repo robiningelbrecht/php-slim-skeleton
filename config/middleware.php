@@ -1,5 +1,6 @@
 <?php
 
+use App\Infrastructure\Container\Settings;
 use App\Infrastructure\Exception\HttpErrorHandler;
 use App\Infrastructure\Exception\ShutdownHandler;
 use Slim\App;
@@ -12,17 +13,17 @@ return function (App $app) {
     $serverRequestCreator = ServerRequestCreatorFactory::create();
     $request = $serverRequestCreator->createServerRequestFromGlobals();
 
-    $slimConfig = $app->getContainer()->get('settings')['slim'];
+    $settings = $app->getContainer()->get(Settings::class);
 
     $errorHandler = new HttpErrorHandler($callableResolver, $responseFactory);
-    $shutdownHandler = new ShutdownHandler($request, $errorHandler, $slimConfig['displayErrorDetails']);
+    $shutdownHandler = new ShutdownHandler($request, $errorHandler, $settings->get('slim.displayErrorDetails'));
     register_shutdown_function($shutdownHandler);
 
     // Add Error Handling Middleware
     $errorMiddleware = $app->addErrorMiddleware(
-        $slimConfig['displayErrorDetails'],
-        $slimConfig['logErrors'],
-        $slimConfig['logErrorDetails']
+        $settings->get('slim.displayErrorDetails'),
+        $settings->get('slim.logErrors'),
+        $settings->get('slim.logErrorDetails'),
     );
     $errorMiddleware->setDefaultErrorHandler($errorHandler);
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-use App\Infrastructure\ContainerFactory;
+use App\Infrastructure\Container\ContainerFactory;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;

@@ -1,6 +1,6 @@
 <?php
 
-use App\Infrastructure\Environment;
+use App\Infrastructure\Container\Environment;
 
 return [
     'slim' => [
@@ -8,11 +8,15 @@ return [
         // a stack trace. Should be disabled in production.
         'displayErrorDetails' => $_ENV['DISPLAY_ERROR_DETAILS'],
         // Whether to display errors on the internal PHP log or not.
-        'logErrors' =>  $_ENV['LOG_ERRORS'],
+        'logErrors' => $_ENV['LOG_ERRORS'],
         // If true, display full errors with message and stack trace on the PHP log.
         // If false, display only "Slim Application Error" on the PHP log.
         // Doesn't do anything when 'logErrors' is false.
         'logErrorDetails' => $_ENV['LOG_ERROR_DETAILS'],
+    ],
+    'console' => [
+        // List of paths where the app will search for Console commands.
+        'dirs' => [APP_ROOT . '/src/Console'],
     ],
     'doctrine' => [
         // Enables or disables Doctrine metadata caching
@@ -32,11 +36,11 @@ return [
         // of valid parameters: https://www.doctrine-project.org/projects/doctrine-dbal/en/current/reference/configuration.html
         'connection' => [
             'driver' => $_ENV['DATABASE_DRIVER'],
-            'host' =>  $_ENV['DATABASE_HOST'],
-            'port' =>  $_ENV['DATABASE_PORT'],
+            'host' => $_ENV['DATABASE_HOST'],
+            'port' => $_ENV['DATABASE_PORT'],
             'dbname' => $_ENV['DATABASE_NAME'],
-            'user' =>  $_ENV['DATABASE_USER'],
-            'password' =>  $_ENV['DATABASE_PASSWORD'],
+            'user' => $_ENV['DATABASE_USER'],
+            'password' => $_ENV['DATABASE_PASSWORD'],
         ],
         'migrations' => [
             'table_storage' => [

@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use App\Infrastructure\ContainerFactory;
+use App\Infrastructure\Container\ContainerFactory;
 use \DI\Bridge\Slim\Bridge;
 
 $container = ContainerFactory::create();

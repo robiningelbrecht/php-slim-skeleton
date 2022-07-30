@@ -22,6 +22,7 @@
     "slim/slim": "4.*",
     "symfony/cache": "^6.1",
     "symfony/console": "^6.1",
+    "symfony/finder": "^6.1",
     "twig/twig": "^3.4",
     "vlucas/phpdotenv": "^5.4"
   },
