@@ -2,18 +2,17 @@
 
 use App\Infrastructure\Container\Environment;
 use App\Infrastructure\Container\Settings;
+use App\Infrastructure\Container\ConsoleCommandContainer;
 use Dotenv\Dotenv;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
-use Psr\Container\ContainerInterface;
 use Twig\Environment as TwigEnvironment;
 use Twig\Loader\FilesystemLoader;
 use Symfony\Component\Console\Application;
-use Symfony\Component\Finder\Finder;
 
-const APP_ROOT = __DIR__ . '/..';
+define('APP_ROOT', dirname(__DIR__));
 
 $dotenv = Dotenv::createImmutable(APP_ROOT);
 $dotenv->load();
@@ -36,23 +35,8 @@ return [
         return EntityManager::create($settings->get('doctrine.connection'), $config);
     },
     // Auto discover and register all console commands.
-    Application::class => function (ContainerInterface $container) {
-        $application = new Application();
-        $settings = $container->get(Settings::class);
-
-        foreach ($settings->get('console.dirs') as $directory) {
-            $finder = new Finder();
-            $finder->files()->in($directory)->name('*Command.php');
-
-            foreach ($finder as $file) {
-                if (!preg_match('/namespace[\s]+(?<namespace>[A-Za-z0-9\\\\]+?)[\s]*;/sm', $file->getContents(), $matches)) {
-                    continue;
-                }
-                $application->add($container->get($matches['namespace'] . '\\' . str_replace('.php', '', $file->getFilename())));
-            }
-        }
-
-        return $application;
+    Application::class => function (ConsoleCommandContainer $consoleCommandContainer) {
+        return $consoleCommandContainer->getApplication();
     },
     // Environment.
     Environment::class => function () {

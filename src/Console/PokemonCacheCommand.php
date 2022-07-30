@@ -4,11 +4,13 @@ namespace App\Console;
 
 use App\Domain\WriteModel\Pokemon\Pokemon;
 use App\Domain\WriteModel\Pokemon\PokemonRepository;
+use App\Infrastructure\Attribute\AsConsoleCommand;
 use GuzzleHttp\Client;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsConsoleCommand]
 class PokemonCacheCommand extends Command
 {
 
