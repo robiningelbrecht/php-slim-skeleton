@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Infrastructure\Container;
+namespace App\Infrastructure\DependencyInjection;
 
-use DI\ContainerBuilder;
+use App\Infrastructure\Attribute\AttributeClassResolver;
+use App\Infrastructure\Environment;
 use Dotenv\Dotenv;
 use Psr\Container\ContainerInterface;
 
@@ -10,7 +11,7 @@ class ContainerFactory
 {
     public static function create(): ContainerInterface
     {
-        $containerBuilder = new ContainerBuilder();
+        $containerBuilder = ContainerBuilder::create();
 
         $dotenv = Dotenv::createImmutable(__DIR__ . '/../../..');
         $dotenv->load();
@@ -20,6 +21,7 @@ class ContainerFactory
             $containerBuilder->enableCompilation(__DIR__ . '/../../../var/cache');
         }
         $containerBuilder->addDefinitions(__DIR__ . '/../../../config/container.php');
+        $containerBuilder->addCompilerPass(new ConsoleCommandCompilerPass(new AttributeClassResolver()));
 
         return $containerBuilder->build();
     }

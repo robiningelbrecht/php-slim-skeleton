@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructure\Container;
+namespace App\Infrastructure;
 
 class Settings
 {
@@ -28,5 +28,10 @@ class Settings
     public static function fromArray(array $settings): self
     {
         return new self($settings);
+    }
+
+    public static function getAppRoot(): string
+    {
+        return dirname(__DIR__, 2);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructure\Container;
+namespace App\Infrastructure;
 
 enum Environment: string
 {

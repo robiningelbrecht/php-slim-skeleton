@@ -1,6 +1,6 @@
 <?php
 
-use App\Infrastructure\Container\Settings;
+use App\Infrastructure\Settings;
 use App\Infrastructure\Exception\HttpErrorHandler;
 use App\Infrastructure\Exception\ShutdownHandler;
 use Slim\App;

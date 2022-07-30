@@ -1,6 +1,6 @@
 <?php
 
-use App\Infrastructure\Container\ContainerFactory;
+use App\Infrastructure\DependencyInjection\ContainerFactory;
 use \DI\Bridge\Slim\Bridge;
 
 $container = ContainerFactory::create();

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console;
+namespace App\Console\Command;
 
 use App\Domain\WriteModel\Pokemon\Pokemon;
 use App\Domain\WriteModel\Pokemon\PokemonRepository;

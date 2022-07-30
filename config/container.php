@@ -1,8 +1,8 @@
 <?php
 
-use App\Infrastructure\Container\Environment;
-use App\Infrastructure\Container\Settings;
-use App\Infrastructure\Container\ConsoleCommandApplication;
+use App\Infrastructure\Environment;
+use App\Infrastructure\Settings;
+use App\Console\ConsoleApp;
 use Dotenv\Dotenv;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
@@ -12,14 +12,14 @@ use Twig\Environment as TwigEnvironment;
 use Twig\Loader\FilesystemLoader;
 use Symfony\Component\Console\Application;
 
-define('APP_ROOT', dirname(__DIR__));
+$appRoot = Settings::getAppRoot();
 
-$dotenv = Dotenv::createImmutable(APP_ROOT);
+$dotenv = Dotenv::createImmutable($appRoot);
 $dotenv->load();
 
 return [
     // Twig Environment.
-    FilesystemLoader::class => DI\create(FilesystemLoader::class)->constructor(APP_ROOT . '/templates'),
+    FilesystemLoader::class => DI\create(FilesystemLoader::class)->constructor($appRoot . '/templates'),
     TwigEnvironment::class => DI\create(TwigEnvironment::class)->constructor(DI\get(FilesystemLoader::class)),
     // Doctrine Dbal.
     Connection::class => function (Settings $settings): Connection {
@@ -35,8 +35,8 @@ return [
         return EntityManager::create($settings->get('doctrine.connection'), $config);
     },
     // Auto discover and register all console commands.
-    Application::class => function (ConsoleCommandApplication $consoleCommandContainer) {
-        return $consoleCommandContainer->getApplication();
+    Application::class => function (ConsoleApp $consoleApp) {
+        return $consoleApp->boot();
     },
     // Environment.
     Environment::class => function () {
@@ -44,5 +44,5 @@ return [
     },
     // Settings.
     Settings::class => DI\factory([Settings::class, 'fromArray'])
-        ->parameter('settings', require APP_ROOT . '/config/settings.php'),
+        ->parameter('settings', require $appRoot . '/config/settings.php'),
 ];
