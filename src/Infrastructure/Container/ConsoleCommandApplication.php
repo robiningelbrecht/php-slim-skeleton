@@ -7,7 +7,7 @@ use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Finder\Finder;
 
-class ConsoleCommandContainer
+class ConsoleCommandApplication
 {
     public function __construct(
         private readonly ContainerInterface $container,
