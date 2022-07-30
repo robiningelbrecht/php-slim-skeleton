@@ -3,7 +3,7 @@
 namespace App\Infrastructure\DependencyInjection;
 
 use App\Infrastructure\Attribute\AttributeClassResolver;
-use App\Infrastructure\Environment;
+use App\Infrastructure\Environment\Environment;
 use Dotenv\Dotenv;
 use Psr\Container\ContainerInterface;
 

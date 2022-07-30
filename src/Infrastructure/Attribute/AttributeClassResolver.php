@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\Attribute;
 
-use App\Infrastructure\Settings;
+use App\Infrastructure\Environment\Settings;
 use Symfony\Component\Finder\Finder;
 
 class AttributeClassResolver

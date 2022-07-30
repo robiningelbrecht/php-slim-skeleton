@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructure;
+namespace App\Infrastructure\Environment;
 
 class Settings
 {
@@ -32,6 +32,6 @@ class Settings
 
     public static function getAppRoot(): string
     {
-        return dirname(__DIR__, 2);
+        return dirname(__DIR__, 3);
     }
 }

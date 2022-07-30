@@ -1,6 +1,6 @@
 <?php
 
-use App\Infrastructure\Settings;
+use App\Infrastructure\Environment\Settings;
 use App\Infrastructure\Exception\HttpErrorHandler;
 use App\Infrastructure\Exception\ShutdownHandler;
 use Slim\App;

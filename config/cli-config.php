@@ -2,7 +2,7 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use App\Infrastructure\Settings;
+use App\Infrastructure\Environment\Settings;
 use App\Infrastructure\DependencyInjection\ContainerFactory;
 use Doctrine\Migrations\Configuration\Migration\ConfigurationArray;
 use Doctrine\ORM\EntityManager;

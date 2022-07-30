@@ -1,7 +1,7 @@
 <?php
 
-use App\Infrastructure\Environment;
-use App\Infrastructure\Settings;
+use App\Infrastructure\Environment\Environment;
+use App\Infrastructure\Environment\Settings;
 use App\Console\ConsoleCommandFactory;
 use Dotenv\Dotenv;
 use Doctrine\DBAL\Connection;
