@@ -2,7 +2,7 @@
 
 use App\Infrastructure\Environment;
 use App\Infrastructure\Settings;
-use App\Console\ConsoleApp;
+use App\Console\ConsoleCommandFactory;
 use Dotenv\Dotenv;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
@@ -35,8 +35,13 @@ return [
         return EntityManager::create($settings->get('doctrine.connection'), $config);
     },
     // Auto discover and register all console commands.
-    Application::class => function (ConsoleApp $consoleApp) {
-        return $consoleApp->boot();
+    Application::class => function (ConsoleCommandFactory $consoleCommandFactory) {
+        $application = new Application();
+        foreach ($consoleCommandFactory->getConsoleCommands() as $command) {
+            $application->add($command);
+        }
+
+        return $application;
     },
     // Environment.
     Environment::class => function () {
