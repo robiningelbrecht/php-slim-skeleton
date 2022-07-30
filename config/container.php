@@ -35,12 +35,11 @@ return [
 
         return EntityManager::create($settings->get('doctrine.connection'), $config);
     },
-    // Console application.
+    // Auto discover and register all console commands.
     Application::class => function (ContainerInterface $container) {
         $application = new Application();
         $settings = $container->get(Settings::class);
 
-        // Auto discover and register all console commands.
         foreach ($settings->get('console.dirs') as $directory) {
             $finder = new Finder();
             $finder->files()->in($directory)->name('*Command.php');
