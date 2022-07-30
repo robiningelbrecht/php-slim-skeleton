@@ -1,0 +1,16 @@
+<nav class="nav-bar">
+    <div class="wrapper">
+        <input type="checkbox" id="drop-down-cbox"/>
+        <label for="drop-down-cbox">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+
+        <ul class="main-nav">
+            <li><a href="/" {{ active == 'vote' ? 'class="active"' : '' }}>Vote</a></li>
+            <li><a href="/results" {{ active == 'results' ? 'class="active"' : '' }}>Results</a></li>
+        </ul>
+
+    </div>
+</nav>

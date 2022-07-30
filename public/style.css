@@ -18,9 +18,16 @@
     --pokemon-rock-color: #b2a061;
     --pokemon-steel-color: #89a1b0;
     --pokemon-water-color: #539ae2;
+    --main: #222222;
+    --gray: #85888C;
+    --white: #ffffff
 }
 
-* {
+*,
+*:before,
+*:after {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
@@ -35,11 +42,23 @@ a {
     font-weight: 600;
 }
 
+ul, li {
+    list-style: none;
+}
+
+form > * {
+    outline: none;
+}
+
 body {
     background-color: #eee;
     font-family: Poppins, sans-serif;
     min-height: 100vh;
-    color: #222;
+    color: var(--main);
+}
+
+h1{
+    margin: 1em 0;
 }
 
 .container {
@@ -48,6 +67,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow-x: hidden;
 }
 
 .container .battle{
@@ -80,7 +100,7 @@ div.pokemon {
     justify-content: center;
     flex-direction: column;
     font-weight: bold;
-    color: rgb(24 23 31);
+    color: var(--main);
     padding: 0.5em;
     border-radius: 0.3em;
 }
@@ -99,7 +119,7 @@ div.pokemon div.header{
 div.pokemon div.hp,
 div.pokemon div.place{
     width: 60px;
-    background-color: #ffffff;
+    background-color: var(--white);
     text-align: center;
     padding: 8px 0;
     border-radius: 30px;
@@ -131,7 +151,7 @@ div.pokemon div.types .type {
     font-weight: 500;
     padding: 5px 15px;
     border-radius: 15px;
-    color: #ffffff;
+    color: var(--white);
 }
 
 div.pokemon div.stats {
@@ -316,4 +336,141 @@ div.pokemon.type--water {
 
 div.pokemon .types .type--water {
     background-color: var(--pokemon-water-color);
+}
+
+/* MENU */
+.nav-bar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: var(--white);
+    height: 60px;
+    box-shadow: 1px 1px 2px 0 var(--gray);
+}
+
+body.results .nav-bar {
+    position: sticky;
+}
+
+.nav-bar .wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.nav-bar .wrapper #drop-down-cbox {
+    display: none;
+}
+
+.nav-bar .wrapper #drop-down-cbox + label {
+    position: relative;
+    cursor: pointer;
+    display: none;
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    background-color: transparent;
+    transition: all 10ms ease-in-out;
+}
+
+.nav-bar .wrapper #drop-down-cbox + label span {
+    position: absolute;
+    display: block;
+    background-color: var(--main);
+    width: 34px;
+    height: 4px;
+    border-radius: 2px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 300ms ease-in-out;
+}
+
+.nav-bar .wrapper #drop-down-cbox + label span:nth-child(1) {
+    top: 35%;
+}
+.nav-bar .wrapper #drop-down-cbox + label span:nth-child(2) {
+    top: 50%;
+}
+.nav-bar .wrapper #drop-down-cbox + label span:nth-child(3) {
+    top: 65%;
+}
+.nav-bar .wrapper #drop-down-cbox:checked + label {
+    background-color: var(--main);
+}
+.nav-bar .wrapper #drop-down-cbox:checked + label span {
+    background-color: var(--white);
+}
+.nav-bar .wrapper #drop-down-cbox:checked + label span:nth-child(1) {
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+.nav-bar .wrapper #drop-down-cbox:checked + label span:nth-child(2) {
+    left: -150%;
+}
+.nav-bar .wrapper #drop-down-cbox:checked + label span:nth-child(3) {
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* Main Nav Desktop */
+.nav-bar .wrapper .main-nav {
+    column-gap: 3em;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    letter-spacing: 0.15rem;
+    font-size: 0.7rem;
+}
+
+.nav-bar .wrapper .main-nav li {
+    display: block;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+}
+
+.nav-bar .wrapper .main-nav li a{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.nav-bar .wrapper .main-nav li a:hover,
+.nav-bar .wrapper .main-nav li a.active {
+    border-bottom: 2px solid var(--main);
+}
+
+/* Tablet and Mobile View */
+@media (max-width: 768px) {
+    .nav-bar .wrapper .main-nav li {
+        height: 50px;
+        line-height: 50px;
+    }
+
+    .nav-bar .wrapper #drop-down-cbox + label {
+        display: block;
+    }
+
+    .nav-bar .wrapper .main-nav {
+        max-height: 0;
+        height: calc(100vh - 60px);
+        overflow: hidden;
+        position: absolute;
+        top: 60px;
+        line-height: inherit;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        background-color: white;
+        transition: all 500ms ease-in-out;
+    }
+
+    .nav-bar .wrapper #drop-down-cbox:checked ~ .main-nav {
+        max-height: calc(100vh - 60px);
+        transition: all 500ms ease-in-out;
+    }
 }

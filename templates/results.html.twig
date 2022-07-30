@@ -8,12 +8,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/style.css?{{ random() }}" />
 </head>
-<body>
+<body class="results">
+<!-- Navigation bar -->
+{% include 'menu.html.twig' with {'active': 'results'} only %}
 <div class="container">
     <h1>The votes are in!</h1>
-    <a href="/">Back to voting</a>
     <div class="results">
         {% for result in results %}
             <div class="result">
