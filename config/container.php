@@ -1,5 +1,6 @@
 <?php
 
+use Dotenv\Dotenv;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
@@ -10,6 +11,9 @@ use Twig\Loader\FilesystemLoader;
 use Symfony\Component\Console\Application;
 
 const APP_ROOT = __DIR__ . '/..';
+
+$dotenv = Dotenv::createImmutable(APP_ROOT);
+$dotenv->load();
 
 return [
     // Twig Environment.
@@ -40,6 +44,10 @@ return [
         }
 
         return $application;
+    },
+    // Environment
+    \App\Infrastructure\Environment::class => function () {
+        return \App\Infrastructure\Environment::from($_ENV['ENVIRONMENT']);
     },
     'settings' => function () {
         return require APP_ROOT . '/config/settings.php';

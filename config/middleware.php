@@ -12,12 +12,18 @@ return function (App $app) {
     $serverRequestCreator = ServerRequestCreatorFactory::create();
     $request = $serverRequestCreator->createServerRequestFromGlobals();
 
+    $slimConfig = $app->getContainer()->get('settings')['slim'];
+
     $errorHandler = new HttpErrorHandler($callableResolver, $responseFactory);
-    $shutdownHandler = new ShutdownHandler($request, $errorHandler, true);
+    $shutdownHandler = new ShutdownHandler($request, $errorHandler, $slimConfig['displayErrorDetails']);
     register_shutdown_function($shutdownHandler);
 
     // Add Error Handling Middleware
-    $errorMiddleware = $app->addErrorMiddleware(true, false, false);
+    $errorMiddleware = $app->addErrorMiddleware(
+        $slimConfig['displayErrorDetails'],
+        $slimConfig['logErrors'],
+        $slimConfig['logErrorDetails']
+    );
     $errorMiddleware->setDefaultErrorHandler($errorHandler);
 
 };

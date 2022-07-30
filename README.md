@@ -12,6 +12,7 @@ To Run on your local machine:
 
 * Run `git clone git@github.com:robiningelbrecht/the-coolest-pokemon.git`
 * Run `composer install` to install dependencies
+* Copy `.env.dist` to `.env`
 * Run `docker-composer up -d --build` to up and build Docker containers
 * Run `docker-compose run --rm php-cli vendor/bin/doctrine-migrations migrate` to bring db schema up to date.
 * Run `docker-compose run --rm php-cli bin/console pokemon:cache` to store Pokemon in database.

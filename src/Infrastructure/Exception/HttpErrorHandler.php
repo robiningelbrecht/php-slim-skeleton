@@ -27,10 +27,12 @@ class HttpErrorHandler extends ErrorHandler
         $statusCode = 500;
         $type = self::SERVER_ERROR;
         $description = 'An internal error has occurred while processing your request.';
+        $trace = null;
 
         if ($exception instanceof HttpException) {
             $statusCode = $exception->getCode();
             $description = $exception->getMessage();
+            $trace = $exception->getTrace();
 
             if ($exception instanceof HttpNotFoundException) {
                 $type = self::RESOURCE_NOT_FOUND;
@@ -53,6 +55,7 @@ class HttpErrorHandler extends ErrorHandler
             && $this->displayErrorDetails
         ) {
             $description = $exception->getMessage();
+            $trace = $exception->getTrace();
         }
 
         $error = [
@@ -60,9 +63,11 @@ class HttpErrorHandler extends ErrorHandler
             'error' => [
                 'type' => $type,
                 'description' => $description,
-                'trace' => $exception->getTraceAsString(),
             ],
         ];
+        if ($trace) {
+            $error['trace'] = $trace;
+        }
 
         $payload = json_encode($error, JSON_PRETTY_PRINT);
 
