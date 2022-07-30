@@ -7,8 +7,6 @@ use Doctrine\ORM\ORMSetup;
 use Psr\Container\ContainerInterface;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
-use Slim\App;
-use Slim\Factory\AppFactory;
 use Symfony\Component\Console\Application;
 
 const APP_ROOT = __DIR__ . '/..';
@@ -42,17 +40,6 @@ return [
         }
 
         return $application;
-    },
-    // Slim App.
-    App::class => function (ContainerInterface $container) {
-        $app = AppFactory::createFromContainer($container);
-
-        // Register routes
-        (require __DIR__ . '/routes.php')($app);
-        // Register middleware
-        (require __DIR__ . '/middleware.php')($app);
-
-        return $app;
     },
     'settings' => function () {
         return require APP_ROOT . '/config/settings.php';

@@ -11,8 +11,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 class PokemonResetConsoleCommand extends Command
 {
     public function __construct(
-        private PokemonRepository $pokemonRepository,
-        private VoteRepository $voteRepository,
+        private readonly PokemonRepository $pokemonRepository,
+        private readonly VoteRepository $voteRepository,
     )
     {
         parent::__construct();

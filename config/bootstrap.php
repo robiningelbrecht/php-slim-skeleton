@@ -3,7 +3,14 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use App\Infrastructure\ContainerFactory;
-use Slim\App;
+use \DI\Bridge\Slim\Bridge;
 
 $container = ContainerFactory::create();
-return $container->get(App::class);
+$app = Bridge::create($container);
+
+// Register routes
+(require __DIR__ . '/routes.php')($app);
+// Register middleware
+(require __DIR__ . '/middleware.php')($app);
+
+return $app;

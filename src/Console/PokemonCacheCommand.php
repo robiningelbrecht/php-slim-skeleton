@@ -13,8 +13,8 @@ class PokemonCacheCommand extends Command
 {
 
     public function __construct(
-        private PokemonRepository $pokemonRepository,
-        private Client $client,
+        private readonly PokemonRepository $pokemonRepository,
+        private readonly Client $client,
     )
     {
         parent::__construct();
