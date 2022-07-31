@@ -2,8 +2,11 @@
 
 namespace App\Infrastructure\DependencyInjection;
 
+use App\Infrastructure\Attribute\AttributeClassResolver;
 use DI\CompiledContainer;
 use DI\Container;
+use DI\Definition\Helper\DefinitionHelper;
+use Symfony\Component\Finder\Finder;
 
 class ContainerBuilder
 {
@@ -11,7 +14,8 @@ class ContainerBuilder
     private array $passes;
 
     private function __construct(
-        private \DI\ContainerBuilder $containerBuilder
+        private readonly \DI\ContainerBuilder $containerBuilder,
+        private readonly AttributeClassResolver $attributeClassResolver,
     )
     {
     }
@@ -45,6 +49,16 @@ class ContainerBuilder
         return $this;
     }
 
+    public function findDefinition(string $id): DefinitionHelper
+    {
+        return \DI\create($id);
+    }
+
+    public function findTaggedWithAttributeServiceIds(string $name): array
+    {
+        return $this->attributeClassResolver->resolve($name);
+    }
+
     public function build(): Container
     {
         foreach ($this->passes as $pass) {
@@ -55,6 +69,9 @@ class ContainerBuilder
 
     public static function create(): self
     {
-        return new self(new \DI\ContainerBuilder());
+        return new self(
+            new \DI\ContainerBuilder(),
+            new AttributeClassResolver(new Finder())
+        );
     }
 }
