@@ -11,7 +11,7 @@ use Symfony\Component\Finder\Finder;
 class ContainerBuilder
 {
     /** @var CompilerPass[] */
-    private array $passes;
+    private array $passes = [];
 
     private function __construct(
         private readonly \DI\ContainerBuilder $containerBuilder,
@@ -42,9 +42,21 @@ class ContainerBuilder
         return $this;
     }
 
+    public function addCompilerPasses(CompilerPass ...$compilerPasses): self
+    {
+        foreach ($compilerPasses as $compilerPass) {
+            $this->addCompilerPass($compilerPass);
+        }
+
+        return $this;
+    }
+
     public function addCompilerPass(CompilerPass $pass): self
     {
-        $this->passes[] = $pass;
+        if (array_key_exists($pass::class, $this->passes)) {
+            throw new \RuntimeException(sprintf('CompilerPass %s already added. Cannot add the same pass twice', $pass::class));
+        }
+        $this->passes[$pass::class] = $pass;
 
         return $this;
     }
