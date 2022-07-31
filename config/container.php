@@ -34,7 +34,7 @@ return [
 
         return EntityManager::create($settings->get('doctrine.connection'), $config);
     },
-    // Auto discover and register all console commands.
+    // Console command application.
     Application::class => function (ConsoleCommandFactory $consoleCommandFactory) {
         $application = new Application();
         foreach ($consoleCommandFactory->getConsoleCommands() as $command) {
