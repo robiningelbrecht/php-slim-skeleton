@@ -11,7 +11,10 @@ class ConsoleCommandFactory
 
     public function registerConsoleCommand(Command $command): void
     {
-        $this->consoleCommands[] = $command;
+        if(array_key_exists($command->getName(), $this->getConsoleCommands())){
+            throw new \RuntimeException(sprintf('Command "%s" already registered in factory', $command->getName()));
+        }
+        $this->consoleCommands[$command->getName()] = $command;
     }
 
     public function getConsoleCommands(): array
