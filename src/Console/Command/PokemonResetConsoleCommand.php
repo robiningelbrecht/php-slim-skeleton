@@ -4,12 +4,12 @@ namespace App\Console\Command;
 
 use App\Domain\WriteModel\Pokemon\PokemonRepository;
 use App\Domain\WriteModel\Vote\VoteRepository;
-use App\Infrastructure\Attribute\AsConsoleCommand;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-#[AsConsoleCommand]
+#[AsCommand(name: 'pokemon:reset', description: 'Empty complete DB, votes will be deleted as well')]
 class PokemonResetConsoleCommand extends Command
 {
     public function __construct(
@@ -18,14 +18,6 @@ class PokemonResetConsoleCommand extends Command
     )
     {
         parent::__construct();
-    }
-
-    protected function configure(): void
-    {
-        parent::configure();
-
-        $this->setName('pokemon:reset');
-        $this->setDescription('Empty complete DB, votes will be deleted as well');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

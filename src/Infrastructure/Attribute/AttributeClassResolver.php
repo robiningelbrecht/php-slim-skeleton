@@ -35,11 +35,8 @@ class AttributeClassResolver
                     $class
                 );
 
-            $reflection = new \ReflectionClass($class);
-            if (!$classAttributes = $reflection->getAttributes()) {
-                continue;
-            }
-            if (!($classAttributes[0]->newInstance() instanceof $attributeClassName)) {
+            if (!(new \ReflectionClass($class))->getAttributes($attributeClassName)) {
+                // Class is not tagged with attribute.
                 continue;
             }
 

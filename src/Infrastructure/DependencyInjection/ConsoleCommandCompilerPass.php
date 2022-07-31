@@ -3,7 +3,7 @@
 namespace App\Infrastructure\DependencyInjection;
 
 use App\Console\ConsoleCommandFactory;
-use App\Infrastructure\Attribute\AsConsoleCommand;
+use Symfony\Component\Console\Attribute\AsCommand;
 
 class ConsoleCommandCompilerPass implements CompilerPass
 {
@@ -11,7 +11,7 @@ class ConsoleCommandCompilerPass implements CompilerPass
     public function process(ContainerBuilder $container)
     {
         $definition = $container->findDefinition(ConsoleCommandFactory::class);
-        foreach ($container->findTaggedWithAttributeServiceIds(AsConsoleCommand::class, 'src/Console/Command') as $class) {
+        foreach ($container->findTaggedWithAttributeServiceIds(AsCommand::class, 'src/Console/Command') as $class) {
             $definition->method('registerConsoleCommand', \DI\get($class));
         }
 

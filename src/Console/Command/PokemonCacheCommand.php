@@ -4,14 +4,14 @@ namespace App\Console\Command;
 
 use App\Domain\WriteModel\Pokemon\Pokemon;
 use App\Domain\WriteModel\Pokemon\PokemonRepository;
-use App\Infrastructure\Attribute\AsConsoleCommand;
 use App\Infrastructure\Exception\EntityNotFound;
 use GuzzleHttp\Client;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-#[AsConsoleCommand]
+#[AsCommand(name: 'pokemon:cache', description: 'Fetch Pokémon from PokéApi and store in DB')]
 class PokemonCacheCommand extends Command
 {
 
@@ -21,14 +21,6 @@ class PokemonCacheCommand extends Command
     )
     {
         parent::__construct();
-    }
-
-    protected function configure(): void
-    {
-        parent::configure();
-
-        $this->setName('pokemon:cache');
-        $this->setDescription('Fetch Pokémon from PokéApi and store in DB');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
