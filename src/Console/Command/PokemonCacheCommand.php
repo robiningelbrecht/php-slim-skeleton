@@ -5,6 +5,7 @@ namespace App\Console\Command;
 use App\Domain\WriteModel\Pokemon\Pokemon;
 use App\Domain\WriteModel\Pokemon\PokemonRepository;
 use App\Infrastructure\Attribute\AsConsoleCommand;
+use App\Infrastructure\Exception\EntityNotFound;
 use GuzzleHttp\Client;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -33,15 +34,19 @@ class PokemonCacheCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         foreach (range(1, Pokemon::MAX_ID) as $id) {
+            try {
+                $this->pokemonRepository->find($id);
+                // Pokémon is already cached, skip.
+                continue;
+            } catch (EntityNotFound) {
+
+            }
+
             $response = $this->client->get('https://pokeapi.co/api/v2/pokemon/' . $id);
 
-            try {
-                $this->pokemonRepository->add(
-                    Pokemon::fromApi(json_decode($response->getBody()->getContents(), true))
-                );
-            } catch (\RuntimeException) {
-                // Pokémon was already cached, ignore.
-            }
+            $this->pokemonRepository->add(
+                Pokemon::fromApi(json_decode($response->getBody()->getContents(), true))
+            );
         }
 
         return Command::SUCCESS;

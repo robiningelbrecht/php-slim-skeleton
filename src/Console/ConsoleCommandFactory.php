@@ -7,7 +7,7 @@ use Symfony\Component\Console\Command\Command;
 class ConsoleCommandFactory
 {
     /** @var Command[] */
-    private array $consoleCommands;
+    private array $consoleCommands = [];
 
     public function registerConsoleCommand(Command $command): void
     {

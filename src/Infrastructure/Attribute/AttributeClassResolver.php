@@ -9,16 +9,23 @@ class AttributeClassResolver
 {
 
     public function __construct(
-        private Finder $finder
+        private readonly Finder $finder
     )
     {
     }
 
-    public function resolve(string $attributeClassName): array
+    public function resolve(string $attributeClassName, array $restrictToDirectories = []): array
     {
         $appRoot = Settings::getAppRoot();
-        $this->finder->files()->in($appRoot . '/src')->name('*.php');
+        $searchInDirectories = array_map(
+            fn(string $dir) => $appRoot . '/' . $dir,
+            $restrictToDirectories ?: ['src']
+        );
 
+        $this->finder->files()->in($searchInDirectories)->name('*.php');
+
+        // @TODO: need to find a more efficient way to fetch tagged classes.
+        // @TODO: maybe introduce caching?
         $classes = [];
         foreach ($this->finder as $file) {
             $class = trim(str_replace($appRoot . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR, '', $file->getRealPath()));

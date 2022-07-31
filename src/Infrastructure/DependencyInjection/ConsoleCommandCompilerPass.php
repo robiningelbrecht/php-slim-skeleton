@@ -11,7 +11,7 @@ class ConsoleCommandCompilerPass implements CompilerPass
     public function process(ContainerBuilder $container)
     {
         $definition = $container->findDefinition(ConsoleCommandFactory::class);
-        foreach ($container->findTaggedWithAttributeServiceIds(AsConsoleCommand::class) as $class) {
+        foreach ($container->findTaggedWithAttributeServiceIds(AsConsoleCommand::class, 'src/Console/Command') as $class) {
             $definition->method('registerConsoleCommand', \DI\get($class));
         }
 

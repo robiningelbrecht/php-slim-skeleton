@@ -54,9 +54,9 @@ class ContainerBuilder
         return \DI\create($id);
     }
 
-    public function findTaggedWithAttributeServiceIds(string $name): array
+    public function findTaggedWithAttributeServiceIds(string $name, string ...$restrictToDirectories): array
     {
-        return $this->attributeClassResolver->resolve($name);
+        return $this->attributeClassResolver->resolve($name, $restrictToDirectories);
     }
 
     public function build(): Container
