@@ -8,16 +8,9 @@ class CommandBus
 
     private array $commandHandlers = [];
 
-
     public function dispatch(DomainCommand $command): void
     {
         $this->getHandlerForCommand($command)->handle($command);
-    }
-
-    private function getHandlerForCommand(DomainCommand $command): CommandHandler
-    {
-        return $this->commandHandlers[$command::class] ??
-            throw new \RuntimeException(sprintf('CommandHandler for command "%s" not subscribed for this bus', $command::class));
     }
 
     public function subscribe(CommandHandler $commandHandler): void
@@ -27,6 +20,12 @@ class CommandBus
 
         $commandFqcn = str_replace(self::COMMAND_HANDLER_SUFFIX, '', $commandHandler::class);
         $this->commandHandlers[$commandFqcn] = $commandHandler;
+    }
+
+    private function getHandlerForCommand(DomainCommand $command): CommandHandler
+    {
+        return $this->commandHandlers[$command::class] ??
+            throw new \RuntimeException(sprintf('CommandHandler for command "%s" not subscribed to this bus', $command::class));
     }
 
     private function guardThatFqcnEndsInCommandHandler(string $fqcn): void
@@ -43,6 +42,9 @@ class CommandBus
         $commandFqcn = str_replace(self::COMMAND_HANDLER_SUFFIX, '', $commandHandler::class);
         if (!class_exists($commandFqcn)) {
             throw new CanNotRegisterCommandHandler(sprintf('No corresponding command for commandHandler "%s" found', $commandHandler::class));
+        }
+        if (str_ends_with($commandFqcn, 'Command')) {
+            throw new CanNotRegisterCommandHandler('Command name cannot end with "command"');
         }
     }
 }
