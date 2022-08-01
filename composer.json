@@ -1,7 +1,12 @@
 {
-  "name": "robiningelbrecht/the-coolest-pokemon",
+  "name": "robiningelbrecht/slim-skeleton-ddd-amqp",
   "keywords": [
-    "Pokemon"
+    "Slim",
+    "Framework",
+    "Skeleton",
+    "DDD",
+    "AMQP",
+    "CQRS"
   ],
   "license": "MIT",
   "authors": [
