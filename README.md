@@ -10,7 +10,7 @@ This repository is a simple example on how to use <a href="https://github.com/sl
 
 To Run on your local machine:
 
-* Run `git clone git@github.com:robiningelbrecht/the-coolest-pokemon.git`
+* Run `git clone git@github.com:robiningelbrecht/slim-skeleton-ddd-amqp.git`
 * Run `composer install` to install dependencies
 * Copy `.env.dist` to `.env`
 * Run `docker-composer up -d --build` to up and build Docker containers
