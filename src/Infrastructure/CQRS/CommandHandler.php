@@ -4,5 +4,5 @@ namespace App\Infrastructure\CQRS;
 
 interface CommandHandler
 {
-    public function handle($command): void;
+    public function handle(DomainCommand $command): void;
 }
