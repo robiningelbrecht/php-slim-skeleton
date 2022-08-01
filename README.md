@@ -1,7 +1,7 @@
 <h1 align="center">Slim Framework skeleton</h1>
 
 <p align="center">
-	<img src="https://github.com/robiningelbrecht/slim-skeleton-ddd-amqp/raw/master/readme/slim.png" alt="Slim">
+	<img src="https://github.com/robiningelbrecht/slim-skeleton-ddd-amqp/raw/master/readme/slim.webp" alt="Slim">
 </p>
 
 <p align="center">
@@ -25,10 +25,10 @@ To Run on your local machine:
 
 <h2 align="center">Voting example</h2>
 <p align="center">
-  <img src="https://github.com/robiningelbrecht/the-coolest-pokemon/raw/master/readme/vote.png" alt="Vote">
+  <img src="https://github.com/robiningelbrecht/the-coolest-pokemon/raw/master/readme/vote.webp" alt="Vote">
 </p>
 
 <h2 align="center">Results example</h2>
 <p align="center">
-  <img src="https://github.com/robiningelbrecht/the-coolest-pokemon/raw/master/readme/results.png" alt="Results">
+  <img src="https://github.com/robiningelbrecht/the-coolest-pokemon/raw/master/readme/results.webp" alt="Results">
 </p>
