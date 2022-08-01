@@ -1,4 +1,4 @@
-<h1 align="center">The coolest Pokémon</h1>
+<h1 align="center">Slim Framework skeleton</h1>
 
 <p align="center">
 <a href="https://github.com/robiningelbrecht/the-coolest-pokemon/blob/master/LICENSE"><img src="https://img.shields.io/github/license/robiningelbrecht/the-coolest-pokemon?color=428f7e&logo=open%20source%20initiative&logoColor=white" alt="License"></a>
