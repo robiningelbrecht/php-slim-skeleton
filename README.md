@@ -5,7 +5,8 @@
 </p>
 
 <p align="center">
-<a href="https://github.com/robiningelbrecht/the-coolest-pokemon/blob/master/LICENSE"><img src="https://img.shields.io/github/license/robiningelbrecht/the-coolest-pokemon?color=428f7e&logo=open%20source%20initiative&logoColor=white" alt="License"></a>
+<a href="https://github.com/robiningelbrecht/slim-skeleton-ddd-amqp/blob/master/LICENSE"><img src="https://img.shields.io/github/license/robiningelbrecht/slim-skeleton-ddd-amqp?color=428f7e&logo=open%20source%20initiative&logoColor=white" alt="License"></a>
+<a href="https://php.net/"><img src="https://img.shields.io/packagist/php-v/robiningelbrecht/slim-skeleton-ddd-amqp/dev-master?color=777bb3&logo=php&logoColor=white" alt="PHP"></a>
 </p>
 
 ---
