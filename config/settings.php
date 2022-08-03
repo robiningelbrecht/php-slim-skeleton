@@ -14,6 +14,8 @@ return [
         // If false, display only "Slim Application Error" on the PHP log.
         // Doesn't do anything when 'logErrors' is false.
         'logErrorDetails' => $_ENV['LOG_ERROR_DETAILS'],
+        // Path where Slim will cache the container, compiler passes, ...
+        'cache_dir' => Settings::getAppRoot() . '/var/cache/slim',
     ],
     'doctrine' => [
         // Enables or disables Doctrine metadata caching
@@ -21,11 +23,11 @@ return [
         'dev_mode' => Environment::from($_ENV['ENVIRONMENT']) !== Environment::PRODUCTION,
         // Path where Doctrine will cache the processed metadata
         // when 'dev_mode' is false.
-        'cache_dir' => Settings::getAppRoot()  . '/var/doctrine',
+        'cache_dir' => Settings::getAppRoot() . '/var/cache/doctrine',
         // List of paths where Doctrine will search for metadata.
         // Metadata can be either YML/XML files or PHP classes annotated
         // with comments or PHP8 attributes.
-        'metadata_dirs' => [Settings::getAppRoot()  . '/src/Domain'],
+        'metadata_dirs' => [Settings::getAppRoot() . '/src/Domain'],
         // The parameters Doctrine needs to connect to your database.
         // These parameters depend on the driver (for instance the 'pdo_sqlite' driver
         // needs a 'path' parameter and doesn't use most of the ones shown in this example).
