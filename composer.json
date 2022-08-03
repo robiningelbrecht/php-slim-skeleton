@@ -17,6 +17,7 @@
   ],
   "require": {
     "php": "^8.1",
+    "doctrine/dbal": "^3.3",
     "doctrine/migrations": "^3.5",
     "doctrine/orm": "^2.12",
     "guzzlehttp/guzzle": "^7.4",
@@ -29,6 +30,7 @@
     "symfony/cache": "^6.1",
     "symfony/console": "^6.1",
     "symfony/finder": "^6.1",
+    "thecodingmachine/safe": "^2.2",
     "twig/twig": "^3.4",
     "vlucas/phpdotenv": "^5.4"
   },

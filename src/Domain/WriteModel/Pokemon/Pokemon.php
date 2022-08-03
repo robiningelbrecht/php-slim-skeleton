@@ -41,6 +41,35 @@ class Pokemon
 
     }
 
+    public static function create(
+        UuidInterface $uuid,
+        string $id,
+        string $name,
+        int $baseExperience,
+        int $height,
+        int $weight,
+        array $abilities,
+        array $moves,
+        array $types,
+        array $stats,
+        array $sprites
+    ): self
+    {
+        return new self(
+            $uuid,
+            $id,
+            $name,
+            $baseExperience,
+            $height,
+            $weight,
+            $abilities,
+            $moves,
+            $types,
+            $stats,
+            $sprites,
+        );
+    }
+
     public function getUuid(): UuidInterface
     {
         return $this->uuid;
@@ -156,26 +185,6 @@ class Pokemon
             json_decode($state['types'], true),
             json_decode($state['stats'], true),
             json_decode($state['sprites'], true),
-        );
-    }
-
-    public static function fromApi(array $data): self
-    {
-        return new self(
-            Uuid::uuid5('4bdbe8ec-5cb5-11ea-bc55-0242ac130003', $data['id']),
-            $data['id'],
-            $data['name'],
-            (int)$data['base_experience'],
-            (int)$data['height'],
-            (int)$data['weight'],
-            array_map(fn(array $ability) => $ability['ability']['name'], $data['abilities']),
-            array_map(fn(array $move) => $move['move']['name'], $data['moves']),
-            array_map(fn(array $type) => $type['type']['name'], $data['types']),
-            array_map(fn(array $stat) => [
-                'name' => $stat['stat']['name'],
-                'base' => $stat['base_stat'],
-            ], $data['stats']),
-            $data['sprites'],
         );
     }
 }

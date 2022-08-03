@@ -8,7 +8,6 @@ use App\Domain\WriteModel\Vote\VoteRepository;
 use App\Infrastructure\Attribute\AsCommandHandler;
 use App\Infrastructure\CQRS\CommandHandler;
 use App\Infrastructure\CQRS\DomainCommand;
-use Ramsey\Uuid\Rfc4122\UuidV4;
 
 #[AsCommandHandler]
 class AddVoteCommandHandler implements CommandHandler
@@ -31,7 +30,7 @@ class AddVoteCommandHandler implements CommandHandler
         $notUpvotedPoke = $this->pokemonRepository->findByUuid($command->getPokemonNotVotedFor());
 
         $this->voteRepository->add(Vote::create(
-            UuidV4::uuid4(),
+            $command->getUuid(),
             $upvotedPoke->getUuid(),
             $notUpvotedPoke->getUuid()
         ));

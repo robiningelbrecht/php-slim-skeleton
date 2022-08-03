@@ -1,6 +1,6 @@
 <?php
 
-use App\Console\ConsoleCommandCompilerPass;
+use App\Infrastructure\Console\ConsoleCommandCompilerPass;
 use App\Infrastructure\CQRS\CommandHandlerCompilerPass;
 
 return [

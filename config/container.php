@@ -1,16 +1,16 @@
 <?php
 
+use App\Infrastructure\Console\ConsoleCommandFactory;
 use App\Infrastructure\Environment\Environment;
 use App\Infrastructure\Environment\Settings;
-use App\Console\ConsoleCommandFactory;
-use Dotenv\Dotenv;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
+use Dotenv\Dotenv;
+use Symfony\Component\Console\Application;
 use Twig\Environment as TwigEnvironment;
 use Twig\Loader\FilesystemLoader;
-use Symfony\Component\Console\Application;
 
 $appRoot = Settings::getAppRoot();
 
