@@ -2,6 +2,7 @@
 
 namespace App\Infrastructure\Exception;
 
+use App\Infrastructure\Serialization\Json;
 use Psr\Http\Message\ResponseInterface;
 use Slim\Exception\HttpBadRequestException;
 use Slim\Exception\HttpException;
@@ -69,7 +70,7 @@ class HttpErrorHandler extends ErrorHandler
             $error['trace'] = $trace;
         }
 
-        $payload = json_encode($error, JSON_PRETTY_PRINT);
+        $payload = Json::encode($error, JSON_PRETTY_PRINT);
 
         $response = $this->responseFactory->createResponse($statusCode);
         $response->getBody()->write($payload);

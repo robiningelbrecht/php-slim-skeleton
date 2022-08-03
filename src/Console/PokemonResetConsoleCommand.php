@@ -23,7 +23,7 @@ class PokemonResetConsoleCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->pokemonRepository->truncate();
-        $this->voteRepository->truncate();;
+        $this->voteRepository->truncate();
         return Command::SUCCESS;
     }
 }

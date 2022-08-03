@@ -2,6 +2,7 @@
 
 namespace App\Domain\WriteModel\Pokemon;
 
+use App\Infrastructure\Serialization\Json;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Doctrine\ORM\Mapping\Column;
@@ -163,11 +164,11 @@ class Pokemon
             'baseExperience' => $this->getBaseExperience(),
             'height' => $this->getHeight(),
             'weight' => $this->getWeight(),
-            'abilities' => json_encode($this->getAbilities()),
-            'moves' => json_encode($this->getMoves()),
-            'types' => json_encode($this->getTypes()),
-            'stats' => json_encode($this->getStats()),
-            'sprites' => json_encode($this->getSprites()),
+            'abilities' => Json::encode($this->getAbilities()),
+            'moves' => Json::encode($this->getMoves()),
+            'types' => Json::encode($this->getTypes()),
+            'stats' => Json::encode($this->getStats()),
+            'sprites' => Json::encode($this->getSprites()),
         ];
     }
 
@@ -180,11 +181,11 @@ class Pokemon
             (int)$state['baseExperience'],
             (int)$state['height'],
             (int)$state['weight'],
-            json_decode($state['abilities'], true),
-            json_decode($state['moves'], true),
-            json_decode($state['types'], true),
-            json_decode($state['stats'], true),
-            json_decode($state['sprites'], true),
+            Json::decode($state['abilities']),
+            Json::decode($state['moves']),
+            Json::decode($state['types']),
+            Json::decode($state['stats']),
+            Json::decode($state['sprites']),
         );
     }
 }
