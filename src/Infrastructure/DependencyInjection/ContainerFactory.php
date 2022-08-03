@@ -17,7 +17,7 @@ class ContainerFactory
         $dotenv->load();
 
         // At this point the container has not been built. We need to load the settings manually.
-        $settings = Settings::fromArray(require $appRoot . '/config/settings.php');
+        $settings = Settings::load();
         $containerBuilder = ContainerBuilder::create($settings);
 
         if (Environment::PRODUCTION === Environment::from($_ENV['ENVIRONMENT'])) {

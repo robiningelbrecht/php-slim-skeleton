@@ -48,6 +48,5 @@ return [
         return Environment::from($_ENV['ENVIRONMENT']);
     },
     // Settings.
-    Settings::class => DI\factory([Settings::class, 'fromArray'])
-        ->parameter('settings', require $appRoot . '/config/settings.php'),
+    Settings::class => DI\factory([Settings::class, 'load']),
 ];

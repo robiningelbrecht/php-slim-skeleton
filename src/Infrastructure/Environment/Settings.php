@@ -27,9 +27,9 @@ class Settings
         return $settings;
     }
 
-    public static function fromArray(array $settings): self
+    public static function load(): self
     {
-        return new self($settings);
+        return new self(require self::getAppRoot() . '/config/settings.php');
     }
 
     public static function getAppRoot(): string
