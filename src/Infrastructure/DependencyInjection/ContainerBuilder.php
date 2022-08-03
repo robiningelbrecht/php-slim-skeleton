@@ -3,6 +3,7 @@
 namespace App\Infrastructure\DependencyInjection;
 
 use App\Infrastructure\Attribute\AttributeClassResolver;
+use App\Infrastructure\Environment\Settings;
 use DI\CompiledContainer;
 use DI\Container;
 use DI\Definition\Helper\DefinitionHelper;
@@ -66,7 +67,7 @@ class ContainerBuilder
         return \DI\create($id);
     }
 
-    public function findTaggedWithAttributeServiceIds(string $name, string ...$restrictToDirectories): array
+    public function findTaggedWithAttributeIds(string $name, string ...$restrictToDirectories): array
     {
         return $this->attributeClassResolver->resolve($name, $restrictToDirectories);
     }
@@ -79,11 +80,11 @@ class ContainerBuilder
         return $this->containerBuilder->build();
     }
 
-    public static function create(): self
+    public static function create(Settings $settings): self
     {
         return new self(
             new \DI\ContainerBuilder(),
-            new AttributeClassResolver(new Finder())
+            new AttributeClassResolver($settings, new Finder())
         );
     }
 }

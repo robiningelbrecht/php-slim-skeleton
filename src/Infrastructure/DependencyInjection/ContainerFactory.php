@@ -12,13 +12,13 @@ class ContainerFactory
     public static function create(): ContainerInterface
     {
         $appRoot = Settings::getAppRoot();
-        $containerBuilder = ContainerBuilder::create();
 
         $dotenv = Dotenv::createImmutable($appRoot);
         $dotenv->load();
 
         // At this point the container has not been built. We need to load the settings manually.
         $settings = Settings::fromArray(require $appRoot . '/config/settings.php');
+        $containerBuilder = ContainerBuilder::create($settings);
 
         if (Environment::PRODUCTION === Environment::from($_ENV['ENVIRONMENT'])) {
             // Compile and cache container.

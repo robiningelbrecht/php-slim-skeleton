@@ -9,7 +9,8 @@ class AttributeClassResolver
 {
 
     public function __construct(
-        private readonly Finder $finder
+        private readonly Settings $settings,
+        private readonly Finder $finder,
     )
     {
     }
@@ -26,6 +27,7 @@ class AttributeClassResolver
 
         // @TODO: need to find a more efficient way to fetch tagged classes.
         // @TODO: maybe introduce caching?
+        // $settings->get('slim.cache_dir').'/compiler-passes.
         $classes = [];
         foreach ($this->finder as $file) {
             $class = trim(str_replace($appRoot . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR, '', $file->getRealPath()));

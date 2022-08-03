@@ -11,7 +11,7 @@ class CommandHandlerCompilerPass implements CompilerPass
     public function process(ContainerBuilder $container): void
     {
         $definition = $container->findDefinition(CommandBus::class);
-        foreach ($container->findTaggedWithAttributeServiceIds(AsCommandHandler::class) as $class) {
+        foreach ($container->findTaggedWithAttributeIds(AsCommandHandler::class) as $class) {
             $definition->method('subscribe', \DI\get($class));
         }
 
