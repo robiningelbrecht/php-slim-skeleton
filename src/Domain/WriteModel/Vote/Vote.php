@@ -2,13 +2,14 @@
 
 namespace App\Domain\WriteModel\Vote;
 
+use App\Infrastructure\Eventing\AggregateRoot;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Id;
 use Ramsey\Uuid\UuidInterface;
 
 #[Entity]
-class Vote
+class Vote extends AggregateRoot
 {
     private function __construct(
         #[Id, Column(type: "guid", unique: true, nullable: false)]
@@ -27,7 +28,14 @@ class Vote
         UuidInterface $pokemonNotVotedFor
     ): self
     {
-        return new self($uuid, $pokemonVotedFor, $pokemonNotVotedFor);
+        $vote =  new self($uuid, $pokemonVotedFor, $pokemonNotVotedFor);
+        $vote->recordThat(new VoteWasAdded(
+            $vote->getUuid(),
+            $vote->getPokemonVotedFor(),
+            $vote->getPokemonNotVotedFor(),
+        ));
+
+        return $vote;
     }
 
     public function getUuid(): UuidInterface
