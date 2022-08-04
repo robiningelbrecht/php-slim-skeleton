@@ -8,12 +8,12 @@ use App\Infrastructure\Eventing\DomainEvent;
 abstract class ConventionBasedEventListener implements EventListener
 {
     private string $eventProcessingMethodPrefix;
-    private array $subscribedEvents;
+    private array $eventsThatWeAreListeningTo;
 
     public function __construct()
     {
         $this->eventProcessingMethodPrefix = $this->resolveEventProcessingMethodPrefix();
-        $this->subscribedEvents = $this->resolveSubscribedEvents();
+        $this->eventsThatWeAreListeningTo = $this->resolveEventsThatWeAreListeningTo();
     }
 
     public function notifyThat(DomainEvent $event): void
@@ -27,10 +27,10 @@ abstract class ConventionBasedEventListener implements EventListener
 
     public function isListeningToEvent(DomainEvent $event): bool
     {
-        return in_array($event::class, $this->subscribedEvents);
+        return in_array($event::class, $this->eventsThatWeAreListeningTo);
     }
 
-    private function resolveSubscribedEvents(): array
+    private function resolveEventsThatWeAreListeningTo(): array
     {
         $interestedIn = [];
         $methods = (new \ReflectionClass($this))->getMethods();
