@@ -1,6 +1,6 @@
 <?php
 
-use App\Infrastructure\Console\ConsoleCommandFactory;
+use App\Infrastructure\Console\ConsoleCommandContainer;
 use App\Infrastructure\Environment\Environment;
 use App\Infrastructure\Environment\Settings;
 use Doctrine\DBAL\Connection;
@@ -35,9 +35,9 @@ return [
         return EntityManager::create($settings->get('doctrine.connection'), $config);
     },
     // Console command application.
-    Application::class => function (ConsoleCommandFactory $consoleCommandFactory) {
+    Application::class => function (ConsoleCommandContainer $consoleCommandContainer) {
         $application = new Application();
-        foreach ($consoleCommandFactory->getConsoleCommands() as $command) {
+        foreach ($consoleCommandContainer->getCommands() as $command) {
             $application->add($command);
         }
 

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Infrastructure\CQRS;
+namespace App\Infrastructure\CQRS\CommandHandler;
 
 use App\Infrastructure\Attribute\AsCommandHandler;
+use App\Infrastructure\CQRS\CommandBus;
 use App\Infrastructure\DependencyInjection\CompilerPass;
 use App\Infrastructure\DependencyInjection\ContainerBuilder;
 
@@ -12,7 +13,7 @@ class CommandHandlerCompilerPass implements CompilerPass
     {
         $definition = $container->findDefinition(CommandBus::class);
         foreach ($container->findTaggedWithClassAttribute(AsCommandHandler::class) as $class) {
-            $definition->method('subscribe', \DI\get($class));
+            $definition->method('subscribeCommandHandler', \DI\get($class));
         }
 
         $container->addDefinitions(

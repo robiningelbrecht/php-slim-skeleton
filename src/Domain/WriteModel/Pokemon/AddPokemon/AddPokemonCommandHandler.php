@@ -5,7 +5,7 @@ namespace App\Domain\WriteModel\Pokemon\AddPokemon;
 use App\Domain\WriteModel\Pokemon\Pokemon;
 use App\Domain\WriteModel\Pokemon\PokemonRepository;
 use App\Infrastructure\Attribute\AsCommandHandler;
-use App\Infrastructure\CQRS\CommandHandler;
+use App\Infrastructure\CQRS\CommandHandler\CommandHandler;
 use App\Infrastructure\CQRS\DomainCommand;
 
 #[AsCommandHandler]

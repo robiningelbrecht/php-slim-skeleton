@@ -1,7 +1,7 @@
 <?php
 
 use App\Infrastructure\Console\ConsoleCommandCompilerPass;
-use App\Infrastructure\CQRS\CommandHandlerCompilerPass;
+use App\Infrastructure\CQRS\CommandHandler\CommandHandlerCompilerPass;
 
 return [
     // Compiler pass to auto discover console commands.

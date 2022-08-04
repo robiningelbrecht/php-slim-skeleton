@@ -6,7 +6,7 @@ use App\Domain\WriteModel\Pokemon\PokemonRepository;
 use App\Domain\WriteModel\Vote\Vote;
 use App\Domain\WriteModel\Vote\VoteRepository;
 use App\Infrastructure\Attribute\AsCommandHandler;
-use App\Infrastructure\CQRS\CommandHandler;
+use App\Infrastructure\CQRS\CommandHandler\CommandHandler;
 use App\Infrastructure\CQRS\DomainCommand;
 
 #[AsCommandHandler]

@@ -11,13 +11,13 @@ class ConsoleCommandCompilerPass implements CompilerPass
 
     public function process(ContainerBuilder $container): void
     {
-        $definition = $container->findDefinition(ConsoleCommandFactory::class);
+        $definition = $container->findDefinition(ConsoleCommandContainer::class);
         foreach ($container->findTaggedWithClassAttribute(AsCommand::class, 'src/Console') as $class) {
-            $definition->method('registerConsoleCommand', \DI\get($class));
+            $definition->method('registerCommand', \DI\get($class));
         }
 
         $container->addDefinitions(
-            [ConsoleCommandFactory::class => $definition],
+            [ConsoleCommandContainer::class => $definition],
         );
     }
 }

@@ -2,6 +2,9 @@
 
 namespace App\Infrastructure\CQRS;
 
+use App\Infrastructure\CQRS\CommandHandler\CanNotRegisterCommandHandler;
+use App\Infrastructure\CQRS\CommandHandler\CommandHandler;
+
 class CommandBus
 {
     private const COMMAND_HANDLER_SUFFIX = 'CommandHandler';
@@ -13,7 +16,7 @@ class CommandBus
         $this->getHandlerForCommand($command)->handle($command);
     }
 
-    public function subscribe(CommandHandler $commandHandler): void
+    public function subscribeCommandHandler(CommandHandler $commandHandler): void
     {
         $this->guardThatFqcnEndsInCommandHandler($commandHandler::class);
         $this->guardThatThereIsACorrespondingCommand($commandHandler);
