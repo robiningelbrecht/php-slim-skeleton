@@ -28,7 +28,7 @@ class EventBus
             try {
                 while ($domainEvent = array_shift($this->queue)) {
                     foreach ($this->eventListeners as $eventListener) {
-                        if (!in_array($domainEvent::class, $eventListener->getSubscribedEvents())) {
+                        if (!$eventListener->isListeningToEvent($domainEvent)) {
                             continue;
                         }
                         $eventListener->notifyThat($domainEvent);

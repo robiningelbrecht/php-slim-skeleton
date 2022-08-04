@@ -6,7 +6,7 @@ use App\Infrastructure\Eventing\DomainEvent;
 
 interface EventListener
 {
-    public function notifyThat(DomainEvent $domainEvent): void;
+    public function notifyThat(DomainEvent $event): void;
 
-    public function getSubscribedEvents(): array;
+    public function isListeningToEvent(DomainEvent $event): bool;
 }

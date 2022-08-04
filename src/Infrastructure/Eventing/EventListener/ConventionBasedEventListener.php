@@ -16,18 +16,18 @@ abstract class ConventionBasedEventListener implements EventListener
         $this->subscribedEvents = $this->resolveSubscribedEvents();
     }
 
-    public function notifyThat(DomainEvent $domainEvent): void
+    public function notifyThat(DomainEvent $event): void
     {
-        $methodName = $this->eventProcessingMethodPrefix . $domainEvent->getShortClassName();
+        $methodName = $this->eventProcessingMethodPrefix . $event->getShortClassName();
         if (!\method_exists($this, $methodName)) {
             return;
         }
-        $this->$methodName($domainEvent);
+        $this->$methodName($event);
     }
 
-    public function getSubscribedEvents(): array
+    public function isListeningToEvent(DomainEvent $event): bool
     {
-        return $this->subscribedEvents;
+        return in_array($event::class, $this->subscribedEvents);
     }
 
     private function resolveSubscribedEvents(): array
