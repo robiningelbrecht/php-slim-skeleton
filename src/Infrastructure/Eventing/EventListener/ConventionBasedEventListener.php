@@ -8,10 +8,12 @@ use App\Infrastructure\Eventing\DomainEvent;
 abstract class ConventionBasedEventListener implements EventListener
 {
     private string $eventProcessingMethodPrefix;
+    private array $subscribedEvents;
 
     public function __construct()
     {
         $this->eventProcessingMethodPrefix = $this->resolveEventProcessingMethodPrefix();
+        $this->subscribedEvents = $this->resolveSubscribedEvents();
     }
 
     public function notifyThat(DomainEvent $domainEvent): void
@@ -21,6 +23,25 @@ abstract class ConventionBasedEventListener implements EventListener
             return;
         }
         $this->$methodName($domainEvent);
+    }
+
+    public function getSubscribedEvents(): array
+    {
+        return $this->subscribedEvents;
+    }
+
+    private function resolveSubscribedEvents(): array
+    {
+        $interestedIn = [];
+        $methods = (new \ReflectionClass($this))->getMethods();
+        foreach ($methods as $method) {
+            if (!str_starts_with($method->getName(), $this->eventProcessingMethodPrefix)) {
+                continue;
+            }
+            $interestedIn[] = (string)$method->getParameters()[0]->getType();
+        }
+
+        return $interestedIn;
     }
 
     private function resolveEventProcessingMethodPrefix(): string
