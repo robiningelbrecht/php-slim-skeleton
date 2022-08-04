@@ -5,17 +5,40 @@ namespace App\Infrastructure\Attribute;
 use App\Infrastructure\Environment\Settings;
 use Symfony\Component\Finder\Finder;
 
-class AttributeClassResolver
+class ClassAttributeResolver
 {
 
     public function __construct(
-        private readonly Settings $settings,
         private readonly Finder $finder,
     )
     {
     }
 
-    public function resolve(string $attributeClassName, array $restrictToDirectories = []): array
+    public function resolve(
+        string $attributeClassName,
+        array $restrictToDirectories = [],
+        ?string $classAttributeCacheDir = null): array
+    {
+        $appRoot = Settings::getAppRoot();
+
+        if ($classAttributeCacheDir) {
+            $cache = new ClassAttributeCache($attributeClassName, $classAttributeCacheDir);
+            if (!$cache->exists()) {
+                return require $cache->compile(
+                    $this->searchForClasses($attributeClassName, $restrictToDirectories)
+                );
+            }
+
+            return require $cache->get();
+        }
+
+        return $this->searchForClasses($attributeClassName, $restrictToDirectories);
+    }
+
+    private function searchForClasses(
+        string $attributeClassName,
+        array $restrictToDirectories = [],
+    ): array
     {
         $appRoot = Settings::getAppRoot();
         $searchInDirectories = array_map(
@@ -25,9 +48,6 @@ class AttributeClassResolver
 
         $this->finder->files()->in($searchInDirectories)->name('*.php');
 
-        // @TODO: need to find a more efficient way to fetch tagged classes.
-        // @TODO: maybe introduce caching?
-        // $settings->get('slim.cache_dir').'/compiler-passes.
         $classes = [];
         foreach ($this->finder as $file) {
             $class = trim(str_replace($appRoot . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR, '', $file->getRealPath()));
@@ -47,4 +67,6 @@ class AttributeClassResolver
 
         return $classes;
     }
+
+
 }

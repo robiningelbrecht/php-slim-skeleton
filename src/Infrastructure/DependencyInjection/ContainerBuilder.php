@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\DependencyInjection;
 
-use App\Infrastructure\Attribute\AttributeClassResolver;
+use App\Infrastructure\Attribute\ClassAttributeResolver;
 use App\Infrastructure\Environment\Settings;
 use DI\CompiledContainer;
 use DI\Container;
@@ -13,10 +13,11 @@ class ContainerBuilder
 {
     /** @var CompilerPass[] */
     private array $passes = [];
+    private ?string $classAttributeCacheDir = null;
 
     private function __construct(
         private readonly \DI\ContainerBuilder $containerBuilder,
-        private readonly AttributeClassResolver $attributeClassResolver,
+        private readonly ClassAttributeResolver $classAttributeResolver,
     )
     {
     }
@@ -39,6 +40,13 @@ class ContainerBuilder
             $containerClass,
             $containerParentClass,
         );
+
+        return $this;
+    }
+
+    public function enableClassAttributeCache(string $directory): self
+    {
+        $this->classAttributeCacheDir = $directory;
 
         return $this;
     }
@@ -67,9 +75,9 @@ class ContainerBuilder
         return \DI\create($id);
     }
 
-    public function findTaggedWithAttributeIds(string $name, string ...$restrictToDirectories): array
+    public function findTaggedWithClassAttribute(string $name, string ...$restrictToDirectories): array
     {
-        return $this->attributeClassResolver->resolve($name, $restrictToDirectories);
+        return $this->classAttributeResolver->resolve($name, $restrictToDirectories, $this->classAttributeCacheDir);
     }
 
     public function build(): Container
@@ -80,11 +88,11 @@ class ContainerBuilder
         return $this->containerBuilder->build();
     }
 
-    public static function create(Settings $settings): self
+    public static function create(): self
     {
         return new self(
             new \DI\ContainerBuilder(),
-            new AttributeClassResolver($settings, new Finder())
+            new ClassAttributeResolver(new Finder())
         );
     }
 }
