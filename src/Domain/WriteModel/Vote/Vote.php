@@ -7,14 +7,13 @@ use App\Infrastructure\Eventing\AggregateRoot;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Id;
-use Ramsey\Uuid\UuidInterface;
 
 #[Entity]
 class Vote extends AggregateRoot
 {
     private function __construct(
-        #[Id, Column(type: "guid", unique: true, nullable: false)]
-        private readonly UuidInterface $uuid,
+        #[Id, Column(type: "string", unique: true, nullable: false)]
+        private readonly VoteId $voteId,
         #[Column(type: "string", nullable: false)]
         private readonly PokemonId $pokemonVotedFor,
         #[Column(type: "string", nullable: false)]
@@ -24,14 +23,14 @@ class Vote extends AggregateRoot
     }
 
     public static function create(
-        UuidInterface $uuid,
+        VoteId $voteId,
         PokemonId $pokemonVotedFor,
         PokemonId $pokemonNotVotedFor
     ): self
     {
-        $vote =  new self($uuid, $pokemonVotedFor, $pokemonNotVotedFor);
+        $vote =  new self($voteId, $pokemonVotedFor, $pokemonNotVotedFor);
         $vote->recordThat(new VoteWasAdded(
-            $vote->getUuid(),
+            $vote->getVoteId(),
             $vote->getPokemonVotedFor(),
             $vote->getPokemonNotVotedFor(),
         ));
@@ -39,9 +38,9 @@ class Vote extends AggregateRoot
         return $vote;
     }
 
-    public function getUuid(): UuidInterface
+    public function getVoteId(): VoteId
     {
-        return $this->uuid;
+        return $this->voteId;
     }
 
     public function getPokemonVotedFor(): PokemonId
@@ -57,7 +56,7 @@ class Vote extends AggregateRoot
     public function toArray(): array
     {
         return [
-            'uuid' => (string)$this->getUuid(),
+            'voteId' => $this->getVoteId(),
             'pokemonVotedFor' => $this->getPokemonVotedFor(),
             'pokemonNotVotedFor' => $this->getPokemonNotVotedFor(),
         ];

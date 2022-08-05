@@ -6,11 +6,10 @@ use App\Domain\WriteModel\Pokemon\Pokemon;
 use App\Domain\WriteModel\Pokemon\PokemonId;
 use App\Domain\WriteModel\Pokemon\PokemonRepository;
 use App\Domain\WriteModel\Vote\AddVote\AddVote;
+use App\Domain\WriteModel\Vote\VoteId;
 use App\Infrastructure\CQRS\CommandBus;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Ramsey\Uuid\Rfc4122\UuidV4;
-use Ramsey\Uuid\Uuid;
 use Slim\Routing\RouteContext;
 use Twig\Environment;
 
@@ -27,14 +26,14 @@ class ChooseCoolestPokemonController
     public function handle(
         ServerRequestInterface $request,
         ResponseInterface $response,
-        string $previousPokemonUpvotedUuid = null,
-        string $previousPokemonNotUpvotedUuid = null): ResponseInterface
+        string $previousPokemonUpvotedId = null,
+        string $previousPokemonNotUpvotedId = null): ResponseInterface
     {
-        if ($previousPokemonUpvotedUuid && $previousPokemonNotUpvotedUuid) {
+        if ($previousPokemonUpvotedId && $previousPokemonNotUpvotedId) {
            $this->commandBus->dispatch(new AddVote(
-               UuidV4::uuid4(),
-               PokemonId::fromString($previousPokemonUpvotedUuid),
-               PokemonId::fromString($previousPokemonNotUpvotedUuid)
+               VoteId::random(),
+               PokemonId::fromString($previousPokemonUpvotedId),
+               PokemonId::fromString($previousPokemonNotUpvotedId)
            ));
 
             // Redirect to index.

@@ -30,7 +30,7 @@ class AddVoteCommandHandler implements CommandHandler
         $notUpvotedPoke = $this->pokemonRepository->find($command->getPokemonNotVotedFor());
 
         $this->voteRepository->add(Vote::create(
-            $command->getUuid(),
+            $command->getVoteId(),
             $upvotedPoke->getPokemonId(),
             $notUpvotedPoke->getPokemonId()
         ));

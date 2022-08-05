@@ -11,7 +11,7 @@ return function (App $app) {
     $routeCollector->setDefaultInvocationStrategy(new RequestResponseArgs());
 
     $app
-        ->get('/[{previousPokemonUpvotedUuid}/{previousPokemonNotUpvotedUuid}]', ChooseCoolestPokemonController::class . ':handle')
+        ->get('/[{previousPokemonUpvotedId}/{previousPokemonNotUpvotedId}]', ChooseCoolestPokemonController::class . ':handle')
         ->setName('index');
     $app
         ->get('/results', ResultController::class . ':handle')

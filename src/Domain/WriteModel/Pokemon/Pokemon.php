@@ -3,8 +3,6 @@
 namespace App\Domain\WriteModel\Pokemon;
 
 use App\Infrastructure\Serialization\Json;
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Id;

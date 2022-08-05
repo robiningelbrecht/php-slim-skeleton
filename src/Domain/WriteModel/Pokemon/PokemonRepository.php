@@ -4,7 +4,6 @@ namespace App\Domain\WriteModel\Pokemon;
 
 use App\Infrastructure\Exception\EntityNotFound;
 use Doctrine\DBAL\Connection;
-use Ramsey\Uuid\UuidInterface;
 
 class PokemonRepository
 {

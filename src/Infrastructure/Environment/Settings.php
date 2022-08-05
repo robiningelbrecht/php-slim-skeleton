@@ -4,7 +4,6 @@ namespace App\Infrastructure\Environment;
 
 class Settings
 {
-    public const UUID_NAMESPACE = '4bdbe8ec-5cb5-11ea-bc55-0242ac130003';
 
     private function __construct(
         private readonly array $settings

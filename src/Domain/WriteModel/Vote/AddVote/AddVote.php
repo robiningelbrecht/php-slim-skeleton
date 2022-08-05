@@ -3,22 +3,22 @@
 namespace App\Domain\WriteModel\Vote\AddVote;
 
 use App\Domain\WriteModel\Pokemon\PokemonId;
+use App\Domain\WriteModel\Vote\VoteId;
 use App\Infrastructure\CQRS\DomainCommand;
-use Ramsey\Uuid\UuidInterface;
 
 class AddVote extends DomainCommand
 {
     public function __construct(
-        protected UuidInterface $uuid,
+        protected VoteId $voteId,
         protected PokemonId $pokemonVotedFor,
         protected PokemonId $pokemonNotVotedFor,
     )
     {
     }
 
-    public function getUuid(): UuidInterface
+    public function getVoteId(): VoteId
     {
-        return $this->uuid;
+        return $this->voteId;
     }
 
     public function getPokemonVotedFor(): PokemonId

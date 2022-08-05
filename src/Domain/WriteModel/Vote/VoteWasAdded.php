@@ -4,19 +4,18 @@ namespace App\Domain\WriteModel\Vote;
 
 use App\Domain\WriteModel\Pokemon\PokemonId;
 use App\Infrastructure\Eventing\DomainEvent;
-use Ramsey\Uuid\UuidInterface;
 
 class VoteWasAdded extends DomainEvent
 {
     public function __construct(
-        private UuidInterface $voteId,
+        private VoteId $voteId,
         private PokemonId $pokemonVotedFor,
         private PokemonId $pokemonNotVotedFor
     )
     {
     }
 
-    public function getVoteId(): UuidInterface
+    public function getVoteId(): VoteId
     {
         return $this->voteId;
     }

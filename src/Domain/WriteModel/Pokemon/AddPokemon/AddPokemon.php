@@ -4,7 +4,6 @@ namespace App\Domain\WriteModel\Pokemon\AddPokemon;
 
 use App\Domain\WriteModel\Pokemon\PokemonId;
 use App\Infrastructure\CQRS\DomainCommand;
-use Ramsey\Uuid\UuidInterface;
 
 class AddPokemon extends DomainCommand
 {
