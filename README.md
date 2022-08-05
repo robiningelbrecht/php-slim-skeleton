@@ -16,9 +16,9 @@ This repository is a simple example on how to use <a href="https://github.com/sl
 To Run on your local machine:
 
 * Run `git clone git@github.com:robiningelbrecht/slim-skeleton-ddd-amqp.git`
-* Run `composer install` to install dependencies
 * Copy `.env.dist` to `.env`
 * Run `docker-composer up -d --build` to up and build Docker containers
+* Run `docker-compose run --rm php-cli composer require php-amqplib/php-amqplib` to install dependencies
 * Run `docker-compose run --rm php-cli vendor/bin/doctrine-migrations migrate` to bring db schema up to date.
 * Run `docker-compose run --rm php-cli bin/console pokemon:cache` to store Pokemon in database.
 * Navigate to `http://localhost:8080`
