@@ -11,7 +11,7 @@
             <div class="hp">HP {{ pokemon.getStat('hp') }}</div>
         </div>
         <img src="{{ pokemon.getSpriteUri() }}">
-        <div class="name">#{{ pokemon.getId() }} {{ pokemon.getName()|capitalize }}</div>
+        <div class="name">#{{ pokemon.getPokedexId() }} {{ pokemon.getName()|capitalize }}</div>
         {% if result %}
             <div class="score">scored {{ result.getScore() }}%, got {{ result.getUpVotes() }} vote{{ result.getUpVotes() > 1 ? 's' : '' }}</div>
         {% endif %}

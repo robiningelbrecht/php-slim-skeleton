@@ -12,7 +12,7 @@ use App\Infrastructure\CQRS\DomainCommand;
 class AddPokemonCommandHandler implements CommandHandler
 {
     public function __construct(
-        private PokemonRepository $pokemonRepository
+        private readonly PokemonRepository $pokemonRepository
     )
     {
     }
@@ -22,8 +22,8 @@ class AddPokemonCommandHandler implements CommandHandler
         assert($command instanceof AddPokemon);
 
         $this->pokemonRepository->add(Pokemon::create(
-            $command->getUuid(),
-            $command->getId(),
+            $command->getPokemonId(),
+            $command->getPokedexId(),
             $command->getName(),
             $command->getBaseExperience(),
             $command->getHeight(),

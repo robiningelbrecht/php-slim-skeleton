@@ -20,9 +20,9 @@ class ResultRepository
     {
         $query = '
                 SELECT * FROM Result
-                INNER JOIN Pokemon on Result.pokemonUuid = Pokemon.uuid
+                INNER JOIN Pokemon on Result.pokemonId = Pokemon.pokemonId
                 WHERE upVotes > 0         
-                ORDER BY score DESC, upVotes DESC, id ASC';
+                ORDER BY score DESC, upVotes DESC, pokedexId ASC';
 
         return array_map(
             fn(array $result) => Result::fromState($result),

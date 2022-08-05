@@ -17,28 +17,28 @@ class PokemonRepository
     public function add(Pokemon $pokemon): void
     {
         try {
-            $this->find($pokemon->getId());
+            $this->findByPokedexId($pokemon->getPokedexId());
             throw new \RuntimeException('Trying to add an already existing entry');
         } catch (EntityNotFound) {
             $this->connection->insert('Pokemon', $pokemon->toArray());
         }
     }
 
-    public function find(string $id): Pokemon
+    public function findByPokedexId(string $pokedexId): Pokemon
     {
-        $query = 'SELECT * FROM Pokemon WHERE id = :id';
-        if (!$result = $this->connection->executeQuery($query, ['id' => $id])->fetchAssociative()) {
-            throw new EntityNotFound(sprintf('Pokemon with id %s not found', $id));
+        $query = 'SELECT * FROM Pokemon WHERE pokedexId = :pokedexId';
+        if (!$result = $this->connection->executeQuery($query, ['pokedexId' => $pokedexId])->fetchAssociative()) {
+            throw new EntityNotFound(sprintf('Pokemon with id %s not found', $pokedexId));
         }
 
         return Pokemon::fromState($result);
     }
 
-    public function findByUuid(UuidInterface $uuid): Pokemon
+    public function find(PokemonId $pokemonId): Pokemon
     {
-        $query = 'SELECT * FROM Pokemon WHERE uuid = :uuid';
-        if (!$result = $this->connection->executeQuery($query, ['uuid' => (string)$uuid])->fetchAssociative()) {
-            throw new EntityNotFound(sprintf('Pokemon with uuid %s not found', $uuid));
+        $query = 'SELECT * FROM Pokemon WHERE pokemonId = :pokemonId';
+        if (!$result = $this->connection->executeQuery($query, ['pokemonId' => $pokemonId])->fetchAssociative()) {
+            throw new EntityNotFound(sprintf('Pokemon with id %s not found', $pokemonId));
         }
 
         return Pokemon::fromState($result);
@@ -49,7 +49,7 @@ class PokemonRepository
         $this->connection->update(
             'Pokemon',
             $pokemon->toArray(),
-            ['uuid' => (string)$pokemon->getUuid()]
+            ['pokemonId' => $pokemon->getPokemonId()]
         );
     }
 }

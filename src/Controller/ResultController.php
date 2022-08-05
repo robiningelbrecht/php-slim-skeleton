@@ -26,7 +26,7 @@ class ResultController
     {
         $results = $this->resultRepository->getAllWithAtLeastOneUpVote();
         foreach ($results as $result) {
-            $pokemon = $this->pokemonRepository->findByUuid($result->getPokemonUuid());
+            $pokemon = $this->pokemonRepository->find($result->getPokemonId());
             $result->enrichWithPokemon($pokemon);
         }
 

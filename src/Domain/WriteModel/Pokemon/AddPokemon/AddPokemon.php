@@ -2,14 +2,15 @@
 
 namespace App\Domain\WriteModel\Pokemon\AddPokemon;
 
+use App\Domain\WriteModel\Pokemon\PokemonId;
 use App\Infrastructure\CQRS\DomainCommand;
 use Ramsey\Uuid\UuidInterface;
 
 class AddPokemon extends DomainCommand
 {
     public function __construct(
-        protected UuidInterface $uuid,
-        protected string $id,
+        protected PokemonId $pokemonId,
+        protected string $pokedexId,
         protected string $name,
         protected int $baseExperience,
         protected int $height,
@@ -23,14 +24,14 @@ class AddPokemon extends DomainCommand
     {
     }
 
-    public function getUuid(): UuidInterface
+    public function getPokemonId(): PokemonId
     {
-        return $this->uuid;
+        return $this->pokemonId;
     }
 
-    public function getId(): string
+    public function getPokedexId(): string
     {
-        return $this->id;
+        return $this->pokedexId;
     }
 
     public function getName(): string

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Domain\WriteModel\Pokemon\Pokemon;
+use App\Domain\WriteModel\Pokemon\PokemonId;
 use App\Domain\WriteModel\Pokemon\PokemonRepository;
 use App\Domain\WriteModel\Vote\AddVote\AddVote;
 use App\Infrastructure\CQRS\CommandBus;
@@ -32,8 +33,8 @@ class ChooseCoolestPokemonController
         if ($previousPokemonUpvotedUuid && $previousPokemonNotUpvotedUuid) {
            $this->commandBus->dispatch(new AddVote(
                UuidV4::uuid4(),
-               Uuid::fromString($previousPokemonUpvotedUuid),
-               Uuid::fromString($previousPokemonNotUpvotedUuid)
+               PokemonId::fromString($previousPokemonUpvotedUuid),
+               PokemonId::fromString($previousPokemonNotUpvotedUuid)
            ));
 
             // Redirect to index.
@@ -49,8 +50,8 @@ class ChooseCoolestPokemonController
         $template = $this->twig->load('index.html.twig');
         $response->getBody()->write($template->render(
             [
-                'pokeOne' => $this->pokemonRepository->find($firstPoke),
-                'pokeTwo' => $this->pokemonRepository->find($secondPoke),
+                'pokeOne' => $this->pokemonRepository->findByPokedexId($firstPoke),
+                'pokeTwo' => $this->pokemonRepository->findByPokedexId($secondPoke),
             ]
         ));
 

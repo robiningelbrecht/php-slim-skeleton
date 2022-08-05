@@ -15,10 +15,10 @@ class Pokemon
     public const MAX_ID = 251;
 
     private function __construct(
-        #[Id, Column(type: "guid", unique: true, nullable: false)]
-        private readonly UuidInterface $uuid,
+        #[Id, Column(type: "string", unique: true, nullable: false)]
+        private readonly PokemonId $pokemonId,
         #[Column(type: 'integer')]
-        private readonly string $id,
+        private readonly string $pokedexId,
         #[Column(type: "string", nullable: false)]
         private readonly string $name,
         #[Column(type: "smallint", nullable: false)]
@@ -43,8 +43,8 @@ class Pokemon
     }
 
     public static function create(
-        UuidInterface $uuid,
-        string $id,
+        PokemonId $pokemonId,
+        string $pokedexId,
         string $name,
         int $baseExperience,
         int $height,
@@ -57,8 +57,8 @@ class Pokemon
     ): self
     {
         return new self(
-            $uuid,
-            $id,
+            $pokemonId,
+            $pokedexId,
             $name,
             $baseExperience,
             $height,
@@ -71,14 +71,14 @@ class Pokemon
         );
     }
 
-    public function getUuid(): UuidInterface
+    public function getPokemonId(): PokemonId
     {
-        return $this->uuid;
+        return $this->pokemonId;
     }
 
-    public function getId(): string
+    public function getPokedexId(): string
     {
-        return $this->id;
+        return $this->pokedexId;
     }
 
     public function getName(): string
@@ -158,8 +158,8 @@ class Pokemon
     public function toArray(): array
     {
         return [
-            'id' => $this->getId(),
-            'uuid' => $this->getUuid()->toString(),
+            'pokemonId' => (string)$this->getPokemonId(),
+            'pokedexId' => $this->getPokedexId(),
             'name' => $this->getName(),
             'baseExperience' => $this->getBaseExperience(),
             'height' => $this->getHeight(),
@@ -175,8 +175,8 @@ class Pokemon
     public static function fromState(array $state): self
     {
         return new self(
-            Uuid::fromString($state['uuid']),
-            $state['id'],
+            PokemonId::fromString($state['pokemonId']),
+            $state['pokedexId'],
             $state['name'],
             (int)$state['baseExperience'],
             (int)$state['height'],

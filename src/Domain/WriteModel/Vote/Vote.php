@@ -2,6 +2,7 @@
 
 namespace App\Domain\WriteModel\Vote;
 
+use App\Domain\WriteModel\Pokemon\PokemonId;
 use App\Infrastructure\Eventing\AggregateRoot;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
@@ -13,19 +14,19 @@ class Vote extends AggregateRoot
 {
     private function __construct(
         #[Id, Column(type: "guid", unique: true, nullable: false)]
-        private UuidInterface $uuid,
-        #[Column(type: "guid", nullable: false)]
-        private UuidInterface $pokemonVotedFor,
-        #[Column(type: "guid", nullable: false)]
-        private UuidInterface $pokemonNotVotedFor
+        private readonly UuidInterface $uuid,
+        #[Column(type: "string", nullable: false)]
+        private readonly PokemonId $pokemonVotedFor,
+        #[Column(type: "string", nullable: false)]
+        private readonly PokemonId $pokemonNotVotedFor
     )
     {
     }
 
     public static function create(
         UuidInterface $uuid,
-        UuidInterface $pokemonVotedFor,
-        UuidInterface $pokemonNotVotedFor
+        PokemonId $pokemonVotedFor,
+        PokemonId $pokemonNotVotedFor
     ): self
     {
         $vote =  new self($uuid, $pokemonVotedFor, $pokemonNotVotedFor);
@@ -43,12 +44,12 @@ class Vote extends AggregateRoot
         return $this->uuid;
     }
 
-    public function getPokemonVotedFor(): UuidInterface
+    public function getPokemonVotedFor(): PokemonId
     {
         return $this->pokemonVotedFor;
     }
 
-    public function getPokemonNotVotedFor(): UuidInterface
+    public function getPokemonNotVotedFor(): PokemonId
     {
         return $this->pokemonNotVotedFor;
     }
@@ -57,8 +58,8 @@ class Vote extends AggregateRoot
     {
         return [
             'uuid' => (string)$this->getUuid(),
-            'pokemonVotedFor' => (string)$this->getPokemonVotedFor(),
-            'pokemonNotVotedFor' => (string)$this->getPokemonNotVotedFor(),
+            'pokemonVotedFor' => $this->getPokemonVotedFor(),
+            'pokemonNotVotedFor' => $this->getPokemonNotVotedFor(),
         ];
     }
 }

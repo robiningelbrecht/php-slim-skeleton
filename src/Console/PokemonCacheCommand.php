@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Domain\WriteModel\Pokemon\AddPokemon\AddPokemon;
 use App\Domain\WriteModel\Pokemon\Pokemon;
+use App\Domain\WriteModel\Pokemon\PokemonId;
 use App\Domain\WriteModel\Pokemon\PokemonRepository;
 use App\Infrastructure\CQRS\CommandBus;
 use App\Infrastructure\Environment\Settings;
@@ -33,7 +34,7 @@ class PokemonCacheCommand extends Command
     {
         foreach (range(1, Pokemon::MAX_ID) as $id) {
             try {
-                $this->pokemonRepository->find($id);
+                $this->pokemonRepository->findByPokedexId($id);
                 // Pokémon is already cached, skip.
                 continue;
             } catch (EntityNotFound) {
@@ -44,7 +45,7 @@ class PokemonCacheCommand extends Command
             $data = Json::decode($response->getBody()->getContents());
 
             $this->commandBus->dispatch(new AddPokemon(
-                Uuid::uuid5(Settings::UUID_NAMESPACE, $data['id']),
+                PokemonId::random(),
                 $data['id'],
                 $data['name'],
                 (int)$data['base_experience'],

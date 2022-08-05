@@ -21,23 +21,23 @@ class VoteResultProjector extends ConventionBasedEventListener
     public function projectVoteWasAdded(VoteWasAdded $event): void
     {
         $pokemonToProject = [$event->getPokemonVotedFor(), $event->getPokemonNotVotedFor()];
-        foreach ($pokemonToProject as $pokemonUuid) {
+        foreach ($pokemonToProject as $pokemonId) {
             $query = '
                 SELECT * FROM (
-                     (SELECT COUNT(1) as impressions FROM Vote WHERE pokemonVotedFor = :pokemonUuid OR pokemonNotVotedFor = :pokemonUuid) as impressions, 
-                     (SELECT COUNT(1) as upVotes FROM Vote WHERE pokemonVotedFor = :pokemonUuid) as upVotes 
+                     (SELECT COUNT(1) as impressions FROM Vote WHERE pokemonVotedFor = :pokemonId OR pokemonNotVotedFor = :pokemonId) as impressions, 
+                     (SELECT COUNT(1) as upVotes FROM Vote WHERE pokemonVotedFor = :pokemonId) as upVotes 
                 )';
 
-            $result = $this->connection->executeQuery($query, ['pokemonUuid' => (string)$pokemonUuid])->fetchAssociative();
+            $result = $this->connection->executeQuery($query, ['pokemonId' => $pokemonId])->fetchAssociative();
 
             $query = '
                 REPLACE INTO Result
-                (pokemonUuid, impressions, upVotes, score)
+                (pokemonId, impressions, upVotes, score)
                 VALUES
-                (:pokemonUuid, :impressions, :upVotes, :score)';
+                (:pokemonId, :impressions, :upVotes, :score)';
 
             $this->connection->executeStatement($query, [
-                'pokemonUuid' => $pokemonUuid,
+                'pokemonId' => $pokemonId,
                 'impressions' => $result['impressions'],
                 'upVotes' => $result['upVotes'],
                 'score' => round(($result['upVotes'] / $result['impressions']) * 100),

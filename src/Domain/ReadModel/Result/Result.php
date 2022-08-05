@@ -3,11 +3,10 @@
 namespace App\Domain\ReadModel\Result;
 
 use App\Domain\WriteModel\Pokemon\Pokemon;
+use App\Domain\WriteModel\Pokemon\PokemonId;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Id;
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
 
 #[Entity]
 class Result
@@ -15,8 +14,8 @@ class Result
     private ?Pokemon $pokemon = null;
 
     private function __construct(
-        #[Id, Column(type: "guid", unique: true, nullable: false)]
-        private readonly UuidInterface $pokemonUuid,
+        #[Id, Column(type: "string", unique: true, nullable: false)]
+        private readonly PokemonId $pokemonId,
         #[Column(type: 'integer', nullable: false)]
         private readonly int $impressions,
         #[Column(type: 'integer', nullable: false)]
@@ -27,9 +26,9 @@ class Result
     {
     }
 
-    public function getPokemonUuid(): UuidInterface
+    public function getPokemonId(): PokemonId
     {
-        return $this->pokemonUuid;
+        return $this->pokemonId;
     }
 
     public function getImpressions(): int
@@ -60,7 +59,7 @@ class Result
     public static function fromState(array $result): self
     {
         return new self(
-            Uuid::fromString($result['pokemonUuid']),
+            PokemonId::fromString($result['pokemonId']),
             (int)$result['impressions'],
             (int)$result['upVotes'],
             (int)$result['score'],

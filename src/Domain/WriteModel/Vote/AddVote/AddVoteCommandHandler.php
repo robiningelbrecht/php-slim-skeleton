@@ -26,13 +26,13 @@ class AddVoteCommandHandler implements CommandHandler
         if ($command->getPokemonVotedFor() === $command->getPokemonNotVotedFor()) {
             throw new \RuntimeException('Dirty little cheater');
         }
-        $upvotedPoke = $this->pokemonRepository->findByUuid($command->getPokemonVotedFor());
-        $notUpvotedPoke = $this->pokemonRepository->findByUuid($command->getPokemonNotVotedFor());
+        $upvotedPoke = $this->pokemonRepository->find($command->getPokemonVotedFor());
+        $notUpvotedPoke = $this->pokemonRepository->find($command->getPokemonNotVotedFor());
 
         $this->voteRepository->add(Vote::create(
             $command->getUuid(),
-            $upvotedPoke->getUuid(),
-            $notUpvotedPoke->getUuid()
+            $upvotedPoke->getPokemonId(),
+            $notUpvotedPoke->getPokemonId()
         ));
     }
 

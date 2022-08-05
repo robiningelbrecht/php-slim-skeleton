@@ -17,8 +17,8 @@
 <div class="container">
     <h1>Pick your favorite!</h1>
     <div class="battle">
-        {% set UuidPokeOne = pokeOne.getUuid() %}
-        {% set UuidPokeTwo = pokeTwo.getUuid() %}
+        {% set UuidPokeOne = pokeOne.getPokemonId() %}
+        {% set UuidPokeTwo = pokeTwo.getPokemonId() %}
 
         {% include 'pokemon-card.html.twig' with {'pokemon': pokeOne, 'voteUri': '/' ~ UuidPokeOne ~ '/' ~ UuidPokeTwo} only %}
         <div class="vs">VS.</div>
