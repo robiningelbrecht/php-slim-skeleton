@@ -21,9 +21,4 @@ class VoteRepository extends DbalAggregateRootRepository
         $this->connection->insert('Vote', $vote->toArray());
         $this->publishEvents($vote->getRecordedEvents());
     }
-
-    public function truncate(): void
-    {
-        $this->connection->executeStatement('TRUNCATE Vote');
-    }
 }

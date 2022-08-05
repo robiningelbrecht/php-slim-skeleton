@@ -13,7 +13,7 @@
         <img src="{{ pokemon.getSpriteUri() }}">
         <div class="name">#{{ pokemon.getId() }} {{ pokemon.getName()|capitalize }}</div>
         {% if result %}
-            <div class="score">scored {{ result.getScore() }}%, got {{ result.getNumberOfVotes() }} vote{{ result.getNumberOfVotes() > 1 ? 's' : '' }}</div>
+            <div class="score">scored {{ result.getScore() }}%, got {{ result.getUpVotes() }} vote{{ result.getUpVotes() > 1 ? 's' : '' }}</div>
         {% endif %}
         <div class="types">
             {% for type in pokemon.getTypes() %}

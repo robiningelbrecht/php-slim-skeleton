@@ -52,9 +52,4 @@ class PokemonRepository
             ['uuid' => (string)$pokemon->getUuid()]
         );
     }
-
-    public function truncate(): void
-    {
-        $this->connection->executeStatement('TRUNCATE Pokemon');
-    }
 }
