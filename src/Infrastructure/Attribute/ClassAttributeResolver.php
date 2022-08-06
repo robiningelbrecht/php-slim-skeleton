@@ -9,6 +9,7 @@ class ClassAttributeResolver
 {
     /**
      * @param string[] $restrictToDirectories
+     *
      * @return string[]
      */
     public function resolve(
@@ -34,6 +35,7 @@ class ClassAttributeResolver
 
     /**
      * @param string[] $restrictToDirectories
+     *
      * @return string[]
      */
     private function searchForClasses(
