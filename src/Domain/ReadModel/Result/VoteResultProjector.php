@@ -13,7 +13,8 @@ class VoteResultProjector extends ConventionBasedEventListener
 {
     public function __construct(
         private readonly Connection $connection
-    ) {
+    )
+    {
         parent::__construct();
     }
 
@@ -27,7 +28,9 @@ class VoteResultProjector extends ConventionBasedEventListener
                      (SELECT COUNT(1) as upVotes FROM Vote WHERE pokemonVotedFor = :pokemonId) as upVotes 
                 )';
 
-            $result = $this->connection->executeQuery($query, ['pokemonId' => $pokemonId])->fetchAssociative();
+            if (!$result = $this->connection->executeQuery($query, ['pokemonId' => $pokemonId])->fetchAssociative()) {
+                return;
+            }
 
             $query = '
                 REPLACE INTO Result
