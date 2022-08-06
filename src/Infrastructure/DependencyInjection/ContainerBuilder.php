@@ -92,7 +92,7 @@ class ContainerBuilder
     {
         return new self(
             new \DI\ContainerBuilder(),
-            new ClassAttributeResolver(new Finder())
+            new ClassAttributeResolver()
         );
     }
 }

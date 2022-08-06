@@ -32,7 +32,7 @@ class ClassAttributeCache
             '<?php',
             '',
             'return [',
-            ...array_map(fn(string $class) => '\'' . $class . '\',', $classes),
+            ...array_map(fn(string $class) => '  \'' . $class . '\',', $classes),
             '];',
         ];
 
