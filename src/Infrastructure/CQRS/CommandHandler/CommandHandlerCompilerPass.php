@@ -13,7 +13,7 @@ class CommandHandlerCompilerPass implements CompilerPass
     {
         $definition = $container->findDefinition(CommandBus::class);
         foreach ($container->findTaggedWithClassAttribute(AsCommandHandler::class) as $class) {
-            $definition->method('subscribeCommandHandler', \DI\get($class));
+            $definition->method('subscribeCommandHandler', \DI\autowire($class));
         }
 
         $container->addDefinitions(

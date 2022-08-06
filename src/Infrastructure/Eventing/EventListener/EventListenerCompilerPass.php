@@ -13,7 +13,7 @@ class EventListenerCompilerPass implements CompilerPass
     {
         $definition = $container->findDefinition(EventBus::class);
         foreach ($container->findTaggedWithClassAttribute(AsEventListener::class) as $class) {
-            $definition->method('subscribeEventListener', \DI\get($class));
+            $definition->method('subscribeEventListener', \DI\autowire($class));
         }
 
         $container->addDefinitions(

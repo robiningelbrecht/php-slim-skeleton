@@ -12,7 +12,7 @@ class QueueCompilerPass implements CompilerPass
     {
         $definition = $container->findDefinition(QueueContainer::class);
         foreach ($container->findTaggedWithClassAttribute(AsAmqpQueue::class) as $class) {
-            $definition->method('registerQueue', \DI\get($class));
+            $definition->method('registerQueue', \DI\autowire($class));
         }
 
         $container->addDefinitions(
