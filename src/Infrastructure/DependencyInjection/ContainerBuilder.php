@@ -14,7 +14,6 @@ class ContainerBuilder
     /** @var CompilerPass[] */
     private array $passes = [];
     private ?string $classAttributeCacheDir = null;
-    private ?string $compileToDirectory = null;
 
     private function __construct(
         private readonly \DI\ContainerBuilder $containerBuilder,
@@ -36,7 +35,6 @@ class ContainerBuilder
         string $containerParentClass = CompiledContainer::class
     ): self
     {
-        $this->compileToDirectory = $directory;
         $this->containerBuilder->enableCompilation(
             $directory,
             $containerClass,
