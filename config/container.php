@@ -9,6 +9,8 @@ use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
 use Dotenv\Dotenv;
+use Lcobucci\Clock\Clock;
+use Lcobucci\Clock\SystemClock;
 use Symfony\Component\Console\Application;
 use Twig\Environment as TwigEnvironment;
 use Twig\Loader\FilesystemLoader;
@@ -19,6 +21,8 @@ $dotenv = Dotenv::createImmutable($appRoot);
 $dotenv->load();
 
 return [
+    // Clock.
+    Clock::class => DI\factory([SystemClock::class, 'fromSystemTimezone']),
     // Twig Environment.
     FilesystemLoader::class => DI\create(FilesystemLoader::class)->constructor($appRoot . '/templates'),
     TwigEnvironment::class => DI\create(TwigEnvironment::class)->constructor(DI\get(FilesystemLoader::class)),
@@ -53,7 +57,8 @@ return [
     // AMQP.
     AMQPStreamConnectionFactory::class => function (Settings $settings) {
         $rabbitMqConfig = $settings->get('amqp.rabbitmq');
-        return DI\create(AMQPStreamConnectionFactory::class)->constructor(
+
+        return new AMQPStreamConnectionFactory(
             $rabbitMqConfig['host'],
             $rabbitMqConfig['port'],
             $rabbitMqConfig['username'],

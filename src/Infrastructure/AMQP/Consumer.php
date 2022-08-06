@@ -27,8 +27,8 @@ class Consumer
     {
         $channel = $this->AMQPChannelFactory->getForQueue($queue);
 
-        $callback = static function (AMQPMessage $message) use ($queue, $sentryDsn) {
-            Consumer::consumeCallback($message, $queue, $sentryDsn);
+        $callback = static function (AMQPMessage $message) use ($queue) {
+            Consumer::consumeCallback($message, $queue);
         };
 
         try {
@@ -45,8 +45,7 @@ class Consumer
 
     public static function consumeCallback(
         AMQPMessage $message,
-        Queue $queue,
-        ?string $sentryDsn = null): void
+        Queue $queue): void
     {
         $worker = $queue->getWorker();
         $envelope = unserialize($message->getBody());

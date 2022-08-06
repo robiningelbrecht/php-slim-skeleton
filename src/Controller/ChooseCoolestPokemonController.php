@@ -6,8 +6,8 @@ use App\Domain\WriteModel\Pokemon\Pokemon;
 use App\Domain\WriteModel\Pokemon\PokemonId;
 use App\Domain\WriteModel\Pokemon\PokemonRepository;
 use App\Domain\WriteModel\Vote\AddVote\AddVote;
+use App\Domain\WriteModel\Vote\AddVoteCommandQueue;
 use App\Domain\WriteModel\Vote\VoteId;
-use App\Infrastructure\CQRS\CommandBus;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Routing\RouteContext;
@@ -18,7 +18,7 @@ class ChooseCoolestPokemonController
     public function __construct(
         private readonly Environment $twig,
         private readonly PokemonRepository $pokemonRepository,
-        private readonly CommandBus $commandBus
+        private readonly AddVoteCommandQueue $addVoteCommandQueue
     )
     {
     }
@@ -30,7 +30,7 @@ class ChooseCoolestPokemonController
         string $previousPokemonNotUpvotedId = null): ResponseInterface
     {
         if ($previousPokemonUpvotedId && $previousPokemonNotUpvotedId) {
-           $this->commandBus->dispatch(new AddVote(
+           $this->addVoteCommandQueue->queue(new AddVote(
                VoteId::random(),
                PokemonId::fromString($previousPokemonUpvotedId),
                PokemonId::fromString($previousPokemonNotUpvotedId)
