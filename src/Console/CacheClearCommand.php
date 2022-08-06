@@ -13,8 +13,7 @@ class CacheClearCommand extends Command
 {
     public function __construct(
         private readonly Settings $settings
-    )
-    {
+    ) {
         parent::__construct();
     }
 
@@ -34,8 +33,8 @@ class CacheClearCommand extends Command
 
     private function removeDirectory(string $path): void
     {
-        $files = glob($path . '/*');
-        if ($files === false) {
+        $files = glob($path.'/*');
+        if (false === $files) {
             return;
         }
 

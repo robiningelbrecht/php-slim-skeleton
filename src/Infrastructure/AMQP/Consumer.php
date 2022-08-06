@@ -68,10 +68,10 @@ class Consumer
             }
 
             $worker->processMessage($envelope, $message);
-            $message->getChannel()->basic_ack($message->getDeliveryTag());
+            $message->getChannel()?->basic_ack($message->getDeliveryTag());
         } catch (WorkerMaxLifeTimeOrIterationsExceeded $exception) {
             // Requeue message to make sure next consumer can process it.
-            $message->getChannel()->basic_nack($message->getDeliveryTag(), false, true);
+            $message->getChannel()?->basic_nack($message->getDeliveryTag(), false, true);
             throw $exception;
         } catch (\Throwable $exception) {
             if (function_exists('newrelic_notice_error')) {
@@ -80,7 +80,7 @@ class Consumer
 
             $worker->processFailure($envelope, $message, $exception, $queue);
             // Ack the message to unblock queue. Worker should handle failed messages.
-            $message->getChannel()->basic_ack($message->getDeliveryTag());
+            $message->getChannel()?->basic_ack($message->getDeliveryTag());
         }
 
         if (function_exists('newrelic_end_transaction')) {

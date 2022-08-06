@@ -11,6 +11,9 @@ class ConsoleCommandContainer
 
     public function registerCommand(Command $command): void
     {
+        if (empty($command->getName())) {
+            throw new \RuntimeException('Command name cannot be empty');
+        }
         if (array_key_exists($command->getName(), $this->getCommands())) {
             throw new \RuntimeException(sprintf('Command "%s" already registered in factory', $command->getName()));
         }
