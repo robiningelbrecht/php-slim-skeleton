@@ -14,6 +14,7 @@ class ContainerBuilder
     /** @var CompilerPass[] */
     private array $passes = [];
     private ?string $classAttributeCacheDir = null;
+    private ?string $compileToDirectory = null;
 
     private function __construct(
         private readonly \DI\ContainerBuilder $containerBuilder,
@@ -35,6 +36,7 @@ class ContainerBuilder
         string $containerParentClass = CompiledContainer::class
     ): self
     {
+        $this->compileToDirectory = $directory;
         $this->containerBuilder->enableCompilation(
             $directory,
             $containerClass,
@@ -72,7 +74,7 @@ class ContainerBuilder
 
     public function findDefinition(string $id): DefinitionHelper
     {
-        return \DI\create($id);
+        return \DI\autowire($id);
     }
 
     public function findTaggedWithClassAttribute(string $name, string ...$restrictToDirectories): array
@@ -84,6 +86,15 @@ class ContainerBuilder
     {
         foreach ($this->passes as $pass) {
             $pass->process($this);
+        }
+        if ($this->containerBuilder->isCompilationEnabled()) {
+            // We need to add the auto wired classes to the container
+            // to make sure they are compiled as well. This will boost performance,
+            // see: https://php-di.org/doc/performances.html#optimizing-for-compilation
+            $file = Settings::getAppRoot() . '/config/auto-wires.php';
+            if (file_exists($file)) {
+                $this->containerBuilder->addDefinitions(require $file);
+            }
         }
         return $this->containerBuilder->build();
     }
