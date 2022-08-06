@@ -44,6 +44,22 @@ class HttpErrorHandlerTest extends TestCase
         $this->assertEquals($expectedStatusCode, $response->getStatusCode());
     }
 
+    public function testRespondNoHttpException(): void
+    {
+        $httpErrorHandler = $this->httpErrorHandler;
+
+        $response = $httpErrorHandler(
+            $this->buildRequest('GET', 'host'),
+            new \RuntimeException('A serious error'),
+            true,
+            false,
+            false
+        );
+
+        $this->assertEquals('Internal Server Error', $response->getReasonPhrase());
+        $this->assertEquals(500, $response->getStatusCode());
+    }
+
     public function provideHttpExceptions(): array
     {
         $request = $this->buildRequest('GET', 'host');
