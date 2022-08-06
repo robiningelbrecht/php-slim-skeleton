@@ -19,8 +19,7 @@ class ChooseCoolestPokemonController
         private readonly Environment $twig,
         private readonly PokemonRepository $pokemonRepository,
         private readonly AddVoteCommandQueue $addVoteCommandQueue
-    )
-    {
+    ) {
     }
 
     public function handle(
@@ -30,14 +29,15 @@ class ChooseCoolestPokemonController
         string $previousPokemonNotUpvotedId = null): ResponseInterface
     {
         if ($previousPokemonUpvotedId && $previousPokemonNotUpvotedId) {
-           $this->addVoteCommandQueue->queue(new AddVote(
-               VoteId::random(),
-               PokemonId::fromString($previousPokemonUpvotedId),
-               PokemonId::fromString($previousPokemonNotUpvotedId)
-           ));
+            $this->addVoteCommandQueue->queue(new AddVote(
+                VoteId::random(),
+                PokemonId::fromString($previousPokemonUpvotedId),
+                PokemonId::fromString($previousPokemonNotUpvotedId)
+            ));
 
             // Redirect to index.
             $routeParser = RouteContext::fromRequest($request)->getRouteParser();
+
             return $response->withStatus(302)->withHeader('Location', $routeParser->urlFor('index'));
         }
 

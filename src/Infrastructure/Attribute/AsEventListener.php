@@ -9,9 +9,7 @@ class AsEventListener
 {
     public function __construct(
         private EventListenerType $type = EventListenerType::PROCESS_MANAGER,
-    )
-    {
-
+    ) {
     }
 
     public function getType(): EventListenerType

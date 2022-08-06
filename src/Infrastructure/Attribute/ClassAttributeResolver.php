@@ -7,7 +7,6 @@ use Symfony\Component\Finder\Finder;
 
 class ClassAttributeResolver
 {
-
     public function resolve(
         string $attributeClassName,
         array $restrictToDirectories = [],
@@ -32,11 +31,10 @@ class ClassAttributeResolver
     private function searchForClasses(
         string $attributeClassName,
         array $restrictToDirectories = [],
-    ): array
-    {
+    ): array {
         $appRoot = Settings::getAppRoot();
         $searchInDirectories = array_map(
-            fn(string $dir) => $appRoot . '/' . $dir,
+            fn (string $dir) => $appRoot.'/'.$dir,
             $restrictToDirectories ?: ['src']
         );
 
@@ -45,12 +43,12 @@ class ClassAttributeResolver
 
         $classes = [];
         foreach ($finder as $file) {
-            $class = trim(str_replace($appRoot . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR, '', $file->getRealPath()));
-            $class = 'App\\' . str_replace(
-                    [DIRECTORY_SEPARATOR, '.php'],
-                    ['\\', ''],
-                    $class
-                );
+            $class = trim(str_replace($appRoot.DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR, '', $file->getRealPath()));
+            $class = 'App\\'.str_replace(
+                [DIRECTORY_SEPARATOR, '.php'],
+                ['\\', ''],
+                $class
+            );
 
             if (!(new \ReflectionClass($class))->getAttributes($attributeClassName)) {
                 // Class is not tagged with attribute.
@@ -62,6 +60,4 @@ class ClassAttributeResolver
 
         return $classes;
     }
-
-
 }

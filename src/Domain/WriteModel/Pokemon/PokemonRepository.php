@@ -9,8 +9,7 @@ class PokemonRepository
 {
     public function __construct(
         private readonly Connection $connection
-    )
-    {
+    ) {
     }
 
     public function add(Pokemon $pokemon): void

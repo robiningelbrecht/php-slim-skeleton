@@ -15,8 +15,7 @@ class CommandQueueWorker extends BaseWorker
         private readonly CommandBus $commandBus,
         private readonly FailedQueueFactory $failedQueueFactory,
         Clock $clock
-    )
-    {
+    ) {
         parent::__construct($clock);
     }
 
@@ -43,5 +42,4 @@ class CommandQueueWorker extends BaseWorker
 
         $this->failedQueueFactory->buildFor($queue)->queue($command);
     }
-
 }

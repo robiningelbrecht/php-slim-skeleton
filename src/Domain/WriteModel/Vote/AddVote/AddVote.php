@@ -12,8 +12,7 @@ class AddVote extends DomainCommand
         protected VoteId $voteId,
         protected PokemonId $pokemonVotedFor,
         protected PokemonId $pokemonNotVotedFor,
-    )
-    {
+    ) {
     }
 
     public function getVoteId(): VoteId

@@ -3,8 +3,6 @@
 namespace App\Controller;
 
 use App\Domain\ReadModel\Result\ResultRepository;
-use App\Domain\ReadModel\Result\VoteBasedResultRepository;
-use App\Domain\WriteModel\Pokemon\Pokemon;
 use App\Domain\WriteModel\Pokemon\PokemonRepository;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -16,8 +14,7 @@ class ResultController
         private readonly Environment $twig,
         private readonly ResultRepository $resultRepository,
         private readonly PokemonRepository $pokemonRepository,
-    )
-    {
+    ) {
     }
 
     public function handle(

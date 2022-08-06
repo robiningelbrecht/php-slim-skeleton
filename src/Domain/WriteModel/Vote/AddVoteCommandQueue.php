@@ -8,5 +8,4 @@ use App\Infrastructure\CQRS\CommandQueue;
 #[AsAmqpQueue(name: 'add-vote-command-queue', numberOfWorkers: 1)]
 class AddVoteCommandQueue extends CommandQueue
 {
-
 }

@@ -8,9 +8,7 @@ class AsAmqpQueue
     public function __construct(
         private string $name,
         private int $numberOfWorkers,
-    )
-    {
-
+    ) {
     }
 
     public function getName(): string

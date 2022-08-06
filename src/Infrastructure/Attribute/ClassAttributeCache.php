@@ -9,9 +9,8 @@ class ClassAttributeCache
     public function __construct(
         private readonly string $attributeClassName,
         private readonly string $cacheDir,
-    )
-    {
-        $this->cacheFileName = rtrim($this->cacheDir, '/') . '/' . (new \ReflectionClass($attributeClassName))->getShortName() . '.php';
+    ) {
+        $this->cacheFileName = rtrim($this->cacheDir, '/').'/'.(new \ReflectionClass($attributeClassName))->getShortName().'.php';
     }
 
     public function get(): string
@@ -19,6 +18,7 @@ class ClassAttributeCache
         if (!$this->exists()) {
             throw new \RuntimeException(sprintf('Cache not set for %s', (new \ReflectionClass($this->attributeClassName))->getShortName()));
         }
+
         return $this->cacheFileName;
     }
 
@@ -32,14 +32,14 @@ class ClassAttributeCache
             '<?php',
             '',
             'return [',
-            ...array_map(fn(string $class) => '  \'' . $class . '\',', $classes),
+            ...array_map(fn (string $class) => '  \''.$class.'\',', $classes),
             '];',
         ];
 
         $this->createCacheDirectory(dirname($this->cacheFileName));
 
         $written = file_put_contents($this->cacheFileName, implode("\n", $fileContent));
-        if ($written === false) {
+        if (false === $written) {
             @unlink($this->cacheFileName);
             throw new \InvalidArgumentException(sprintf('Error while writing to %s', $this->cacheFileName));
         }
@@ -61,5 +61,4 @@ class ClassAttributeCache
             throw new \InvalidArgumentException(sprintf('Cache directory is not writable: %s.', $directory));
         }
     }
-
 }

@@ -12,8 +12,7 @@ abstract class CommandQueue extends BaseQueue
     public function __construct(
         AMQPChannelFactory $AMQPChannelFactory,
         private readonly CommandQueueWorker $commandQueueWorker,
-    )
-    {
+    ) {
         parent::__construct($AMQPChannelFactory);
     }
 

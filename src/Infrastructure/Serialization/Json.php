@@ -3,6 +3,7 @@
 namespace App\Infrastructure\Serialization;
 
 use Safe\Exceptions\JsonException;
+
 use function var_export;
 
 class Json

@@ -7,7 +7,6 @@ use App\Infrastructure\Environment\Settings;
 use DI\CompiledContainer;
 use DI\Container;
 use DI\Definition\Helper\DefinitionHelper;
-use Symfony\Component\Finder\Finder;
 
 class ContainerBuilder
 {
@@ -18,8 +17,7 @@ class ContainerBuilder
     private function __construct(
         private readonly \DI\ContainerBuilder $containerBuilder,
         private readonly ClassAttributeResolver $classAttributeResolver,
-    )
-    {
+    ) {
     }
 
     public function addDefinitions(...$definitions): self
@@ -33,8 +31,7 @@ class ContainerBuilder
         string $directory,
         string $containerClass = 'CompiledContainer',
         string $containerParentClass = CompiledContainer::class
-    ): self
-    {
+    ): self {
         $this->containerBuilder->enableCompilation(
             $directory,
             $containerClass,
@@ -89,11 +86,12 @@ class ContainerBuilder
             // We need to add the auto wired classes to the container
             // to make sure they are compiled as well. This will boost performance,
             // see: https://php-di.org/doc/performances.html#optimizing-for-compilation
-            $file = Settings::getAppRoot() . '/config/auto-wires.php';
+            $file = Settings::getAppRoot().'/config/auto-wires.php';
             if (file_exists($file)) {
                 $this->containerBuilder->addDefinitions(require $file);
             }
         }
+
         return $this->containerBuilder->build();
     }
 

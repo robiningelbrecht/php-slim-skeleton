@@ -19,8 +19,7 @@ class AddPokemon extends DomainCommand
         protected array $types,
         protected array $stats,
         protected array $sprites
-    )
-    {
+    ) {
     }
 
     public function getPokemonId(): PokemonId

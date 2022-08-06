@@ -18,7 +18,7 @@ abstract class ConventionBasedEventListener implements EventListener
 
     public function notifyThat(DomainEvent $event): void
     {
-        $methodName = $this->eventProcessingMethodPrefix . $event->getShortClassName();
+        $methodName = $this->eventProcessingMethodPrefix.$event->getShortClassName();
         if (!\method_exists($this, $methodName)) {
             return;
         }
@@ -38,7 +38,7 @@ abstract class ConventionBasedEventListener implements EventListener
             if (!str_starts_with($method->getName(), $this->eventProcessingMethodPrefix)) {
                 continue;
             }
-            $interestedIn[] = (string)$method->getParameters()[0]->getType();
+            $interestedIn[] = (string) $method->getParameters()[0]->getType();
         }
 
         return $interestedIn;
@@ -52,6 +52,7 @@ abstract class ConventionBasedEventListener implements EventListener
 
         /** @var \App\Infrastructure\Eventing\EventListener\EventListenerType $type */
         $type = $attributes[0]->newInstance()->getType();
+
         return $type->getEventProcessingMethodPrefix();
     }
 }

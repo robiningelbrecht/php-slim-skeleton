@@ -20,5 +20,4 @@ class CommandHandlerCompilerPass implements CompilerPass
             [CommandBus::class => $definition],
         );
     }
-
 }

@@ -11,8 +11,7 @@ class VoteRepository extends DbalAggregateRootRepository
     public function __construct(
         EventBus $eventBus,
         private readonly Connection $connection
-    )
-    {
+    ) {
         parent::__construct($eventBus);
     }
 

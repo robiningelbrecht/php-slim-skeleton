@@ -4,11 +4,9 @@ namespace App\Infrastructure\Environment;
 
 class Settings
 {
-
     private function __construct(
         private readonly array $settings
-    )
-    {
+    ) {
     }
 
     public function get(string $parents)
@@ -23,12 +21,13 @@ class Settings
                 return null;
             }
         }
+
         return $settings;
     }
 
     public static function load(): self
     {
-        return new self(require self::getAppRoot() . '/config/settings.php');
+        return new self(require self::getAppRoot().'/config/settings.php');
     }
 
     public static function getAppRoot(): string

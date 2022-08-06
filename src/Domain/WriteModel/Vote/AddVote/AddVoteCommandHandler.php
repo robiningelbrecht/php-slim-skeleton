@@ -15,8 +15,7 @@ class AddVoteCommandHandler implements CommandHandler
     public function __construct(
         private readonly PokemonRepository $pokemonRepository,
         private readonly VoteRepository $voteRepository
-    )
-    {
+    ) {
     }
 
     public function handle(DomainCommand $command): void
@@ -35,5 +34,4 @@ class AddVoteCommandHandler implements CommandHandler
             $notUpvotedPoke->getPokemonId()
         ));
     }
-
 }

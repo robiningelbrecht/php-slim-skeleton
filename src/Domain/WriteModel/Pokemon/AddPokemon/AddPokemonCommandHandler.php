@@ -13,8 +13,7 @@ class AddPokemonCommandHandler implements CommandHandler
 {
     public function __construct(
         private readonly PokemonRepository $pokemonRepository
-    )
-    {
+    ) {
     }
 
     public function handle(DomainCommand $command): void
@@ -35,5 +34,4 @@ class AddPokemonCommandHandler implements CommandHandler
             $command->getSprites()
         ));
     }
-
 }

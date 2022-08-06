@@ -7,6 +7,5 @@ class AsCommandHandler
 {
     public function __construct()
     {
-
     }
 }

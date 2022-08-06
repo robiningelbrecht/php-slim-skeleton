@@ -13,8 +13,7 @@ class VoteResultProjector extends ConventionBasedEventListener
 {
     public function __construct(
         private readonly Connection $connection
-    )
-    {
+    ) {
         parent::__construct();
     }
 

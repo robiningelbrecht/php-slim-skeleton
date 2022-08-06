@@ -16,8 +16,7 @@ class AmqpConsumeConsoleCommand extends Command
     public function __construct(
         private readonly QueueContainer $queueContainer,
         private readonly Consumer $consumer,
-    )
-    {
+    ) {
         parent::__construct();
     }
 

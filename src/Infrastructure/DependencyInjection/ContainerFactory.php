@@ -22,11 +22,12 @@ class ContainerFactory
 
         if (Environment::PRODUCTION === Environment::from($_ENV['ENVIRONMENT'])) {
             // Compile and cache container.
-            $containerBuilder->enableCompilation($settings->get('slim.cache_dir') . '/container');
-            $containerBuilder->enableClassAttributeCache($settings->get('slim.cache_dir') . '/class-attributes');
+            $containerBuilder->enableCompilation($settings->get('slim.cache_dir').'/container');
+            $containerBuilder->enableClassAttributeCache($settings->get('slim.cache_dir').'/class-attributes');
         }
-        $containerBuilder->addDefinitions($appRoot . '/config/container.php');
-        $containerBuilder->addCompilerPasses(...require $appRoot . '/config/compiler-passes.php');
+        $containerBuilder->addDefinitions($appRoot.'/config/container.php');
+        $containerBuilder->addCompilerPasses(...require $appRoot.'/config/compiler-passes.php');
+
         return $containerBuilder->build();
     }
 }

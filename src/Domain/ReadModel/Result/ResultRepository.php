@@ -2,15 +2,13 @@
 
 namespace App\Domain\ReadModel\Result;
 
-use App\Domain\WriteModel\Pokemon\Pokemon;
 use Doctrine\DBAL\Connection;
 
 class ResultRepository
 {
     public function __construct(
         private readonly Connection $connection
-    )
-    {
+    ) {
     }
 
     /**
@@ -25,7 +23,7 @@ class ResultRepository
                 ORDER BY score DESC, upVotes DESC, pokedexId ASC';
 
         return array_map(
-            fn(array $result) => Result::fromState($result),
+            fn (array $result) => Result::fromState($result),
             $this->connection->executeQuery($query)->fetchAllAssociative()
         );
     }

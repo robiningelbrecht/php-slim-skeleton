@@ -12,23 +12,21 @@ use Doctrine\ORM\Mapping\Id;
 class Vote extends AggregateRoot
 {
     private function __construct(
-        #[Id, Column(type: "string", unique: true, nullable: false)]
+        #[Id, Column(type: 'string', unique: true, nullable: false)]
         private readonly VoteId $voteId,
-        #[Column(type: "string", nullable: false)]
+        #[Column(type: 'string', nullable: false)]
         private readonly PokemonId $pokemonVotedFor,
-        #[Column(type: "string", nullable: false)]
+        #[Column(type: 'string', nullable: false)]
         private readonly PokemonId $pokemonNotVotedFor
-    )
-    {
+    ) {
     }
 
     public static function create(
         VoteId $voteId,
         PokemonId $pokemonVotedFor,
         PokemonId $pokemonNotVotedFor
-    ): self
-    {
-        $vote =  new self($voteId, $pokemonVotedFor, $pokemonNotVotedFor);
+    ): self {
+        $vote = new self($voteId, $pokemonVotedFor, $pokemonNotVotedFor);
         $vote->recordThat(new VoteWasAdded(
             $vote->getVoteId(),
             $vote->getPokemonVotedFor(),

@@ -10,5 +10,4 @@ class PokemonId extends Identifier
     {
         return 'pokemon-';
     }
-
 }

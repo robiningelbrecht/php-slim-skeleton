@@ -10,5 +10,4 @@ class VoteId extends Identifier
     {
         return 'vote-';
     }
-
 }

@@ -13,31 +13,29 @@ class Pokemon
     public const MAX_ID = 251;
 
     private function __construct(
-        #[Id, Column(type: "string", unique: true, nullable: false)]
+        #[Id, Column(type: 'string', unique: true, nullable: false)]
         private readonly PokemonId $pokemonId,
         #[Column(type: 'integer')]
         private readonly string $pokedexId,
-        #[Column(type: "string", nullable: false)]
+        #[Column(type: 'string', nullable: false)]
         private readonly string $name,
-        #[Column(type: "smallint", nullable: false)]
+        #[Column(type: 'smallint', nullable: false)]
         private readonly int $baseExperience,
-        #[Column(type: "smallint", nullable: false)]
+        #[Column(type: 'smallint', nullable: false)]
         private readonly int $height,
-        #[Column(type: "smallint", nullable: false)]
+        #[Column(type: 'smallint', nullable: false)]
         private readonly int $weight,
-        #[Column(type: "json", nullable: true)]
+        #[Column(type: 'json', nullable: true)]
         private readonly array $abilities,
-        #[Column(type: "json", nullable: true)]
+        #[Column(type: 'json', nullable: true)]
         private readonly array $moves,
-        #[Column(type: "json", nullable: true)]
+        #[Column(type: 'json', nullable: true)]
         private readonly array $types,
-        #[Column(type: "json", nullable: true)]
+        #[Column(type: 'json', nullable: true)]
         private readonly array $stats,
-        #[Column(type: "json", nullable: true)]
+        #[Column(type: 'json', nullable: true)]
         private readonly array $sprites,
-    )
-    {
-
+    ) {
     }
 
     public static function create(
@@ -52,8 +50,7 @@ class Pokemon
         array $types,
         array $stats,
         array $sprites
-    ): self
-    {
+    ): self {
         return new self(
             $pokemonId,
             $pokedexId,
@@ -126,7 +123,7 @@ class Pokemon
 
     public function getStat(string $name): int
     {
-        $stats = array_filter($this->getStats(), fn(array $stat) => $name === $stat['name']);
+        $stats = array_filter($this->getStats(), fn (array $stat) => $name === $stat['name']);
         if (empty($stats)) {
             throw new \RuntimeException(sprintf('Stat "%s" not found', $name));
         }
@@ -156,7 +153,7 @@ class Pokemon
     public function toArray(): array
     {
         return [
-            'pokemonId' => (string)$this->getPokemonId(),
+            'pokemonId' => (string) $this->getPokemonId(),
             'pokedexId' => $this->getPokedexId(),
             'name' => $this->getName(),
             'baseExperience' => $this->getBaseExperience(),
@@ -176,9 +173,9 @@ class Pokemon
             PokemonId::fromString($state['pokemonId']),
             $state['pokedexId'],
             $state['name'],
-            (int)$state['baseExperience'],
-            (int)$state['height'],
-            (int)$state['weight'],
+            (int) $state['baseExperience'],
+            (int) $state['height'],
+            (int) $state['weight'],
             Json::decode($state['abilities']),
             Json::decode($state['moves']),
             Json::decode($state['types']),

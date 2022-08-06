@@ -8,7 +8,6 @@ use Symfony\Component\Console\Attribute\AsCommand;
 
 class ConsoleCommandCompilerPass implements CompilerPass
 {
-
     public function process(ContainerBuilder $container): void
     {
         $definition = $container->findDefinition(ConsoleCommandContainer::class);

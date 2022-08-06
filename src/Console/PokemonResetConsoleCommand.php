@@ -2,8 +2,6 @@
 
 namespace App\Console;
 
-use App\Domain\WriteModel\Pokemon\PokemonRepository;
-use App\Domain\WriteModel\Vote\VoteRepository;
 use Doctrine\DBAL\Connection;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -15,8 +13,7 @@ class PokemonResetConsoleCommand extends Command
 {
     public function __construct(
         private readonly Connection $connection,
-    )
-    {
+    ) {
         parent::__construct();
     }
 
@@ -24,8 +21,9 @@ class PokemonResetConsoleCommand extends Command
     {
         $tables = ['Pokemon', 'Vote', 'Result'];
         foreach ($tables as $table) {
-            $this->connection->executeStatement('TRUNCATE ' . $table);
+            $this->connection->executeStatement('TRUNCATE '.$table);
         }
+
         return Command::SUCCESS;
     }
 }

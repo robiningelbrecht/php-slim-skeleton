@@ -11,8 +11,7 @@ class VoteWasAdded extends DomainEvent
         private VoteId $voteId,
         private PokemonId $pokemonVotedFor,
         private PokemonId $pokemonNotVotedFor
-    )
-    {
+    ) {
     }
 
     public function getVoteId(): VoteId

@@ -13,8 +13,7 @@ abstract class BaseWorker implements Worker
 
     public function __construct(
         private readonly Clock $clock
-    )
-    {
+    ) {
         $this->maxLifeTimeDateTime = $this->clock->now()->add($this->getMaxLifeTimeInterval());
     }
 

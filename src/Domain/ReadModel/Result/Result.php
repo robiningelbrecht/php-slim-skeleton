@@ -14,7 +14,7 @@ class Result
     private ?Pokemon $pokemon = null;
 
     private function __construct(
-        #[Id, Column(type: "string", unique: true, nullable: false)]
+        #[Id, Column(type: 'string', unique: true, nullable: false)]
         private readonly PokemonId $pokemonId,
         #[Column(type: 'integer', nullable: false)]
         private readonly int $impressions,
@@ -22,8 +22,7 @@ class Result
         private readonly int $upVotes,
         #[Column(type: 'integer', nullable: false)]
         private readonly int $score,
-    )
-    {
+    ) {
     }
 
     public function getPokemonId(): PokemonId
@@ -60,9 +59,9 @@ class Result
     {
         return new self(
             PokemonId::fromString($result['pokemonId']),
-            (int)$result['impressions'],
-            (int)$result['upVotes'],
-            (int)$result['score'],
+            (int) $result['impressions'],
+            (int) $result['upVotes'],
+            (int) $result['score'],
         );
     }
 }

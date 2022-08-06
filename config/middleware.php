@@ -26,5 +26,4 @@ return function (App $app) {
         $settings->get('slim.logErrorDetails'),
     );
     $errorMiddleware->setDefaultErrorHandler($errorHandler);
-
 };

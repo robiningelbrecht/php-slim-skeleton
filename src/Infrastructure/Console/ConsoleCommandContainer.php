@@ -11,7 +11,7 @@ class ConsoleCommandContainer
 
     public function registerCommand(Command $command): void
     {
-        if(array_key_exists($command->getName(), $this->getCommands())){
+        if (array_key_exists($command->getName(), $this->getCommands())) {
             throw new \RuntimeException(sprintf('Command "%s" already registered in factory', $command->getName()));
         }
         $this->consoleCommands[$command->getName()] = $command;

@@ -20,5 +20,4 @@ class EventListenerCompilerPass implements CompilerPass
             [EventBus::class => $definition],
         );
     }
-
 }

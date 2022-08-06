@@ -6,21 +6,18 @@ namespace App\Infrastructure\ValueObject;
 
 abstract class NonEmptyStringLiteral implements \JsonSerializable, \Stringable
 {
-
     protected function __construct(
         private readonly string $string,
-    )
-    {
+    ) {
         $this->guardNonEmpty($string);
     }
 
     private function guardNonEmpty(string $string): void
     {
         if (empty($string)) {
-            throw new \InvalidArgumentException(get_called_class() . ' can not be empty');
+            throw new \InvalidArgumentException(get_called_class().' can not be empty');
         }
     }
-
 
     public static function fromString(string $string): static
     {
@@ -43,6 +40,6 @@ abstract class NonEmptyStringLiteral implements \JsonSerializable, \Stringable
 
     public function jsonSerialize(): string
     {
-        return (string)$this;
+        return (string) $this;
     }
 }

@@ -24,7 +24,7 @@ return [
     // Clock.
     Clock::class => DI\factory([SystemClock::class, 'fromSystemTimezone']),
     // Twig Environment.
-    FilesystemLoader::class => DI\create(FilesystemLoader::class)->constructor($appRoot . '/templates'),
+    FilesystemLoader::class => DI\create(FilesystemLoader::class)->constructor($appRoot.'/templates'),
     TwigEnvironment::class => DI\create(TwigEnvironment::class)->constructor(DI\get(FilesystemLoader::class)),
     // Doctrine Dbal.
     Connection::class => function (Settings $settings): Connection {

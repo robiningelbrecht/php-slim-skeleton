@@ -1,13 +1,13 @@
 <?php
 
-require __DIR__ . '/../vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 
-use App\Infrastructure\Environment\Settings;
 use App\Infrastructure\DependencyInjection\ContainerFactory;
-use Doctrine\Migrations\Configuration\Migration\ConfigurationArray;
-use Doctrine\ORM\EntityManager;
-use Doctrine\Migrations\DependencyFactory;
+use App\Infrastructure\Environment\Settings;
 use Doctrine\Migrations\Configuration\EntityManager\ExistingEntityManager;
+use Doctrine\Migrations\Configuration\Migration\ConfigurationArray;
+use Doctrine\Migrations\DependencyFactory;
+use Doctrine\ORM\EntityManager;
 
 /** @var \DI\Container $container */
 $container = ContainerFactory::create();

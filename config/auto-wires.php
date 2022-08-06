@@ -14,5 +14,5 @@
 
 return [
     \App\Controller\ChooseCoolestPokemonController::class => DI\autowire(),
-    \App\Controller\ResultController::class => DI\autowire()
+    \App\Controller\ResultController::class => DI\autowire(),
 ];

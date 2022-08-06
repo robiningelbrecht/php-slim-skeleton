@@ -6,8 +6,7 @@ abstract class Identifier extends NonEmptyStringLiteral
 {
     protected function __construct(
         string $identifier
-    )
-    {
+    ) {
         $this->validate($identifier);
         parent::__construct($identifier);
     }
