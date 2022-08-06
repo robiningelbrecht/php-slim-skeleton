@@ -3,6 +3,7 @@
 namespace App\Infrastructure\AMQP\Queue\DelayedQueue;
 
 use App\Infrastructure\AMQP\AMQPChannelFactory;
+use App\Infrastructure\AMQP\Queue\Queue;
 
 class DelayedQueueFactory
 {
@@ -11,14 +12,10 @@ class DelayedQueueFactory
     ) {
     }
 
-    public function buildWithDelay(int $delayInSeconds, RouteToQueue $routeToQueue = null): DelayedQueue
+    public function buildWithDelayForQueue(int $delayInSeconds, Queue $queue): DelayedQueue
     {
-        if (!$routeToQueue) {
-            $routeToQueue = RouteToQueue::generalCommandQueue();
-        }
-
         return new DelayedQueue(
-            $routeToQueue,
+            $queue,
             $delayInSeconds,
             $this->AMQPChannelFactory,
         );

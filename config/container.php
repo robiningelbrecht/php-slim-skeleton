@@ -1,5 +1,6 @@
 <?php
 
+use App\Infrastructure\AMQP\AMQPStreamConnectionFactory;
 use App\Infrastructure\Console\ConsoleCommandContainer;
 use App\Infrastructure\Environment\Environment;
 use App\Infrastructure\Environment\Settings;
@@ -49,4 +50,15 @@ return [
     },
     // Settings.
     Settings::class => DI\factory([Settings::class, 'load']),
+    // AMQP.
+    AMQPStreamConnectionFactory::class => function (Settings $settings) {
+        $rabbitMqConfig = $settings->get('amqp.rabbitmq');
+        return DI\create(AMQPStreamConnectionFactory::class)->constructor(
+            $rabbitMqConfig['host'],
+            $rabbitMqConfig['port'],
+            $rabbitMqConfig['username'],
+            $rabbitMqConfig['password'],
+            $rabbitMqConfig['vhost']
+        );
+    },
 ];

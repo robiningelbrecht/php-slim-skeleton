@@ -5,14 +5,20 @@ namespace App\Infrastructure\AMQP\Queue;
 use App\Infrastructure\AMQP\AMQPChannelFactory;
 use App\Infrastructure\AMQP\Envelope;
 use App\Infrastructure\AMQP\Worker\Worker;
+use App\Infrastructure\Attribute\AsAmqpQueue;
 use PhpAmqpLib\Channel\AMQPChannel;
 use PhpAmqpLib\Message\AMQPMessage;
 
 abstract class Queue
 {
+    private AsAmqpQueue $amqpQueueAttribute;
+
     public function __construct(
         private readonly AMQPChannelFactory $AMQPChannelFactory
-    ) {
+    )
+    {
+        $attribute = (new \ReflectionClass($this))->getAttributes(AsAmqpQueue::class);
+        $this->amqpQueueAttribute = $attribute[0]->newInstance();
     }
 
     public function queue(Envelope $envelope): void
@@ -49,9 +55,15 @@ abstract class Queue
         return $this->AMQPChannelFactory->getForQueue($this);
     }
 
-    abstract public function getName(): string;
+    public function getName(): string
+    {
+        return $this->amqpQueueAttribute->getName();
+    }
+
+    public function getNumberOfConsumers(): int
+    {
+        return $this->amqpQueueAttribute->getNumberOfWorkers();
+    }
 
     abstract public function getWorker(): Worker;
-
-    abstract public function getNumberOfConsumers(): int;
 }

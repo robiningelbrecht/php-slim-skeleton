@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\AMQP\Queue;
 
-class QueueFactory
+class QueueContainer
 {
     /** @var Queue[] */
     private array $queues = [];
@@ -15,7 +15,7 @@ class QueueFactory
     public function getQueue(string $name): Queue
     {
         if (!array_key_exists($name, $this->queues)) {
-            throw new \RuntimeException(sprintf('Queue "%s" not registered in factory', $name));
+            throw new \RuntimeException(sprintf('Queue "%s" not registered in container', $name));
         }
 
         return $this->queues[$name];

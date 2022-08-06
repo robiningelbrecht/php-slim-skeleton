@@ -13,7 +13,7 @@ class DelayedQueue extends Queue
     private const X_DEAD_LETTER_EXCHANGE = 'dlx';
 
     public function __construct(
-        private readonly RouteToQueue $routeToQueue,
+        private readonly Queue $queue,
         private readonly int $delayInSeconds,
         private readonly AMQPChannelFactory $AMQPChannelFactory,
     ) {
@@ -25,7 +25,7 @@ class DelayedQueue extends Queue
 
     public function getName(): string
     {
-        return 'delayed-'.$this->delayInSeconds.'s-'.$this->routeToQueue->value;
+        return 'delayed-'.$this->delayInSeconds.'s-'.$this->queue->getName();
     }
 
     public function getWorker(): Worker
@@ -37,7 +37,7 @@ class DelayedQueue extends Queue
     {
         $options = new AMQPChannelOptions(false, true, false, false, false, [
             'x-dead-letter-exchange' => ['S', self::X_DEAD_LETTER_EXCHANGE],
-            'x-dead-letter-routing-key' => ['S', $this->routeToQueue->value],
+            'x-dead-letter-routing-key' => ['S', $this->queue->getName()],
             'x-message-ttl' => ['I', $this->delayInSeconds * 1000],
             'x-expires' => ['I', $this->delayInSeconds * 1000 + 100000], // Keep the Q for 100s after the last message,
         ]);

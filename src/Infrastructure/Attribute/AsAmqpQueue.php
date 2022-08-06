@@ -6,10 +6,20 @@ namespace App\Infrastructure\Attribute;
 class AsAmqpQueue
 {
     public function __construct(
-        public string $name,
-        public int $numberOfWorkers,
+        private string $name,
+        private int $numberOfWorkers,
     )
     {
 
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getNumberOfWorkers(): int
+    {
+        return $this->numberOfWorkers;
     }
 }
