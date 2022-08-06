@@ -2,9 +2,11 @@
 
 namespace App\Infrastructure\ValueObject;
 
+use App\Infrastructure\ValueObject\String\NonEmptyStringLiteral;
+
 abstract class Identifier extends NonEmptyStringLiteral
 {
-    protected function __construct(
+    final public function __construct(
         string $identifier
     ) {
         $this->validate($identifier);
@@ -16,7 +18,7 @@ abstract class Identifier extends NonEmptyStringLiteral
         if (empty($identifier)) {
             throw new \InvalidArgumentException(get_called_class().' cannot be empty');
         }
-        if (!static::startsWithPrefix($identifier)) {
+        if (!self::startsWithPrefix($identifier)) {
             throw new \InvalidArgumentException('Identifier does not start with prefix "'.$this->getPrefix().'", got: '.$identifier);
         }
     }

@@ -22,7 +22,7 @@ class PokemonRepository
         }
     }
 
-    public function findByPokedexId(string $pokedexId): Pokemon
+    public function findByPokedexId(int $pokedexId): Pokemon
     {
         $query = 'SELECT * FROM Pokemon WHERE pokedexId = :pokedexId';
         if (!$result = $this->connection->executeQuery($query, ['pokedexId' => $pokedexId])->fetchAssociative()) {

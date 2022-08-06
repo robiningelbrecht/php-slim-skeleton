@@ -16,7 +16,7 @@ class Pokemon
         #[Id, Column(type: 'string', unique: true, nullable: false)]
         private readonly PokemonId $pokemonId,
         #[Column(type: 'integer')]
-        private readonly string $pokedexId,
+        private readonly int $pokedexId,
         #[Column(type: 'string', nullable: false)]
         private readonly string $name,
         #[Column(type: 'smallint', nullable: false)]
@@ -40,7 +40,7 @@ class Pokemon
 
     public static function create(
         PokemonId $pokemonId,
-        string $pokedexId,
+        int $pokedexId,
         string $name,
         int $baseExperience,
         int $height,
@@ -71,7 +71,7 @@ class Pokemon
         return $this->pokemonId;
     }
 
-    public function getPokedexId(): string
+    public function getPokedexId(): int
     {
         return $this->pokedexId;
     }

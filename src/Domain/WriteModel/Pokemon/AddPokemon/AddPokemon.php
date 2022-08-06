@@ -9,7 +9,7 @@ class AddPokemon extends DomainCommand
 {
     public function __construct(
         protected PokemonId $pokemonId,
-        protected string $pokedexId,
+        protected int $pokedexId,
         protected string $name,
         protected int $baseExperience,
         protected int $height,
@@ -27,7 +27,7 @@ class AddPokemon extends DomainCommand
         return $this->pokemonId;
     }
 
-    public function getPokedexId(): string
+    public function getPokedexId(): int
     {
         return $this->pokedexId;
     }

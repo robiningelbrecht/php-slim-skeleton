@@ -48,6 +48,7 @@
     "sort-packages": true
   },
   "scripts": {
-    "lint:fix": " ./vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php"
+    "lint:fix": " ./vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php",
+    "phpstan": " ./vendor/bin/phpstan analyse --memory-limit=1G"
   }
 }

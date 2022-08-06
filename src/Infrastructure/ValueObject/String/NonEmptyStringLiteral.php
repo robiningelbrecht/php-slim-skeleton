@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\ValueObject;
+namespace App\Infrastructure\ValueObject\String;
 
-abstract class NonEmptyStringLiteral implements \JsonSerializable, \Stringable
+abstract class NonEmptyStringLiteral implements \JsonSerializable, \Stringable, StringLiteral
 {
-    protected function __construct(
+    public function __construct(
         private readonly string $string,
     ) {
         $this->guardNonEmpty($string);

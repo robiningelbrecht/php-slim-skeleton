@@ -6,7 +6,7 @@ use App\Infrastructure\Attribute\ClassAttributeResolver;
 use App\Infrastructure\Environment\Settings;
 use DI\CompiledContainer;
 use DI\Container;
-use DI\Definition\Helper\DefinitionHelper;
+use DI\Definition\Helper\AutowireDefinitionHelper;
 
 class ContainerBuilder
 {
@@ -67,7 +67,7 @@ class ContainerBuilder
         return $this;
     }
 
-    public function findDefinition(string $id): DefinitionHelper
+    public function findDefinition(string $id): AutowireDefinitionHelper
     {
         return \DI\autowire($id);
     }
