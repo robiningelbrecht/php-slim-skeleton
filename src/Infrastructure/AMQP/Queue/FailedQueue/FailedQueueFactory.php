@@ -12,7 +12,7 @@ class FailedQueueFactory
     ) {
     }
 
-    public function buildFor(Queue $queue): FailedQueue
+    public function buildFor(Queue $queue): Queue
     {
         return new FailedQueue(
             $queue,

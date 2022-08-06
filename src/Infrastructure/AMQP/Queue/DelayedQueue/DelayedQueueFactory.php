@@ -12,7 +12,7 @@ class DelayedQueueFactory
     ) {
     }
 
-    public function buildWithDelayForQueue(int $delayInSeconds, Queue $queue): DelayedQueue
+    public function buildWithDelayForQueue(int $delayInSeconds, Queue $queue): Queue
     {
         return new DelayedQueue(
             $queue,

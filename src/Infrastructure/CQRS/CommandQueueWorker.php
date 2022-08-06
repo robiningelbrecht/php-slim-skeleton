@@ -3,50 +3,45 @@
 namespace App\Infrastructure\CQRS;
 
 use App\Infrastructure\AMQP\Envelope;
+use App\Infrastructure\AMQP\Queue\FailedQueue\FailedQueueFactory;
 use App\Infrastructure\AMQP\Queue\Queue;
-use App\Infrastructure\AMQP\Worker\Worker;
+use App\Infrastructure\AMQP\Worker\BaseWorker;
+use Lcobucci\Clock\Clock;
 use PhpAmqpLib\Message\AMQPMessage;
 
-class CommandQueueWorker implements Worker
+class CommandQueueWorker extends BaseWorker
 {
+    public function __construct(
+        private readonly CommandBus $commandBus,
+        private readonly FailedQueueFactory $failedQueueFactory,
+        Clock $clock
+    )
+    {
+        parent::__construct($clock);
+    }
+
     public function getName(): string
     {
-        // TODO: Implement getName() method.
+        return 'command-queue-worker';
     }
 
-    public function processMessage(Envelope $envelope, AMQPMessage $message)
+    public function processMessage(Envelope $envelope, AMQPMessage $message): void
     {
-        // TODO: Implement processMessage() method.
+        /** @var \App\Infrastructure\CQRS\DomainCommand $command */
+        $command = $envelope;
+        $this->commandBus->dispatch($command);
     }
 
-    public function processFailure(Envelope $envelope, AMQPMessage $message, \Throwable $exception, Queue $queue)
+    public function processFailure(Envelope $envelope, AMQPMessage $message, \Throwable $exception, Queue $queue): void
     {
-        // TODO: Implement processFailure() method.
-    }
+        /** @var \App\Infrastructure\CQRS\DomainCommand $command */
+        $command = $envelope;
+        $command->setMetaData([
+            'exceptionMessage' => $exception->getMessage(),
+            'traceAsString' => $exception->getTraceAsString(),
+        ]);
 
-    public function maxIterationsReached(): bool
-    {
-        // TODO: Implement maxIterationsReached() method.
-    }
-
-    public function maxLifeTimeReached(): bool
-    {
-        // TODO: Implement maxLifeTimeReached() method.
-    }
-
-    public function getMaxIterations(): int
-    {
-        // TODO: Implement getMaxIterations() method.
-    }
-
-    public function getMaxLifeTime(): \DateTimeImmutable
-    {
-        // TODO: Implement getMaxLifeTime() method.
-    }
-
-    public function getMaxLifeTimeInterval(): \DateInterval
-    {
-        // TODO: Implement getMaxLifeTimeInterval() method.
+        $this->failedQueueFactory->buildFor($queue)->queue($command);
     }
 
 }

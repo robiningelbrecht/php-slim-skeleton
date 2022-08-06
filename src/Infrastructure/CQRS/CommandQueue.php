@@ -3,10 +3,11 @@
 namespace App\Infrastructure\CQRS;
 
 use App\Infrastructure\AMQP\AMQPChannelFactory;
-use App\Infrastructure\AMQP\Queue\Queue;
+use App\Infrastructure\AMQP\Envelope;
+use App\Infrastructure\AMQP\Queue\BaseQueue;
 use App\Infrastructure\AMQP\Worker\Worker;
 
-abstract class CommandQueue extends Queue
+abstract class CommandQueue extends BaseQueue
 {
     public function __construct(
         AMQPChannelFactory $AMQPChannelFactory,
@@ -19,5 +20,14 @@ abstract class CommandQueue extends Queue
     public function getWorker(): Worker
     {
         return $this->commandQueueWorker;
+    }
+
+    public function queue(Envelope $envelope): void
+    {
+        if (!$envelope instanceof DomainCommand) {
+            throw new \RuntimeException(sprintf('Queue "%s" requires a command to be queued, %s given', $this->getName(), $envelope::class));
+        }
+
+        parent::queue($envelope);
     }
 }
