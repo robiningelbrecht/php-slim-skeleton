@@ -21,6 +21,9 @@ class QueueContainer
         return $this->queues[$name];
     }
 
+    /**
+     * @return \App\Infrastructure\AMQP\Queue\Queue[]
+     */
     public function getQueues(): array
     {
         return $this->queues;

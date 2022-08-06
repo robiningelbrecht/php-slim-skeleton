@@ -7,6 +7,10 @@ use Symfony\Component\Finder\Finder;
 
 class ClassAttributeResolver
 {
+    /**
+     * @param string[] $restrictToDirectories
+     * @return string[]
+     */
     public function resolve(
         string $attributeClassName,
         array $restrictToDirectories = [],
@@ -28,6 +32,10 @@ class ClassAttributeResolver
         return $this->searchForClasses($attributeClassName, $restrictToDirectories);
     }
 
+    /**
+     * @param string[] $restrictToDirectories
+     * @return string[]
+     */
     private function searchForClasses(
         string $attributeClassName,
         array $restrictToDirectories = [],

@@ -55,6 +55,9 @@ class Result
         $this->pokemon = $pokemon;
     }
 
+    /**
+     * @param array<mixed> $result
+     */
     public static function fromState(array $result): self
     {
         return new self(

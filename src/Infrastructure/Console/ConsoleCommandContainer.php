@@ -17,6 +17,9 @@ class ConsoleCommandContainer
         $this->consoleCommands[$command->getName()] = $command;
     }
 
+    /**
+     * @return Command[]
+     */
     public function getCommands(): array
     {
         return $this->consoleCommands;

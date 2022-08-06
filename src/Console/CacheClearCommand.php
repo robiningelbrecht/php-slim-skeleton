@@ -31,7 +31,7 @@ class CacheClearCommand extends Command
         return Command::SUCCESS;
     }
 
-    private function removeDirectory($path): void
+    private function removeDirectory(string $path): void
     {
         $files = glob($path.'/*');
         foreach ($files as $file) {

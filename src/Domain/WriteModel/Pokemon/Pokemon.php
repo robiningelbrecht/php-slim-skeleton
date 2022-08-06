@@ -96,16 +96,25 @@ class Pokemon
         return $this->weight;
     }
 
+    /**
+     * @return array<string>
+     */
     public function getAbilities(): array
     {
         return $this->abilities;
     }
 
+    /**
+     * @return array<string>
+     */
     public function getMoves(): array
     {
         return $this->moves;
     }
 
+    /**
+     * @return array<string>
+     */
     public function getTypes(): array
     {
         return $this->types;
@@ -116,6 +125,9 @@ class Pokemon
         return $this->getTypes()[0];
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function getStats(): array
     {
         return $this->stats;
@@ -131,6 +143,9 @@ class Pokemon
         return reset($stats)['base'];
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function getSprites(): array
     {
         return $this->sprites;

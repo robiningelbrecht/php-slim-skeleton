@@ -11,6 +11,7 @@ class AMQPChannelOptions
         private readonly bool $exclusive = false,
         private readonly bool $autoDelete = true,
         private readonly bool $nowait = false,
+        /** @var array<mixed> $arguments */
         private readonly array $arguments = [],
         private readonly ?int $ticket = null
     ) {
@@ -41,6 +42,9 @@ class AMQPChannelOptions
         return $this->nowait;
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function getArguments(): array
     {
         return $this->arguments;

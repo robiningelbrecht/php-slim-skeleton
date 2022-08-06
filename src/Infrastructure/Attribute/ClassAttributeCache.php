@@ -22,6 +22,9 @@ class ClassAttributeCache
         return $this->cacheFileName;
     }
 
+    /**
+     * @param string[] $classes
+     */
     public function compile(array $classes): string
     {
         if ($this->exists()) {

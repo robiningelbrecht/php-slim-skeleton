@@ -9,6 +9,7 @@ class CommandBus
 {
     private const COMMAND_HANDLER_SUFFIX = 'CommandHandler';
 
+    /** @var CommandHandler[] */
     private array $commandHandlers = [];
 
     public function dispatch(DomainCommand $command): void

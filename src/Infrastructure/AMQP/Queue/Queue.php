@@ -15,5 +15,8 @@ interface Queue
 
     public function queue(Envelope $envelope): void;
 
+    /**
+     * @param array<Envelope> $envelopes
+     */
     public function queueBatch(array $envelopes): void;
 }
