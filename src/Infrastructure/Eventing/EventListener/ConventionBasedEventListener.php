@@ -8,6 +8,7 @@ use App\Infrastructure\Eventing\DomainEvent;
 abstract class ConventionBasedEventListener implements EventListener
 {
     private string $eventProcessingMethodPrefix;
+    /** @var string[] */
     private array $eventsThatWeAreListeningTo;
 
     public function __construct()
@@ -30,6 +31,9 @@ abstract class ConventionBasedEventListener implements EventListener
         return in_array($event::class, $this->eventsThatWeAreListeningTo);
     }
 
+    /**
+     * @return string[]
+     */
     private function resolveEventsThatWeAreListeningTo(): array
     {
         $interestedIn = [];

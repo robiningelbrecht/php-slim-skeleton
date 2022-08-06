@@ -4,6 +4,7 @@ namespace App\Infrastructure\Eventing;
 
 abstract class AggregateRoot
 {
+    /** @var \App\Infrastructure\Eventing\DomainEvent[] */
     private array $recordedEvents = [];
 
     protected function recordThat(DomainEvent $domainEvent): void
@@ -11,6 +12,9 @@ abstract class AggregateRoot
         $this->recordedEvents[] = $domainEvent;
     }
 
+    /**
+     * @return \App\Infrastructure\Eventing\DomainEvent[]
+     */
     public function getRecordedEvents(): array
     {
         $recordedEvents = $this->recordedEvents;

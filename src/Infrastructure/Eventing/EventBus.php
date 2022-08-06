@@ -8,6 +8,7 @@ class EventBus
 {
     /** @var EventListener[] */
     private array $eventListeners = [];
+    /** @var DomainEvent[] */
     private array $queue = [];
     private bool $isPublishing = false;
 
@@ -16,7 +17,7 @@ class EventBus
         $this->eventListeners[] = $eventListener;
     }
 
-    public function publish(array $domainEvents): void
+    public function publish(DomainEvent ...$domainEvents): void
     {
         foreach ($domainEvents as $domainEvent) {
             $this->queue[] = $domainEvent;

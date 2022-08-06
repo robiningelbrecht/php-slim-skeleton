@@ -20,6 +20,9 @@ class ContainerBuilder
     ) {
     }
 
+    /**
+     *  @param array<mixed> ...$definitions
+     */
     public function addDefinitions(...$definitions): self
     {
         $this->containerBuilder->addDefinitions(...$definitions);
@@ -72,6 +75,9 @@ class ContainerBuilder
         return \DI\autowire($id);
     }
 
+    /**
+     * @return string[]
+     */
     public function findTaggedWithClassAttribute(string $name, string ...$restrictToDirectories): array
     {
         return $this->classAttributeResolver->resolve($name, $restrictToDirectories, $this->classAttributeCacheDir);

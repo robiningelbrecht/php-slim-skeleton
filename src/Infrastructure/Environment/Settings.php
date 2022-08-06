@@ -5,11 +5,12 @@ namespace App\Infrastructure\Environment;
 class Settings
 {
     private function __construct(
+        /** @var array<mixed> $settings */
         private readonly array $settings
     ) {
     }
 
-    public function get(string $parents)
+    public function get(string $parents): mixed
     {
         $settings = $this->settings;
         $parents = explode('.', $parents);

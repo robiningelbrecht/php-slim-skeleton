@@ -49,6 +49,7 @@
   },
   "scripts": {
     "lint:fix": " ./vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php",
-    "phpstan": " ./vendor/bin/phpstan analyse --memory-limit=1G"
+    "phpstan": " ./vendor/bin/phpstan analyse --memory-limit=1G",
+    "phpstan:generate-baseline": " ./vendor/bin/phpstan analyse --generate-baseline --memory-limit=1G"
   }
 }

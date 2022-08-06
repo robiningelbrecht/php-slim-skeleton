@@ -11,8 +11,11 @@ abstract class DbalAggregateRootRepository
     {
     }
 
+    /**
+     * @param \App\Infrastructure\Eventing\DomainEvent[] $domainEvents
+     */
     protected function publishEvents(array $domainEvents): void
     {
-        $this->eventBus->publish($domainEvents);
+        $this->eventBus->publish(...$domainEvents);
     }
 }
