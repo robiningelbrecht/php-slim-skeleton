@@ -14,6 +14,11 @@ class NonEmptyStringLiteralTest extends TestCase
         $this->assertNull(TestNonEmptyStringLiteral::fromOptionalString(''));
     }
 
+    public function testJsonSerialize(): void
+    {
+        $this->assertEquals('"test"', json_encode(TestNonEmptyStringLiteral::fromOptionalString('test')));
+    }
+
     public function testItShouldThrowWhenEmpty(): void
     {
         $this->expectException(\InvalidArgumentException::class);
