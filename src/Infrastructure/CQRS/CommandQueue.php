@@ -4,10 +4,10 @@ namespace App\Infrastructure\CQRS;
 
 use App\Infrastructure\AMQP\AMQPChannelFactory;
 use App\Infrastructure\AMQP\Envelope;
-use App\Infrastructure\AMQP\Queue\BaseQueue;
+use App\Infrastructure\AMQP\Queue\AmqpQueue;
 use App\Infrastructure\AMQP\Worker\Worker;
 
-abstract class CommandQueue extends BaseQueue
+abstract class CommandQueue extends AmqpQueue
 {
     public function __construct(
         AMQPChannelFactory $AMQPChannelFactory,

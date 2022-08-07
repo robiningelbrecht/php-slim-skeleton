@@ -3,11 +3,11 @@
 namespace App\Infrastructure\AMQP\Queue\FailedQueue;
 
 use App\Infrastructure\AMQP\AMQPChannelFactory;
-use App\Infrastructure\AMQP\Queue\BaseQueue;
+use App\Infrastructure\AMQP\Queue\AmqpQueue;
 use App\Infrastructure\AMQP\Queue\Queue;
 use App\Infrastructure\AMQP\Worker\Worker;
 
-class FailedQueue extends BaseQueue
+class FailedQueue extends AmqpQueue
 {
     public function __construct(
         private readonly Queue $queue,

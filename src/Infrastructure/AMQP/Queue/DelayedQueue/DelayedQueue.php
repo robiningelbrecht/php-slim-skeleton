@@ -4,12 +4,12 @@ namespace App\Infrastructure\AMQP\Queue\DelayedQueue;
 
 use App\Infrastructure\AMQP\AMQPChannelFactory;
 use App\Infrastructure\AMQP\AMQPChannelOptions;
-use App\Infrastructure\AMQP\Queue\BaseQueue;
+use App\Infrastructure\AMQP\Queue\AmqpQueue;
 use App\Infrastructure\AMQP\Queue\Queue;
 use App\Infrastructure\AMQP\Worker\Worker;
 use PhpAmqpLib\Channel\AMQPChannel;
 
-class DelayedQueue extends BaseQueue
+class DelayedQueue extends AmqpQueue
 {
     private const X_DEAD_LETTER_EXCHANGE = 'dlx';
 
