@@ -2,7 +2,6 @@
 
 namespace App\Tests\Infrastructure\Eventing;
 
-use App\Infrastructure\Eventing\DomainEvent;
 use App\Infrastructure\Serialization\Json;
 use PHPUnit\Framework\TestCase;
 use Spatie\Snapshots\MatchesSnapshots;
