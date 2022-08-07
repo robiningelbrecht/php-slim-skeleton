@@ -32,4 +32,12 @@ class ConventionBasedEventListenerTest extends TestCase
         $this->assertTrue($eventListener->isListeningToEvent(new TestEvent(1)));
         $this->assertFalse($eventListener->isListeningToEvent($this->createMock(DomainEvent::class)));
     }
+
+    public function testItShouldThrowOnMissingAttribute(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Event listener App\Tests\Infrastructure\Eventing\EventListener\TestEventListenerNotTagged not tagged with attribute');
+
+        $eventListener = new TestEventListenerNotTagged();
+    }
 }
