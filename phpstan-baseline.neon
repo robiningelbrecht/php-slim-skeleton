@@ -93,7 +93,7 @@ parameters:
 		-
 			message: "#^Expression in empty\\(\\) is always falsy\\.$#"
 			count: 1
-			path: src/Infrastructure/AMQP/Queue/BaseQueue.php
+			path: src/Infrastructure/AMQP/Queue/AmqpQueue.php
 
 		-
 			message: "#^Parameter \\#1 \\$objectOrClass of class ReflectionClass constructor expects class\\-string\\<T of object\\>\\|T of object, string given\\.$#"
