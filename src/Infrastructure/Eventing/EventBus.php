@@ -14,7 +14,15 @@ class EventBus
 
     public function subscribeEventListener(EventListener $eventListener): void
     {
-        $this->eventListeners[] = $eventListener;
+        $this->eventListeners[$eventListener::class] = $eventListener;
+    }
+
+    /**
+     * @return EventListener[]
+     */
+    public function getEventListeners(): array
+    {
+        return $this->eventListeners;
     }
 
     public function publish(DomainEvent ...$domainEvents): void
