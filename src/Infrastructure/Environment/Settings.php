@@ -4,7 +4,7 @@ namespace App\Infrastructure\Environment;
 
 class Settings
 {
-    private function __construct(
+    public function __construct(
         /** @var array<mixed> $settings */
         private readonly array $settings
     ) {
@@ -19,7 +19,7 @@ class Settings
             if (is_array($settings) && (isset($settings[$parent]) || array_key_exists($parent, $settings))) {
                 $settings = $settings[$parent];
             } else {
-                return null;
+                throw new \RuntimeException(sprintf('Trying to fetch invalid setting "%s"', implode('.', $parents)));
             }
         }
 

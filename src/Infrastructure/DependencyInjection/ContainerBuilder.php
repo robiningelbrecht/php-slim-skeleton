@@ -15,7 +15,7 @@ class ContainerBuilder
     private array $passes = [];
     private ?string $classAttributeCacheDir = null;
 
-    private function __construct(
+    public function __construct(
         private readonly \DI\ContainerBuilder $containerBuilder,
         private readonly ClassAttributeResolver $classAttributeResolver,
     ) {
