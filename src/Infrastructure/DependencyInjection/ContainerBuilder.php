@@ -7,6 +7,7 @@ use App\Infrastructure\Environment\Settings;
 use DI\CompiledContainer;
 use DI\Container;
 use DI\Definition\Helper\AutowireDefinitionHelper;
+use DI\Definition\Source\DefinitionSource;
 
 class ContainerBuilder
 {
@@ -21,7 +22,7 @@ class ContainerBuilder
     }
 
     /**
-     *  @param array<mixed> ...$definitions
+     *  @param array<mixed>|string|DefinitionSource ...$definitions
      */
     public function addDefinitions(...$definitions): self
     {

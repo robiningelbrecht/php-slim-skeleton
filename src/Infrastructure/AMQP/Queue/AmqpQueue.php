@@ -8,7 +8,7 @@ use App\Infrastructure\Attribute\AsAmqpQueue;
 use PhpAmqpLib\Channel\AMQPChannel;
 use PhpAmqpLib\Message\AMQPMessage;
 
-abstract class BaseQueue implements Queue
+abstract class AmqpQueue implements Queue
 {
     private AsAmqpQueue $amqpQueueAttribute;
 
