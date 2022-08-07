@@ -25,7 +25,7 @@ To Run on your local machine:
 * Run `docker-compose run --rm php-cli vendor/bin/doctrine-migrations migrate` to bring db schema up to date.
 * Run `docker-compose run --rm php-cli bin/console pokemon:cache` to store Pokemon in database.
 * Run `docker-compose run --rm php-cli bin/console amqp:consume add-vote-command-queue` to start consuming vote queue
-* Navigate to `http://localhost:8080`
+* Navigate to `http://localhost:8080` 
 
 <h2 align="center">Voting example</h2>
 <p align="center">
