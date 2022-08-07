@@ -2,19 +2,19 @@
 
 namespace App\Tests;
 
-use App\Infrastructure\DependencyInjection\ContainerFactory;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
 abstract class ContainerTestCase extends TestCase
 {
+    use ProvideContainer;
+
     private ContainerInterface $container;
 
     protected function setUp(): void
     {
         parent::setUp();
-
-        $this->container = ContainerFactory::create();
+        $this->container = $this->bootContainer();
     }
 
     public function getContainer(): ContainerInterface

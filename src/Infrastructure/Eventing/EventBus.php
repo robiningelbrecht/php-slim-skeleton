@@ -14,6 +14,9 @@ class EventBus
 
     public function subscribeEventListener(EventListener $eventListener): void
     {
+        if (array_key_exists($eventListener::class, $this->eventListeners)) {
+            throw new \RuntimeException(sprintf('EventListener "%s" already registered', $eventListener::class));
+        }
         $this->eventListeners[$eventListener::class] = $eventListener;
     }
 

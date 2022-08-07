@@ -9,11 +9,11 @@ use Psr\Container\ContainerInterface;
 
 class ContainerFactory
 {
-    public static function create(): ContainerInterface
+    public static function create(string $dotEnv = '.env'): ContainerInterface
     {
         $appRoot = Settings::getAppRoot();
 
-        $dotenv = Dotenv::createImmutable($appRoot);
+        $dotenv = Dotenv::createImmutable($appRoot, $dotEnv);
         $dotenv->load();
 
         // At this point the container has not been built. We need to load the settings manually.
@@ -29,5 +29,10 @@ class ContainerFactory
         $containerBuilder->addCompilerPasses(...require $appRoot.'/config/compiler-passes.php');
 
         return $containerBuilder->build();
+    }
+
+    public static function createForTestSuite(): ContainerInterface
+    {
+        return static::create('.env.test');
     }
 }
