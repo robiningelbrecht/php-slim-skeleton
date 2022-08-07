@@ -8,7 +8,7 @@ use App\Infrastructure\Eventing\EventListener\EventListenerType;
 class AsEventListener
 {
     public function __construct(
-        private EventListenerType $type = EventListenerType::PROCESS_MANAGER,
+        private readonly EventListenerType $type = EventListenerType::PROCESS_MANAGER,
     ) {
     }
 

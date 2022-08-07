@@ -2,18 +2,15 @@
 
 namespace App\Tests\Infrastructure\Eventing\EventListener;
 
-use App\Infrastructure\Eventing\DomainEvent;
-use App\Infrastructure\Eventing\EventListener\EventListener;
+use App\Infrastructure\Attribute\AsEventListener;
+use App\Infrastructure\Eventing\EventListener\ConventionBasedEventListener;
+use App\Tests\Infrastructure\Eventing\TestEvent;
 
-class TestEventListener implements EventListener
+#[AsEventListener]
+class TestEventListener extends ConventionBasedEventListener
 {
-    public function notifyThat(DomainEvent $event): void
+    public function reactToTestEvent(TestEvent $event): void
     {
-        // TODO: Implement notifyThat() method.
-    }
-
-    public function isListeningToEvent(DomainEvent $event): bool
-    {
-        // TODO: Implement isListeningToEvent() method.
+        throw new \RuntimeException('reacted to event!');
     }
 }
