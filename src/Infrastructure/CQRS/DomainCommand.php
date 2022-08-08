@@ -7,7 +7,7 @@ use App\Infrastructure\AMQP\Envelope;
 abstract class DomainCommand implements Envelope, \JsonSerializable
 {
     /** @var array<mixed> */
-    private array $metadata = [];
+    protected array $metadata = [];
 
     /**
      * @param array<mixed> $metadata
@@ -34,8 +34,8 @@ abstract class DomainCommand implements Envelope, \JsonSerializable
     protected function getSerializablePayload(): array
     {
         $serializedPayload = [];
-        foreach ($this as $property => $value) {
-            $serializedPayload[$property] = $value;
+        foreach ((new \ReflectionClass($this))->getProperties() as $property) {
+            $serializedPayload[$property->getName()] = $property->getValue($this);
         }
 
         return $serializedPayload;
