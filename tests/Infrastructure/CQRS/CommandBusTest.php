@@ -16,7 +16,9 @@ class CommandBusTest extends ContainerTestCase
 
     public function testItRegistersAllCommands(): void
     {
-        $this->assertMatchesJsonSnapshot(Json::encode(array_keys($this->commandBus->getCommandHandlers())));
+        $commands = array_keys($this->commandBus->getCommandHandlers());
+        sort($commands);
+        $this->assertMatchesJsonSnapshot(Json::encode($commands));
     }
 
     public function testGetItShouldThrowOnInvalidCommandHandler(): void
