@@ -18,6 +18,22 @@ class CommandBusTest extends ContainerTestCase
         $this->assertMatchesJsonSnapshot(Json::encode(array_keys($this->commandBus->getCommandHandlers())));
     }
 
+    public function testGetItShouldThrowOnInvalidCommandHandler(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('CommandHandler for command "App\Tests\Infrastructure\CQRS\TestCommand" not subscribed to this bus');
+
+        $this->commandBus->dispatch(new TestCommand());
+    }
+
+    public function testSubscribeCommandHandlerItShouldThrowWhenInvalidCommandHandlerName(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Fqcn "App\Tests\Infrastructure\CQRS\TestInvalidCommandHandlerName" does not end with "CommandHandler"');
+
+        $this->commandBus->subscribeCommandHandler(new TestInvalidCommandHandlerName());
+    }
+
     protected function setUp(): void
     {
         parent::setUp();
