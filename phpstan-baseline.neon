@@ -106,11 +106,6 @@ parameters:
 			path: src/Infrastructure/Attribute/ClassAttributeResolver.php
 
 		-
-			message: "#^Argument of an invalid type App\\\\Infrastructure\\\\Eventing\\\\DomainEvent supplied for foreach, only iterables are supported\\.$#"
-			count: 1
-			path: src/Infrastructure/Eventing/DomainEvent.php
-
-		-
 			message: "#^Parameter \\#3 \\$depth of function Safe\\\\json_decode expects int\\<1, max\\>, int given\\.$#"
 			count: 1
 			path: src/Infrastructure/Serialization/Json.php

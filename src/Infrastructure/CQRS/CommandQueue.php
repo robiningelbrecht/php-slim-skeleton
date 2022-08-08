@@ -29,4 +29,17 @@ abstract class CommandQueue extends AmqpQueue
 
         parent::queue($envelope);
     }
+
+    public function queueBatch(array $envelopes): void
+    {
+        foreach ($envelopes as $envelope) {
+            if ($envelope instanceof DomainCommand) {
+                continue;
+            }
+
+            throw new \RuntimeException(sprintf('Queue "%s" requires a command to be queued, %s given', $this->getName(), $envelope::class));
+        }
+
+        parent::queueBatch($envelopes);
+    }
 }

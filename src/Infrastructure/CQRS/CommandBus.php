@@ -26,6 +26,14 @@ class CommandBus
         $this->commandHandlers[$commandFqcn] = $commandHandler;
     }
 
+    /**
+     * @return CommandHandler[]
+     */
+    public function getCommandHandlers(): array
+    {
+        return $this->commandHandlers;
+    }
+
     private function getHandlerForCommand(DomainCommand $command): CommandHandler
     {
         return $this->commandHandlers[$command::class] ??
