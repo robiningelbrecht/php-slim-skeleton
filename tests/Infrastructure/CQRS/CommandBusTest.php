@@ -5,6 +5,7 @@ namespace App\Tests\Infrastructure\CQRS;
 use App\Infrastructure\CQRS\CommandBus;
 use App\Infrastructure\Serialization\Json;
 use App\Tests\ContainerTestCase;
+use App\Tests\Infrastructure\CQRS\InvalidTestCommand\InvalidTestCommandCommandHandler;
 use Spatie\Snapshots\MatchesSnapshots;
 
 class CommandBusTest extends ContainerTestCase
@@ -32,6 +33,14 @@ class CommandBusTest extends ContainerTestCase
         $this->expectExceptionMessage('Fqcn "App\Tests\Infrastructure\CQRS\TestInvalidCommandHandlerName" does not end with "CommandHandler"');
 
         $this->commandBus->subscribeCommandHandler(new TestInvalidCommandHandlerName());
+    }
+
+    public function testSubscribeCommandHandlerItShouldThrowWhenInvalidCommandName(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Command name cannot end with "command"');
+
+        $this->commandBus->subscribeCommandHandler(new InvalidTestCommandCommandHandler());
     }
 
     protected function setUp(): void
