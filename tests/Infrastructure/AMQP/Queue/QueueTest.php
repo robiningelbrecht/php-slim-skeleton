@@ -101,6 +101,24 @@ class QueueTest extends TestCase
         $this->testQueue->queueBatch(['test']);
     }
 
+    public function testGetNameItShouldThrowWhenNoAttribute(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('AsAmqpQueue attribute not set');
+
+        $queue = new TestQueueWithoutAttribute($this->createMock(AMQPChannelFactory::class));
+        $queue->getName();
+    }
+
+    public function testGetNumberOfWorkersItShouldThrowWhenNoAttribute(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('AsAmqpQueue attribute not set');
+
+        $queue = new TestQueueWithoutAttribute($this->createMock(AMQPChannelFactory::class));
+        $queue->getNumberOfConsumers();
+    }
+
     protected function setUp(): void
     {
         parent::setUp();

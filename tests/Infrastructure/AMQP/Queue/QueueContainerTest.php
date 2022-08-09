@@ -2,12 +2,13 @@
 
 namespace App\Tests\Infrastructure\AMQP\Queue;
 
+use App\Infrastructure\AMQP\AMQPChannelFactory;
 use App\Infrastructure\AMQP\Queue\Queue;
 use App\Infrastructure\AMQP\Queue\QueueContainer;
 use App\Tests\ContainerTestCase;
 use Spatie\Snapshots\MatchesSnapshots;
 
-class QueueFactoryTest extends ContainerTestCase
+class QueueContainerTest extends ContainerTestCase
 {
     use MatchesSnapshots;
 
@@ -22,6 +23,17 @@ class QueueFactoryTest extends ContainerTestCase
                 'numberOfConsumers' => $queue->getNumberOfConsumers(),
             ];
         }, $this->queueContainer->getQueues()));
+    }
+
+    public function testGetQueue(): void
+    {
+        $queue = new TestQueue($this->createMock(AMQPChannelFactory::class));
+        $this->queueContainer->registerQueue($queue);
+
+        $this->assertEquals(
+            $queue,
+            $this->queueContainer->getQueue('test-queue')
+        );
     }
 
     public function testItShouldThrowWhenGettingInvalidQueueName()
