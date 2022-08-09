@@ -29,6 +29,14 @@ class CommandBusTest extends ContainerTestCase
         $this->commandBus->dispatch(new TestCommand());
     }
 
+    public function testSubscribeCommandHandlerItShouldThrowWhenNoCorrespondingCommand(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('No corresponding command for commandHandler "App\Tests\Infrastructure\CQRS\TestNoCorrespondingCommandCommandHandler" found');
+
+        $this->commandBus->subscribeCommandHandler(new TestNoCorrespondingCommandCommandHandler());
+    }
+
     public function testSubscribeCommandHandlerItShouldThrowWhenInvalidCommandHandlerName(): void
     {
         $this->expectException(\RuntimeException::class);
