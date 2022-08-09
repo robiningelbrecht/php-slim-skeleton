@@ -15,8 +15,9 @@ abstract class AmqpQueue implements Queue
     public function __construct(
         private readonly AMQPChannelFactory $AMQPChannelFactory
     ) {
-        $attribute = (new \ReflectionClass($this))->getAttributes(AsAmqpQueue::class);
-        $this->amqpQueueAttribute = $attribute[0]->newInstance();
+        if ($attribute = (new \ReflectionClass($this))->getAttributes(AsAmqpQueue::class)) {
+            $this->amqpQueueAttribute = $attribute[0]->newInstance();
+        }
     }
 
     public function getName(): string
