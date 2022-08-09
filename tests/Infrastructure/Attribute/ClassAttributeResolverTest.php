@@ -31,6 +31,11 @@ class ClassAttributeResolverTest extends TestCase
             ['src/Console'],
             $this->dir
         );
+        $this->assertEquals($classes, $resolver->resolve(
+            AsCommand::class,
+            ['src/Console'],
+            $this->dir
+        ));
         sort($classes);
 
         $this->assertFileExists($this->dir.'/AsCommand.php');
@@ -50,7 +55,7 @@ class ClassAttributeResolverTest extends TestCase
     {
         parent::tearDown();
 
-        @unlink($this->dir.'/AsAmqpQueue.php');
+        @unlink($this->dir.'/AsCommand.php');
         @rmdir($this->dir);
     }
 }
