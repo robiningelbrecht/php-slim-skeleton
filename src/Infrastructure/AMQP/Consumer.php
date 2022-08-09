@@ -50,18 +50,6 @@ class Consumer
         $worker = $queue->getWorker();
         $envelope = unserialize($message->getBody());
 
-        if (function_exists('newrelic_start_transaction')) {
-            newrelic_start_transaction($queue->getName());
-        }
-
-        if (function_exists('newrelic_background_job')) {
-            newrelic_background_job();
-        }
-
-        if (function_exists('newrelic_name_transaction')) {
-            newrelic_name_transaction((new \ReflectionClass($envelope))->getShortName());
-        }
-
         try {
             if ($worker->maxLifeTimeReached() || $worker->maxIterationsReached()) {
                 throw new WorkerMaxLifeTimeOrIterationsExceeded();
@@ -81,10 +69,6 @@ class Consumer
             $worker->processFailure($envelope, $message, $exception, $queue);
             // Ack the message to unblock queue. Worker should handle failed messages.
             $message->getChannel()?->basic_ack($message->getDeliveryTag());
-        }
-
-        if (function_exists('newrelic_end_transaction')) {
-            newrelic_end_transaction();
         }
     }
 }
