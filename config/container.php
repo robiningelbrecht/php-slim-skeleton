@@ -7,6 +7,7 @@ use App\Infrastructure\Environment\Settings;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\ORMSetup;
 use Dotenv\Dotenv;
 use Lcobucci\Clock\Clock;
@@ -39,6 +40,7 @@ return [
 
         return EntityManager::create($settings->get('doctrine.connection'), $config);
     },
+    EntityManagerInterface::class => DI\get(EntityManager::class),
     // Console command application.
     Application::class => function (ConsoleCommandContainer $consoleCommandContainer) {
         $application = new Application();
