@@ -23,6 +23,7 @@ class DelayedQueueTest extends TestCase
         );
 
         $this->assertEquals('delayed-10s-test-queue', $delayedQueue->getName());
+        $this->assertEquals(0, $delayedQueue->getNumberOfConsumers());
     }
 
     public function testQueue(): void

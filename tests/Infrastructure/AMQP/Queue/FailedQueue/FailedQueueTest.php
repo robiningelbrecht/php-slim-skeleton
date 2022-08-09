@@ -15,6 +15,7 @@ class FailedQueueTest extends TestCase
     public function testGetName()
     {
         $this->assertEquals('test-queue-failed', $this->failedQueue->getName());
+        $this->assertEquals(0, $this->failedQueue->getNumberOfConsumers());
     }
 
     public function testGetWorker()
