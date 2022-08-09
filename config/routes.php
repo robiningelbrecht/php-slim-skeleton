@@ -1,7 +1,7 @@
 <?php
 
-use App\Controller\ChooseCoolestPokemonController;
-use App\Controller\ResultController;
+use App\Controller\ChooseCoolestPokemonRequestHandler;
+use App\Controller\ResultRequestHandler;
 use Slim\App;
 use Slim\Handlers\Strategies\RequestResponseArgs;
 
@@ -11,9 +11,9 @@ return function (App $app) {
     $routeCollector->setDefaultInvocationStrategy(new RequestResponseArgs());
 
     $app
-        ->get('/[{previousPokemonUpvotedId}/{previousPokemonNotUpvotedId}]', ChooseCoolestPokemonController::class.':handle')
+        ->get('/[{previousPokemonUpvotedId}/{previousPokemonNotUpvotedId}]', ChooseCoolestPokemonRequestHandler::class.':handle')
         ->setName('index');
     $app
-        ->get('/results', ResultController::class.':handle')
+        ->get('/results', ResultRequestHandler::class.':handle')
         ->setName('results');
 };

@@ -10,22 +10,31 @@ use PhpAmqpLib\Message\AMQPMessage;
 
 abstract class AmqpQueue implements Queue
 {
-    private AsAmqpQueue $amqpQueueAttribute;
+    private ?AsAmqpQueue $amqpQueueAttribute = null;
 
     public function __construct(
         private readonly AMQPChannelFactory $AMQPChannelFactory
     ) {
-        $attribute = (new \ReflectionClass($this))->getAttributes(AsAmqpQueue::class);
-        $this->amqpQueueAttribute = $attribute[0]->newInstance();
+        if ($attribute = (new \ReflectionClass($this))->getAttributes(AsAmqpQueue::class)) {
+            $this->amqpQueueAttribute = $attribute[0]->newInstance();
+        }
     }
 
     public function getName(): string
     {
+        if (!$this->amqpQueueAttribute) {
+            throw new \RuntimeException('AsAmqpQueue attribute not set');
+        }
+
         return $this->amqpQueueAttribute->getName();
     }
 
     public function getNumberOfConsumers(): int
     {
+        if (!$this->amqpQueueAttribute) {
+            throw new \RuntimeException('AsAmqpQueue attribute not set');
+        }
+
         return $this->amqpQueueAttribute->getNumberOfWorkers();
     }
 

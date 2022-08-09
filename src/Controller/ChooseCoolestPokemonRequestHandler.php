@@ -13,7 +13,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Slim\Routing\RouteContext;
 use Twig\Environment;
 
-class ChooseCoolestPokemonController
+class ChooseCoolestPokemonRequestHandler
 {
     public function __construct(
         private readonly Environment $twig,
