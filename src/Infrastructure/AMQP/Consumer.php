@@ -62,10 +62,6 @@ class Consumer
             $message->getChannel()?->basic_nack($message->getDeliveryTag(), false, true);
             throw $exception;
         } catch (\Throwable $exception) {
-            if (function_exists('newrelic_notice_error')) {
-                newrelic_notice_error($exception);
-            }
-
             $worker->processFailure($envelope, $message, $exception, $queue);
             // Ack the message to unblock queue. Worker should handle failed messages.
             $message->getChannel()?->basic_ack($message->getDeliveryTag());
