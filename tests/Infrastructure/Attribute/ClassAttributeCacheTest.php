@@ -5,6 +5,7 @@ namespace App\Tests\Infrastructure\Attribute;
 use App\Infrastructure\Attribute\AsAmqpQueue;
 use App\Infrastructure\Attribute\ClassAttributeCache;
 use App\Infrastructure\Environment\Settings;
+use App\Infrastructure\Serialization\Json;
 use PHPUnit\Framework\TestCase;
 use Spatie\Snapshots\MatchesSnapshots;
 
@@ -30,7 +31,7 @@ class ClassAttributeCacheTest extends TestCase
         $this->assertTrue($this->classAttributeCache->exists());
 
         $this->assertStringContainsString('tests/Infrastructure/Attribute/cache/AsAmqpQueue.php', $this->classAttributeCache->get());
-        $this->assertMatchesFileSnapshot($this->classAttributeCache->get());
+        $this->assertMatchesJsonSnapshot(Json::encode(require $this->classAttributeCache->get()));
     }
 
     protected function setUp(): void
