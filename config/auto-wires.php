@@ -13,6 +13,6 @@
 // But I failed :'(
 
 return [
-    \App\Controller\ChooseCoolestPokemonController::class => DI\autowire(),
-    \App\Controller\ResultController::class => DI\autowire(),
+    \App\Controller\ChooseCoolestPokemonRequestHandler::class => DI\autowire(),
+    \App\Controller\ResultRequestHandler::class => DI\autowire(),
 ];
