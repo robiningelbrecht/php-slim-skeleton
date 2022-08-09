@@ -3,6 +3,7 @@
 namespace App\Domain\WriteModel\Pokemon;
 
 use App\Infrastructure\Exception\EntityNotFound;
+use App\Infrastructure\Serialization\Json;
 use Doctrine\DBAL\Connection;
 
 class PokemonRepository
@@ -29,7 +30,7 @@ class PokemonRepository
             throw new EntityNotFound(sprintf('Pokemon with id %s not found', $pokedexId));
         }
 
-        return Pokemon::fromState($result);
+        return $this->buildResult($result);
     }
 
     public function find(PokemonId $pokemonId): Pokemon
@@ -39,15 +40,23 @@ class PokemonRepository
             throw new EntityNotFound(sprintf('Pokemon with id %s not found', $pokemonId));
         }
 
-        return Pokemon::fromState($result);
+        return $this->buildResult($result);
     }
 
-    public function save(Pokemon $pokemon): void
+    private function buildResult(array $result): Pokemon
     {
-        $this->connection->update(
-            'Pokemon',
-            $pokemon->toArray(),
-            ['pokemonId' => $pokemon->getPokemonId()]
+        return Pokemon::fromState(
+            PokemonId::fromString($result['pokemonId']),
+            $result['pokedexId'],
+            $result['name'],
+            (int) $result['baseExperience'],
+            (int) $result['height'],
+            (int) $result['weight'],
+            Json::decode($result['abilities']),
+            Json::decode($result['moves']),
+            Json::decode($result['types']),
+            Json::decode($result['stats']),
+            Json::decode($result['sprites']),
         );
     }
 }

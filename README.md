@@ -21,11 +21,12 @@ To Run on your local machine:
 * Run `git clone git@github.com:robiningelbrecht/slim-skeleton-ddd-amqp.git`
 * Copy `.env.dist` to `.env`
 * Run `docker-composer up -d --build` to up and build Docker containers
-* Run `docker-compose run --rm php-cli install` to install dependencies
+* Run `docker-compose run --rm php-cli composer install` to install dependencies
 * Run `docker-compose run --rm php-cli vendor/bin/doctrine-migrations migrate` to bring db schema up to date.
 * Run `docker-compose run --rm php-cli bin/console pokemon:cache` to store Pokemon in database.
 * Run `docker-compose run --rm php-cli bin/console amqp:consume add-vote-command-queue` to start consuming vote queue
 * Navigate to `http://localhost:8080` 
+* Run test suite `docker-compose run --rm php-cli vendor/bin/phpunit`
 
 <h2 align="center">Voting example</h2>
 <p align="center">

@@ -182,20 +182,31 @@ class Pokemon
         ];
     }
 
-    public static function fromState(array $state): self
-    {
+    public static function fromState(
+        PokemonId $pokemonId,
+        int $pokedexId,
+        string $name,
+        int $baseExperience,
+        int $height,
+        int $weight,
+        array $abilities,
+        array $moves,
+        array $types,
+        array $stats,
+        array $sprites
+    ): self {
         return new self(
-            PokemonId::fromString($state['pokemonId']),
-            $state['pokedexId'],
-            $state['name'],
-            (int) $state['baseExperience'],
-            (int) $state['height'],
-            (int) $state['weight'],
-            Json::decode($state['abilities']),
-            Json::decode($state['moves']),
-            Json::decode($state['types']),
-            Json::decode($state['stats']),
-            Json::decode($state['sprites']),
+            $pokemonId,
+            $pokedexId,
+            $name,
+            $baseExperience,
+            $height,
+            $weight,
+            $abilities,
+            $moves,
+            $types,
+            $stats,
+            $sprites,
         );
     }
 }
