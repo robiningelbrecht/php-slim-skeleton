@@ -18,6 +18,7 @@ class ClassAttributeResolverTest extends TestCase
     {
         $resolver = new ClassAttributeResolver();
         $classes = $resolver->resolve(AsCommand::class, ['src/Console']);
+        sort($classes);
 
         $this->assertMatchesJsonSnapshot($classes);
     }
@@ -30,6 +31,7 @@ class ClassAttributeResolverTest extends TestCase
             ['src/Console'],
             $this->dir
         );
+        sort($classes);
 
         $this->assertFileExists($this->dir.'/AsCommand.php');
         $this->assertMatchesJsonSnapshot($classes);
