@@ -16,7 +16,7 @@ class PokemonBuilder
     private readonly array $abilities;
     private readonly array $moves;
     private readonly array $types;
-    private readonly array $stats;
+    private array $stats;
     private array $sprites;
 
     private function __construct()
@@ -82,6 +82,13 @@ class PokemonBuilder
     public function withPokedexId(int $pokedexId): self
     {
         $this->pokedexId = $pokedexId;
+
+        return $this;
+    }
+
+    public function withStats(array $stats): self
+    {
+        $this->stats = $stats;
 
         return $this;
     }
