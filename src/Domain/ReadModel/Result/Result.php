@@ -55,16 +55,17 @@ class Result
         $this->pokemon = $pokemon;
     }
 
-    /**
-     * @param array<mixed> $result
-     */
-    public static function fromState(array $result): self
-    {
+    public static function fromState(
+        PokemonId $pokemonId,
+        int $impressions,
+        int $upVotes,
+        int $score,
+    ): self {
         return new self(
-            PokemonId::fromString($result['pokemonId']),
-            (int) $result['impressions'],
-            (int) $result['upVotes'],
-            (int) $result['score'],
+            $pokemonId,
+            $impressions,
+            $upVotes,
+            $score
         );
     }
 }
