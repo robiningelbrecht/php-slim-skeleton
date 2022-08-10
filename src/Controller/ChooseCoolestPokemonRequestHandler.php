@@ -2,21 +2,22 @@
 
 namespace App\Controller;
 
-use App\Domain\WriteModel\Pokemon\Pokemon;
+use App\Domain\WriteModel\Pokemon\PokedexIdGenerator;
 use App\Domain\WriteModel\Pokemon\PokemonId;
 use App\Domain\WriteModel\Pokemon\PokemonRepository;
 use App\Domain\WriteModel\Vote\AddVote\AddVote;
 use App\Domain\WriteModel\Vote\AddVoteCommandQueue;
-use App\Domain\WriteModel\Vote\VoteId;
+use App\Domain\WriteModel\Vote\VoteIdGenerator;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Slim\Routing\RouteContext;
 use Twig\Environment;
 
 class ChooseCoolestPokemonRequestHandler
 {
     public function __construct(
         private readonly Environment $twig,
+        private readonly PokedexIdGenerator $pokedexIdGenerator,
+        private readonly VoteIdGenerator $voteIdGenerator,
         private readonly PokemonRepository $pokemonRepository,
         private readonly AddVoteCommandQueue $addVoteCommandQueue
     ) {
@@ -30,20 +31,18 @@ class ChooseCoolestPokemonRequestHandler
     {
         if ($previousPokemonUpvotedId && $previousPokemonNotUpvotedId) {
             $this->addVoteCommandQueue->queue(new AddVote(
-                VoteId::random(),
+                $this->voteIdGenerator->random(),
                 PokemonId::fromString($previousPokemonUpvotedId),
                 PokemonId::fromString($previousPokemonNotUpvotedId)
             ));
 
             // Redirect to index.
-            $routeParser = RouteContext::fromRequest($request)->getRouteParser();
-
-            return $response->withStatus(302)->withHeader('Location', $routeParser->urlFor('index'));
+            return $response->withStatus(302)->withHeader('Location', '/');
         }
 
-        $firstPoke = mt_rand(1, Pokemon::MAX_ID);
+        $firstPoke = $this->pokedexIdGenerator->random();
         do {
-            $secondPoke = mt_rand(1, Pokemon::MAX_ID);
+            $secondPoke = $this->pokedexIdGenerator->random();
         } while ($secondPoke === $firstPoke);
 
         $template = $this->twig->load('index.html.twig');
