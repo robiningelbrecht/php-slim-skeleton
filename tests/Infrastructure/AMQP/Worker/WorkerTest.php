@@ -21,9 +21,10 @@ class WorkerTest extends TestCase
     public function testMaxIterationsReached(): void
     {
         $this->assertFalse($this->testWorker->maxIterationsReached());
-        for ($i = 0; $i < 999; ++$i) {
-            $this->assertFalse($this->testWorker->maxIterationsReached());
+        for ($i = 0; $i < 998; ++$i) {
+            $this->testWorker->maxIterationsReached();
         }
+        $this->assertFalse($this->testWorker->maxIterationsReached());
         $this->assertTrue($this->testWorker->maxIterationsReached());
     }
 
