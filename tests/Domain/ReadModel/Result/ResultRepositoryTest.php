@@ -37,14 +37,16 @@ class ResultRepositoryTest extends DatabaseTestCase
             'score' => 20,
         ]);
 
+        $result = Result::fromState(
+            PokemonId::fromString('pokemon-test'),
+            10,
+            2,
+            20
+        );
+        $this->assertEquals(10, $result->getImpressions());
         $this->assertEquals(
             [
-                Result::fromState(
-                    PokemonId::fromString('pokemon-test'),
-                    10,
-                    2,
-                    20
-                ),
+                $result
             ],
             $this->resultRepository->getAllWithAtLeastOneUpVote()
         );
