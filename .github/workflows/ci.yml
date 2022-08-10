@@ -32,7 +32,7 @@ jobs:
         run: composer install --prefer-dist
 
       - name: Copy .env file
-        run: cp .env.github-actions .env
+        run: cp .env.github-actions .env.test
 
       - name: Wait for services to boot
         run: sleep 10
