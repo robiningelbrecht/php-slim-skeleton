@@ -28,7 +28,6 @@ class Vote extends AggregateRoot
     ): self {
         $vote = new self($voteId, $pokemonVotedFor, $pokemonNotVotedFor);
         $vote->recordThat(new VoteWasAdded(
-            $vote->getVoteId(),
             $vote->getPokemonVotedFor(),
             $vote->getPokemonNotVotedFor(),
         ));

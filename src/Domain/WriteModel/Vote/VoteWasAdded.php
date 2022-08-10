@@ -8,15 +8,9 @@ use App\Infrastructure\Eventing\DomainEvent;
 class VoteWasAdded extends DomainEvent
 {
     public function __construct(
-        private VoteId $voteId,
         private PokemonId $pokemonVotedFor,
         private PokemonId $pokemonNotVotedFor
     ) {
-    }
-
-    public function getVoteId(): VoteId
-    {
-        return $this->voteId;
     }
 
     public function getPokemonVotedFor(): PokemonId
