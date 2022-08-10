@@ -6,6 +6,17 @@ jobs:
   test-suite:
     name: PHPStan, PHPcs & Testsuite
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_DATABASE: test-suite
+          MYSQL_USER: user
+          MYSQL_PASSWORD: password
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306
+      options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
       # https://github.com/marketplace/actions/setup-php-action
       - name: Setup PHP 8.1 with Xdebug 3.x
@@ -22,7 +33,7 @@ jobs:
         run: composer install --prefer-dist
 
       - name: Copy .env file
-        run: cp .env.dist .env
+        run: cp .env.github-actions .env
 
       - name: Run PHPStan
         run: vendor/bin/phpstan analyse

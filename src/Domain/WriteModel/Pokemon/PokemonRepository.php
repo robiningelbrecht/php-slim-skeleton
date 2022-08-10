@@ -43,6 +43,9 @@ class PokemonRepository
         return $this->buildResult($result);
     }
 
+    /**
+     * @param array<mixed> $result
+     */
     private function buildResult(array $result): Pokemon
     {
         return Pokemon::fromState(
