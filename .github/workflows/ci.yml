@@ -16,7 +16,6 @@ jobs:
           MYSQL_ROOT_PASSWORD: root
         ports:
           - 3306
-      options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
       # https://github.com/marketplace/actions/setup-php-action
@@ -35,6 +34,9 @@ jobs:
 
       - name: Copy .env file
         run: cp .env.github-actions .env
+
+      - name: Wait for services to boot
+        run: sleep 10
 
       - name: Run PHPStan
         run: vendor/bin/phpstan analyse
