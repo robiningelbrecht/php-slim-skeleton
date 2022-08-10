@@ -1,6 +1,6 @@
 [
     "App\\Console\\AmqpConsumeConsoleCommand",
     "App\\Console\\CacheClearCommand",
-    "App\\Console\\PokemonCacheCommand",
+    "App\\Console\\PokemonCacheConsoleCommand",
     "App\\Console\\PokemonResetConsoleCommand"
 ]
