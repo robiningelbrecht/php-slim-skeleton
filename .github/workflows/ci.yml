@@ -11,8 +11,7 @@ jobs:
         image: mysql:8.0
         env:
           MYSQL_DATABASE: test-suite
-          MYSQL_USER: user
-          MYSQL_PASSWORD: password
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_ROOT_PASSWORD: root
         ports:
           - 3306
