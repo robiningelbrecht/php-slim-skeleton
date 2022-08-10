@@ -13,7 +13,7 @@ jobs:
           MYSQL_DATABASE: test-suite
           MYSQL_ROOT_PASSWORD: root
         ports:
-          - 3306
+          - 3306:3306
 
     steps:
       # https://github.com/marketplace/actions/setup-php-action
