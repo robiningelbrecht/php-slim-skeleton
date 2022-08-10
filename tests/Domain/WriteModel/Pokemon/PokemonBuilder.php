@@ -7,7 +7,7 @@ use App\Domain\WriteModel\Pokemon\PokemonId;
 
 class PokemonBuilder
 {
-    private readonly PokemonId $pokemonId;
+    private PokemonId $pokemonId;
     private readonly int $pokedexId;
     private readonly string $name;
     private readonly int $baseExperience;
@@ -70,6 +70,13 @@ class PokemonBuilder
             $this->stats,
             $this->sprites,
         );
+    }
+
+    public function withPokemonId(PokemonId $pokemonId): self
+    {
+        $this->pokemonId = $pokemonId;
+
+        return $this;
     }
 
     public function withSprites(array $sprites): self
