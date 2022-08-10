@@ -36,6 +36,11 @@ jobs:
       - name: Wait for services to boot
         run: sleep 10
 
+      - name: Verify MySQL connection from host
+        run: |
+          sudo apt-get install -y mysql-client
+          mysql --host 127.0.0.1 --port 3306 -uroot -proot -e "SHOW DATABASES"        
+
       - name: Run PHPStan
         run: vendor/bin/phpstan analyse
 
