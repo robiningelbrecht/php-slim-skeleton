@@ -28,7 +28,7 @@ class VoteResultProjector extends ConventionBasedEventListener
                 )';
 
             if (!$result = $this->connection->executeQuery($query, ['pokemonId' => $pokemonId])->fetchAssociative()) {
-                return;
+                continue;
             }
 
             $query = '

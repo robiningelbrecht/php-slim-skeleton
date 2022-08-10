@@ -45,14 +45,6 @@ jobs:
       - name: Run test suite
         run: vendor/bin/phpunit --testsuite unit --fail-on-incomplete  --log-junit junit.xml --coverage-clover clover.xml
 
-      # https://github.com/marketplace/actions/publish-test-results
-      - name: Publish test results
-        uses: EnricoMi/publish-unit-test-result-action@v2
-        if: always()
-        with:
-          junit_files: "junit.xml"
-          check_name: "Test results"
-
       # https://github.com/marketplace/actions/codecov
       - name: Send test coverage to codecov.io
         uses: codecov/codecov-action@v3

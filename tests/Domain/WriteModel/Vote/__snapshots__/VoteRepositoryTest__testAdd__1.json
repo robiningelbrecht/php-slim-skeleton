@@ -1,0 +1,10 @@
+[
+    {
+        "eventName": "App.Domain.WriteModel.Vote.VoteWasAdded",
+        "payload": {
+            "voteId": "vote-test",
+            "pokemonVotedFor": "pokemon-voted-for",
+            "pokemonNotVotedFor": "pokemon-not-voted-for"
+        }
+    }
+]

@@ -22,7 +22,7 @@ class AddVoteCommandHandler implements CommandHandler
     {
         assert($command instanceof AddVote);
 
-        if ($command->getPokemonVotedFor() === $command->getPokemonNotVotedFor()) {
+        if ($command->getPokemonVotedFor() == $command->getPokemonNotVotedFor()) {
             throw new \RuntimeException('Dirty little cheater');
         }
         $upvotedPoke = $this->pokemonRepository->find($command->getPokemonVotedFor());
