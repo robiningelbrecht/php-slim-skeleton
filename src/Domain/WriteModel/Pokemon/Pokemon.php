@@ -38,6 +38,13 @@ class Pokemon
     ) {
     }
 
+    /**
+     * @param array<string> $abilities
+     * @param array<string> $moves
+     * @param array<string> $types
+     * @param array<array<string>> $stats
+     * @param array<string> $sprites
+     */
     public static function create(
         PokemonId $pokemonId,
         int $pokedexId,
@@ -182,6 +189,13 @@ class Pokemon
         ];
     }
 
+    /**
+     * @param array<string> $abilities
+     * @param array<string> $moves
+     * @param array<string> $types
+     * @param array<array<string>> $stats
+     * @param array<string> $sprites
+     */
     public static function fromState(
         PokemonId $pokemonId,
         int $pokedexId,

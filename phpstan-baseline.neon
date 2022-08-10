@@ -26,36 +26,6 @@ parameters:
 			path: src/Domain/WriteModel/Pokemon/Pokemon.php
 
 		-
-			message: "#^Method App\\\\Domain\\\\WriteModel\\\\Pokemon\\\\Pokemon\\:\\:create\\(\\) has parameter \\$abilities with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Domain/WriteModel/Pokemon/Pokemon.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\WriteModel\\\\Pokemon\\\\Pokemon\\:\\:create\\(\\) has parameter \\$moves with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Domain/WriteModel/Pokemon/Pokemon.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\WriteModel\\\\Pokemon\\\\Pokemon\\:\\:create\\(\\) has parameter \\$sprites with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Domain/WriteModel/Pokemon/Pokemon.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\WriteModel\\\\Pokemon\\\\Pokemon\\:\\:create\\(\\) has parameter \\$stats with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Domain/WriteModel/Pokemon/Pokemon.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\WriteModel\\\\Pokemon\\\\Pokemon\\:\\:create\\(\\) has parameter \\$types with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Domain/WriteModel/Pokemon/Pokemon.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\WriteModel\\\\Pokemon\\\\Pokemon\\:\\:fromState\\(\\) has parameter \\$state with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Domain/WriteModel/Pokemon/Pokemon.php
-
-		-
 			message: "#^Method App\\\\Domain\\\\WriteModel\\\\Pokemon\\\\Pokemon\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Domain/WriteModel/Pokemon/Pokemon.php
