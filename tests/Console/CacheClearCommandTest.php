@@ -13,20 +13,22 @@ class CacheClearCommandTest extends ConsoleCommandTestCase
 {
     private CacheClearCommand $cacheClearCommand;
     private MockObject $settings;
+    private string $cacheDir;
 
     public function testExecute(): void
     {
-        @mkdir(Settings::getAppRoot().'/tests/Console/cache');
-        @mkdir(Settings::getAppRoot().'/tests/Console/cache/slim');
-        file_put_contents(Settings::getAppRoot().'/tests/Console/cache/slim/cache.file', 'contents');
+        @mkdir($this->cacheDir);
+        @mkdir($this->cacheDir.'/slim');
+        file_put_contents($this->cacheDir.'/slim/cache.file', 'contents');
+        @mkdir($this->cacheDir.'/slim/sub-dir');
 
         $this->settings
             ->expects($this->exactly(2))
             ->method('get')
             ->withConsecutive(['doctrine.cache_dir'], ['slim.cache_dir'])
             ->willReturnOnConsecutiveCalls(
-                Settings::getAppRoot().'/tests/Console/cache/doctrine',
-                Settings::getAppRoot().'/tests/Console/cache/slim'
+                $this->cacheDir.'/doctrine',
+                $this->cacheDir.'/slim'
             );
 
         $command = $this->getCommandInApplication('cache:clear');
@@ -43,13 +45,14 @@ class CacheClearCommandTest extends ConsoleCommandTestCase
     {
         parent::tearDown();
 
-        @rmdir(Settings::getAppRoot().'/tests/Console/cache');
+        @rmdir($this->cacheDir);
     }
 
     protected function setUp(): void
     {
         parent::setUp();
 
+        $this->cacheDir = Settings::getAppRoot().'/tests/Console/cache';
         $this->settings = $this->createMock(Settings::class);
 
         $this->cacheClearCommand = new CacheClearCommand(
