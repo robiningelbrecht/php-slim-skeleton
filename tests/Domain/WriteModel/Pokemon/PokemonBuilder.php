@@ -17,7 +17,7 @@ class PokemonBuilder
     private readonly array $moves;
     private readonly array $types;
     private readonly array $stats;
-    private readonly array $sprites;
+    private array $sprites;
 
     private function __construct()
     {
@@ -30,8 +30,24 @@ class PokemonBuilder
         $this->abilities = ['abilityOne', 'abilityTwo'];
         $this->moves = ['moveOne', 'moveTwo'];
         $this->types = ['typeOne', 'typeTwo'];
-        $this->stats = [];
-        $this->sprites = [];
+        $this->stats = [
+            [
+                'base' => 30,
+                'name' => 'hp',
+            ],
+            [
+                'base' => 56,
+                'name' => 'attack',
+            ],
+        ];
+        $this->sprites = [
+            'other' => [
+                'dream_world' => [
+                    'front_female' => null,
+                    'front_default' => 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/19.svg',
+                ],
+            ],
+        ];
     }
 
     public static function fromDefaults(): self
@@ -54,5 +70,12 @@ class PokemonBuilder
             $this->stats,
             $this->sprites,
         );
+    }
+
+    public function withSprites(array $sprites): self
+    {
+        $this->sprites = $sprites;
+
+        return $this;
     }
 }
