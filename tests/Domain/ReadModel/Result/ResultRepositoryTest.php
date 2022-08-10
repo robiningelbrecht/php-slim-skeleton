@@ -46,7 +46,7 @@ class ResultRepositoryTest extends DatabaseTestCase
         $this->assertEquals(10, $result->getImpressions());
         $this->assertEquals(
             [
-                $result
+                $result,
             ],
             $this->resultRepository->getAllWithAtLeastOneUpVote()
         );
