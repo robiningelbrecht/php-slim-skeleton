@@ -2,6 +2,7 @@
 
 namespace App\Tests\Infrastructure\Serialization;
 
+use App\Infrastructure\Environment\Settings;
 use App\Infrastructure\Serialization\Json;
 use PHPUnit\Framework\TestCase;
 use Safe\Exceptions\JsonException;
@@ -26,7 +27,7 @@ class JsonTest extends TestCase
         $this->expectException(JsonException::class);
         $this->expectExceptionMessage('Type is not supported: NULL');
 
-        $fp = fopen('test.txt', 'w');
+        $fp = fopen(Settings::getAppRoot().'/tests/test.txt', 'w');
         Json::encode($fp);
     }
 }
