@@ -16,7 +16,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 #[AsCommand(name: 'pokemon:cache', description: 'Fetch Pokémon from PokéApi and store in DB')]
-class PokemonCacheCommand extends Command
+class PokemonCacheConsoleCommand extends Command
 {
     public function __construct(
         private readonly PokemonRepository $pokemonRepository,

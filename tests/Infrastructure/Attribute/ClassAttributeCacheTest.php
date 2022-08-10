@@ -28,6 +28,7 @@ class ClassAttributeCacheTest extends TestCase
     {
         $this->assertFalse($this->classAttributeCache->exists());
         $this->classAttributeCache->compile(['classOne', 'classTwo']);
+        $this->classAttributeCache->compile(['classOne', 'classTwo']);
         $this->assertTrue($this->classAttributeCache->exists());
 
         $this->assertStringContainsString('tests/Infrastructure/Attribute/cache/AsAmqpQueue.php', $this->classAttributeCache->get());
