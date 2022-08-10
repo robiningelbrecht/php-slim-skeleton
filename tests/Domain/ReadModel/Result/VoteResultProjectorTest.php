@@ -4,7 +4,6 @@ namespace App\Tests\Domain\ReadModel\Result;
 
 use App\Domain\ReadModel\Result\VoteResultProjector;
 use App\Domain\WriteModel\Pokemon\PokemonId;
-use App\Domain\WriteModel\Vote\VoteId;
 use App\Domain\WriteModel\Vote\VoteWasAdded;
 use App\Infrastructure\Eventing\EventListener\EventListener;
 use App\Tests\EventListenerTestCase;
@@ -56,7 +55,6 @@ class VoteResultProjectorTest extends EventListenerTestCase
             ->method('executeStatement');
 
         $this->voteResultProjector->notifyThat(new VoteWasAdded(
-            VoteId::fromString('vote-test'),
             PokemonId::fromString('pokemon-voted-for'),
             PokemonId::fromString('pokemon-not-voted-for')
         ));
