@@ -13,6 +13,4 @@
 // But I failed :'(
 
 return [
-    \App\Controller\ChooseCoolestPokemonRequestHandler::class => DI\autowire(),
-    \App\Controller\ResultRequestHandler::class => DI\autowire(),
 ];
