@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# @todo: clear routes file.
 # Public folder.
 rm -Rf public/favicon.png
 rm -Rf public/style.css
