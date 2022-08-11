@@ -18,8 +18,7 @@ This repository is a simple example on how to use <a href="https://github.com/sl
 
 To Run on your local machine:
 
-* Run `composer create-project --stability dev robiningelbrecht/slim-skeleton-ddd-amqp directory-name`
-* Copy `.env.dist` to `.env`
+* Run `composer create-project --no-install --ignore-platform-reqs --stability=dev robiningelbrecht/slim-skeleton-ddd-amqp directory-name`
 * Run `docker-composer up -d --build` to up and build Docker containers
 * Run `docker-compose run --rm php-cli composer install` to install dependencies
 * Run `docker-compose run --rm php-cli composer example:init` to init the skeleton example
