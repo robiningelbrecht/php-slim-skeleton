@@ -60,7 +60,8 @@
     "phpstan:generate-baseline": " ./vendor/bin/phpstan analyse --generate-baseline --memory-limit=1G",
     "example:remove": [
       "./bin/example-remove.sh",
-      "./vendor/bin/phpunit -d --update-snapshots"
+      "./vendor/bin/phpunit -d --update-snapshots",
+      "echo \"All examples related files are deleted.\nDo not forget to update 'docker/mysql/mysql.databases.sql' to create the database(s) you need\""
     ],
     "example:init": [
       "./vendor/bin/doctrine-migrations migrate",

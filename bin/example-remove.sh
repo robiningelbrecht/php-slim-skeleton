@@ -30,7 +30,3 @@ printf '
       $routeCollector = $app->getRouteCollector();
       $routeCollector->setDefaultInvocationStrategy(new RequestResponseArgs());
   };' > config/routes.php
-
-
-echo "All examples related files are deleted.
-Do not forget to update 'docker/mysql/mysql.databases.sql' to create the database(s) you need"
