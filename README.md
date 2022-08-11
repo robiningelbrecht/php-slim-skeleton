@@ -1,7 +1,7 @@
 <h1 align="center">Slim Framework skeleton</h1>
 
 <p align="center">
-	<img src="https://github.com/robiningelbrecht/slim-skeleton-ddd-amqp/raw/master/readme/slim.webp" alt="Slim">
+	<img src="https://github.com/robiningelbrecht/slim-skeleton-ddd-amqp/raw/master/readme/slim-new.webp" alt="Slim">
 </p>
 
 <p align="center">
