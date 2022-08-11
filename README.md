@@ -27,8 +27,7 @@ To Run on your local machine:
 * Navigate to `http://localhost:8080` 
 * Run test suite `docker-compose run --rm php-cli vendor/bin/phpunit`
 
-@TODO: composer create-project with or without examples
-@TODO: Add authentication
+@TODO: Add authentication?
 
 <h2 align="center">Voting example</h2>
 <p align="center">
