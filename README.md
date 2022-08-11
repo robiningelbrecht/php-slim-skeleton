@@ -1,4 +1,4 @@
-<h1 align="center">Slim Framework skeleton</h1>
+<h1 align="center">Event driven Slim Framework skeleton</h1>
 
 <p align="center">
 	<img src="https://github.com/robiningelbrecht/slim-skeleton-ddd-amqp/raw/master/readme/slim-new.webp" alt="Slim">
