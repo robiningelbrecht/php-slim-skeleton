@@ -14,7 +14,7 @@
 
 ---
 
-This repository is a simple example of an an event driven Slim Framework skeleton using AMQP and CQRS
+An event driven Slim Framework skeleton using AMQP and CQRS
 
 # Installation
 
