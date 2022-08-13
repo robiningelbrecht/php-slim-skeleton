@@ -14,27 +14,20 @@
 
 ---
 
-This repository is a simple example on how to use <a href="https://github.com/slimphp/Slim">Slim Framework</a> and <a href="https://github.com/PHP-DI/PHP-DI">PHP-DI</a>
+This repository is a simple example of an an event driven Slim Framework skeleton using AMQP and CQRS
 
-To Run on your local machine:
+# Installation
 
-* Run `composer create-project --no-install --ignore-platform-reqs --stability=dev robiningelbrecht/slim-skeleton-ddd-amqp [app-name]`
-* Run `docker-composer up -d --build` to up and build Docker containers
-* Run `docker-compose run --rm php-cli composer install` to install dependencies
-* Run `docker-compose run --rm php-cli composer example:init` to init the skeleton example
-  OR run `docker-compose run --rm php-cli composer example:remove` to remove all example related code and start with a clean slate.
-* Run `docker-compose run --rm php-cli bin/console amqp:consume add-vote-command-queue` to start consuming vote queue
-* Navigate to `http://localhost:8080` 
-* Run test suite `docker-compose run --rm php-cli vendor/bin/phpunit`
+```bash
+composer create-project robiningelbrecht/slim-skeleton-ddd-amqp [app-name] --no-install --ignore-platform-reqs --stability=dev
+# Build docker containers
+docker-composer up -d --build
+# Install dependencies
+docker-compose run --rm php-cli composer install
+# Remove example related code
+docker-compose run --rm php-cli composer example:remove
+```
 
-@TODO: Add authentication?
+# Documentation
 
-<h2 align="center">Voting example</h2>
-<p align="center">
-  <img src="https://github.com/robiningelbrecht/the-coolest-pokemon/raw/master/readme/vote.webp" alt="Vote">
-</p>
-
-<h2 align="center">Results example</h2>
-<p align="center">
-  <img src="https://github.com/robiningelbrecht/the-coolest-pokemon/raw/master/readme/results.webp" alt="Results">
-</p>
+<a href="https://php-slim-skeleton.robiningelbrecht.be/">https://php-slim-skeleton.robiningelbrecht.be/</a>
