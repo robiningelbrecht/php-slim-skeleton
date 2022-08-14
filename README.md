@@ -18,7 +18,7 @@
     An event driven Slim Framework skeleton using AMQP and CQRS
 </p>
 
-# Installation
+## Installation
 
 ```bash
 composer create-project robiningelbrecht/slim-skeleton-ddd-amqp [app-name] --no-install --ignore-platform-reqs --stability=dev
@@ -28,6 +28,15 @@ docker-composer up -d --build
 docker-compose run --rm php-cli composer install
 ```
 
-# Documentation
+## Documentation
 
-<a href="https://php-slim-skeleton.robiningelbrecht.be/">https://php-slim-skeleton.robiningelbrecht.be/</a>
+Learn more at these links:
+
+- [Documentation](https://php-slim-skeleton.robiningelbrecht.be/)
+- [Slim framework](https://www.slimframework.com)
+- [PHP-DI](https://php-di.org/)
+- [Doctrine migrations](https://www.doctrine-project.org/projects/doctrine-migrations/en/3.5/index.html)
+
+## Contributing
+
+Please see [CONTRIBUTING](https://php-slim-skeleton.robiningelbrecht.be/contribute) for details.
