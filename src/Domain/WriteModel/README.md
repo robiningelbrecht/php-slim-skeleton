@@ -1,0 +1,1 @@
+# Add Domain write model in this directory

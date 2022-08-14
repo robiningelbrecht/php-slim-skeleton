@@ -1,0 +1,1 @@
+# Add Domain read model in this directory
