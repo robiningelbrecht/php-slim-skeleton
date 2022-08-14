@@ -1,4 +1,1 @@
-[
-    "App\\Domain\\WriteModel\\Pokemon\\AddPokemon\\AddPokemon",
-    "App\\Domain\\WriteModel\\Vote\\AddVote\\AddVote"
-]
+[]

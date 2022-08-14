@@ -1,7 +1,1 @@
-{
-    "add-vote-command-queue": {
-        "queueName": "add-vote-command-queue",
-        "workerName": "command-queue-worker",
-        "numberOfConsumers": 1
-    }
-}
+[]

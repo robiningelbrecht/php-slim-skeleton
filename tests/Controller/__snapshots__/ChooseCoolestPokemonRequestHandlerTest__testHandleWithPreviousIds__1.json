@@ -1,9 +1,0 @@
-{
-    "commandName": "App.Domain.WriteModel.Vote.AddVote.AddVote",
-    "payload": {
-        "voteId": "vote-test",
-        "pokemonVotedFor": "pokemon-test",
-        "pokemonNotVotedFor": "pokemon-test2",
-        "metadata": []
-    }
-}
