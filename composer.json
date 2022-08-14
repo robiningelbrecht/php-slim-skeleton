@@ -60,11 +60,6 @@
     "lint:fix": " ./vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php",
     "phpstan:run": " ./vendor/bin/phpstan analyse --memory-limit=1G",
     "phpstan:generate-baseline": " ./vendor/bin/phpstan analyse --generate-baseline --memory-limit=1G",
-    "example:remove": [
-      "./bin/example-remove.sh",
-      "./vendor/bin/phpunit -d --update-snapshots",
-      "# <info>All examples related files are deleted. Do not forget to update 'docker/mysql/mysql.databases.sql' to create the databases you need</info>"
-    ],
     "example:init": [
       "./vendor/bin/doctrine-migrations migrate",
       "./bin/console pokemon:cache"

@@ -1,0 +1,1 @@
+# Add Doctrine migrations in this directory.
