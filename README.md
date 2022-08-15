@@ -21,7 +21,7 @@
 ## Installation
 
 ```bash
-composer create-project robiningelbrecht/slim-skeleton-ddd-amqp [app-name] --no-install --ignore-platform-reqs --stability=dev
+composer create-project robiningelbrecht/php-slim-skeleton [app-name] --no-install --ignore-platform-reqs --stability=dev
 # Build docker containers
 docker-composer up -d --build
 # Install dependencies
