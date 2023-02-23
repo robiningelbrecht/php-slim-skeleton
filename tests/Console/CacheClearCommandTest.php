@@ -37,7 +37,7 @@ class CacheClearCommandTest extends ConsoleCommandTestCase
                 $this->cacheDir.'/slim'
             );
 
-        $command = $this->getCommandInApplication('cache:clear');
+        $command = $this->getCommandInApplication('app:cache:clear');
 
         $commandTester = new CommandTester($command);
         $commandTester->execute([

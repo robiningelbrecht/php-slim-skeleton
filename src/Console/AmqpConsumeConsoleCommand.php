@@ -11,7 +11,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-#[AsCommand(name: 'amqp:consume', description: 'Start consuming a given AMQP queue')]
+#[AsCommand(name: 'app:amqp:consume', description: 'Start consuming a given AMQP queue')]
 class AmqpConsumeConsoleCommand extends Command implements SignalableCommandInterface
 {
     public function __construct(
