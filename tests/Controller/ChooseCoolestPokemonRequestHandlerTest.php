@@ -51,10 +51,16 @@ class ChooseCoolestPokemonRequestHandlerTest extends ContainerTestCase
                 $pokeIdTwo,
             );
 
+        $matcher = $this->exactly(2);
         $this->pokemonRepository
-            ->expects($this->exactly(2))
+            ->expects($matcher)
             ->method('findByPokedexId')
-            ->withConsecutive([3], [10])
+            ->willReturnCallback(function (int $id) use ($matcher) {
+                match ($matcher->numberOfInvocations()) {
+                    1 => $this->assertEquals($id, 3),
+                    2 => $this->assertEquals($id, 10),
+                };
+            })
             ->willReturn(PokemonBuilder::fromDefaults()
                 ->withStats([
                     [

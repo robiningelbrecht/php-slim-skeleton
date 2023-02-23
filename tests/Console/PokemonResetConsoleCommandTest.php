@@ -16,14 +16,17 @@ class PokemonResetConsoleCommandTest extends ConsoleCommandTestCase
 
     public function testHandle(): void
     {
+        $matcher = $this->exactly(3);
         $this->connection
-            ->expects($this->exactly(3))
+            ->expects($matcher)
             ->method('executeStatement')
-            ->withConsecutive(
-                ['TRUNCATE Pokemon'],
-                ['TRUNCATE Vote'],
-                ['TRUNCATE Result']
-            );
+            ->willReturnCallback(function (string $sql) use ($matcher) {
+                match ($matcher->numberOfInvocations()) {
+                    1 => $this->assertEquals($sql, 'TRUNCATE Pokemon'),
+                    2 => $this->assertEquals($sql, 'TRUNCATE Vote'),
+                    3 => $this->assertEquals($sql, 'TRUNCATE Result'),
+                };
+            });
 
         $command = $this->getCommandInApplication('pokemon:reset');
 

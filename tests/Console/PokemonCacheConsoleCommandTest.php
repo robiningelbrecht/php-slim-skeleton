@@ -28,7 +28,7 @@ class PokemonCacheConsoleCommandTest extends ConsoleCommandTestCase
             ->expects($matcher)
             ->method('findByPokedexId')
             ->willReturnCallback(function () use ($matcher) {
-                if ($matcher->getInvocationCount() <= 2) {
+                if ($matcher->numberOfInvocations() <= 2) {
                     throw new EntityNotFound();
                 }
 
@@ -38,10 +38,12 @@ class PokemonCacheConsoleCommandTest extends ConsoleCommandTestCase
         $this->client
             ->expects($this->exactly(2))
             ->method('get')
-            ->withConsecutive(
-                ['https://pokeapi.co/api/v2/pokemon/1'],
-                ['https://pokeapi.co/api/v2/pokemon/2'],
-            )
+            ->willReturnCallback(function (string $uri) use ($matcher) {
+                match ($matcher->numberOfInvocations()) {
+                    1 => $this->assertEquals($uri, 'https://pokeapi.co/api/v2/pokemon/1'),
+                    2 => $this->assertEquals($uri, 'https://pokeapi.co/api/v2/pokemon/2'),
+                };
+            })
             ->willReturnOnConsecutiveCalls(
                 new Response(200, [], $this->getMockResponse()),
                 new Response(200, [], $this->getMockResponse())

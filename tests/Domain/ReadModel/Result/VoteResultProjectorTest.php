@@ -25,13 +25,16 @@ class VoteResultProjectorTest extends EventListenerTestCase
                 )';
 
         $result = $this->createMock(Result::class);
+        $matcher = $this->exactly(2);
         $this->connection
-            ->expects($this->exactly(2))
+            ->expects($matcher)
             ->method('executeQuery')
-            ->withConsecutive(
-                [$expectedQuery, ['pokemonId' => PokemonId::fromString('pokemon-voted-for')]],
-                [$expectedQuery, ['pokemonId' => PokemonId::fromString('pokemon-not-voted-for')]],
-            )
+            ->willReturnCallback(function (string $query, array $vote) use ($matcher, $expectedQuery) {
+                match ($matcher->numberOfInvocations()) {
+                    1 => $this->assertEquals([$query, $vote], [$expectedQuery,  ['pokemonId' => PokemonId::fromString('pokemon-voted-for')]]),
+                    2 => $this->assertEquals([$query, $vote], [$expectedQuery,  ['pokemonId' => PokemonId::fromString('pokemon-not-voted-for')]]),
+                };
+            })
             ->willReturnOnConsecutiveCalls(
                 $result,
                 $result,

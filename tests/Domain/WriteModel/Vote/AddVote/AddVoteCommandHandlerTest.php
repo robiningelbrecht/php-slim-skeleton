@@ -29,13 +29,16 @@ class AddVoteCommandHandlerTest extends CommandHandlerTestCase
             ->withPokemonId(PokemonId::fromString('pokemon-not-voted-for'))
             ->build();
 
+        $matcher = $this->exactly(2);
         $this->pokemonRepository
-            ->expects($this->exactly(2))
+            ->expects($matcher)
             ->method('find')
-            ->withConsecutive(
-                [$pokemonVotedFor->getPokemonId()],
-                [$pokemonNotVotedFor->getPokemonId()],
-            )
+            ->willReturnCallback(function (PokemonId $pokemonId) use ($matcher) {
+                match ($matcher->numberOfInvocations()) {
+                    1 => $this->assertEquals($pokemonId, PokemonId::fromString('pokemon-voted-for')),
+                    2 => $this->assertEquals($pokemonId, PokemonId::fromString('pokemon-not-voted-for')),
+                };
+            })
             ->willReturnOnConsecutiveCalls($pokemonVotedFor, $pokemonNotVotedFor);
 
         $this->voteRepository
