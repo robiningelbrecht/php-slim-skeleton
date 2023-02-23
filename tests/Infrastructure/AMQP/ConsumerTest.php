@@ -59,7 +59,9 @@ class ConsumerTest extends TestCase
                     return true;
                 }
 
-                return false;
+                $this->consumer->shutdown();
+
+                return true;
             });
 
         $channel
