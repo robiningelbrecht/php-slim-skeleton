@@ -6,7 +6,7 @@ use App\Infrastructure\AMQP\AMQPChannelFactory;
 use App\Infrastructure\AMQP\AMQPChannelOptions;
 use App\Infrastructure\AMQP\Queue\DelayedQueue\DelayedQueue;
 use App\Tests\Infrastructure\AMQP\Queue\TestQueue;
-use App\Tests\Infrastructure\AMQP\RunUnitTest\RunUnitTest;
+use App\Tests\Infrastructure\AMQP\RunUnitTester\RunUnitTester;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -46,7 +46,7 @@ class DelayedQueueTest extends TestCase
             ->method('getForQueue')
             ->with($delayedQueue, $options);
 
-        $delayedQueue->queue(new RunUnitTest());
+        $delayedQueue->queue(new RunUnitTester());
     }
 
     public function testGetWorker(): void

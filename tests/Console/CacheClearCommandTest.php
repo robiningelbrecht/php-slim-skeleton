@@ -22,10 +22,16 @@ class CacheClearCommandTest extends ConsoleCommandTestCase
         file_put_contents($this->cacheDir.'/slim/cache.file', 'contents');
         @mkdir($this->cacheDir.'/slim/sub-dir');
 
+        $matcher = $this->exactly(2);
         $this->settings
-            ->expects($this->exactly(2))
+            ->expects($matcher)
             ->method('get')
-            ->withConsecutive(['doctrine.cache_dir'], ['slim.cache_dir'])
+            ->willReturnCallback(function (string $key) use ($matcher) {
+                match ($matcher->numberOfInvocations()) {
+                    1 => $this->assertEquals($key, 'doctrine.cache_dir'),
+                    2 => $this->assertEquals($key, 'slim.cache_dir'),
+                };
+            })
             ->willReturnOnConsecutiveCalls(
                 $this->cacheDir.'/doctrine',
                 $this->cacheDir.'/slim'

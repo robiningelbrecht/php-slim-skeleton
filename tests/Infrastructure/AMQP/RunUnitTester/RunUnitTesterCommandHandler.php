@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Tests\Infrastructure\AMQP\RunUnitTest;
+namespace App\Tests\Infrastructure\AMQP\RunUnitTester;
 
 use App\Infrastructure\CQRS\CommandHandler\CommandHandler;
 use App\Infrastructure\CQRS\DomainCommand;
 
-class RunUnitTestCommandHandler implements CommandHandler
+class RunUnitTesterCommandHandler implements CommandHandler
 {
     public function handle(DomainCommand $command): void
     {
