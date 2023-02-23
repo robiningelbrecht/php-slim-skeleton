@@ -5,6 +5,7 @@ namespace App\Tests\Infrastructure\CQRS;
 use App\Infrastructure\CQRS\CommandBus;
 use App\Infrastructure\Serialization\Json;
 use App\Tests\ContainerTestCase;
+use App\Tests\Infrastructure\AMQP\RunUnitTester\RunUnitTesterCommandHandler;
 use App\Tests\Infrastructure\CQRS\InvalidTestCommand\InvalidTestCommandCommandHandler;
 use Spatie\Snapshots\MatchesSnapshots;
 
@@ -19,6 +20,13 @@ class CommandBusTest extends ContainerTestCase
         $commands = array_keys($this->commandBus->getCommandHandlers());
         sort($commands);
         $this->assertMatchesJsonSnapshot(Json::encode($commands));
+    }
+
+    public function testItRegistersCommand(): void
+    {
+        $commandHandler = new RunUnitTesterCommandHandler();
+        $this->commandBus->subscribeCommandHandler($commandHandler);
+        $this->assertContains($commandHandler, $this->commandBus->getCommandHandlers());
     }
 
     public function testGetItShouldThrowOnInvalidCommandHandler(): void

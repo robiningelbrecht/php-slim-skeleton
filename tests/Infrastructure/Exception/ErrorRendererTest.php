@@ -21,4 +21,21 @@ class ErrorRendererTest extends WebTestCase
         $this->assertEquals(404, $response->getStatusCode());
         $this->assertMatchesHtmlSnapshot((string) $response->getBody());
     }
+
+    public function testInvokeRuntimeException(): void
+    {
+        // The routes registered in your app.
+        $this->getApp()
+            ->get('/exception', fn () => throw new \RuntimeException('WAW, an error!'));
+
+        $response = $this->getApp()->handle(
+            $this->createRequest(
+                'GET',
+                '/exception',
+            )
+        );
+
+        $this->assertEquals(500, $response->getStatusCode());
+        $this->assertStringContainsString('<strong>Message:</strong> WAW, an error!</div>', (string) $response->getBody());
+    }
 }

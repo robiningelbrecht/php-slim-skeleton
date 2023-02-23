@@ -10,6 +10,7 @@ use App\Tests\ConsoleCommandTestCase;
 use App\Tests\Infrastructure\AMQP\Queue\TestQueue;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Command\SignalableCommandInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 
 class AmqpConsumeConsoleCommandTest extends ConsoleCommandTestCase
@@ -40,6 +41,25 @@ class AmqpConsumeConsoleCommandTest extends ConsoleCommandTestCase
             'command' => $command->getName(),
             'queue' => 'test-queue',
         ]);
+    }
+
+    public function testGetSubscribedSignals(): void
+    {
+        /** @var SignalableCommandInterface $command */
+        $command = $this->getCommandInApplication('amqp:consume');
+        $this->assertEquals([SIGTERM, SIGINT], $command->getSubscribedSignals());
+    }
+
+    public function testHandleSignal(): void
+    {
+        /** @var SignalableCommandInterface $command */
+        $command = $this->getCommandInApplication('amqp:consume');
+
+        $this->consumer
+            ->expects($this->once())
+            ->method('shutdown');
+
+        $command->handleSignal(1);
     }
 
     protected function setUp(): void

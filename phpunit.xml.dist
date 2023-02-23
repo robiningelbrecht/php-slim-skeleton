@@ -9,5 +9,8 @@
     <include>
       <directory>src</directory>
     </include>
+    <exclude>
+      <file>src/Infrastructure/AMQP/AMQPStreamConnectionFactory.php</file>
+    </exclude>
   </coverage>
 </phpunit>
