@@ -9,7 +9,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 #[AsCommand(name: 'app:cache:clear', description: 'Clear all caches')]
-class CacheClearCommand extends Command
+class CacheClearConsoleCommand extends Command
 {
     public function __construct(
         private readonly Settings $settings

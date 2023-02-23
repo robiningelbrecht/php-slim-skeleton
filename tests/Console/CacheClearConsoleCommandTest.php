@@ -2,16 +2,16 @@
 
 namespace App\Tests\Console;
 
-use App\Console\CacheClearCommand;
+use App\Console\CacheClearConsoleCommand;
 use App\Infrastructure\Environment\Settings;
 use App\Tests\ConsoleCommandTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
 
-class CacheClearCommandTest extends ConsoleCommandTestCase
+class CacheClearConsoleCommandTest extends ConsoleCommandTestCase
 {
-    private CacheClearCommand $cacheClearCommand;
+    private CacheClearConsoleCommand $cacheClearCommand;
     private MockObject $settings;
     private string $cacheDir;
 
@@ -61,7 +61,7 @@ class CacheClearCommandTest extends ConsoleCommandTestCase
         $this->cacheDir = Settings::getAppRoot().'/tests/Console/cache';
         $this->settings = $this->createMock(Settings::class);
 
-        $this->cacheClearCommand = new CacheClearCommand(
+        $this->cacheClearCommand = new CacheClearConsoleCommand(
             $this->settings
         );
     }
