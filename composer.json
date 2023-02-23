@@ -40,8 +40,8 @@
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^3.9",
     "phpstan/phpstan": "^1.8",
-    "phpunit/phpunit": "^9.5",
-    "spatie/phpunit-snapshot-assertions": "^4.2"
+    "phpunit/phpunit": "^10.0",
+    "spatie/phpunit-snapshot-assertions": "^5.0"
   },
   "autoload": {
     "psr-4": {

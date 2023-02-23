@@ -1,6 +1,7 @@
 nginx
 vendor
 var
+.phpunit.cache
 .env
 .php-cs-fixer.cache
 .phpunit.result.cache

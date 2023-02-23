@@ -3,7 +3,7 @@
 namespace App\Tests\Infrastructure\AMQP\Queue;
 
 use App\Infrastructure\AMQP\AMQPChannelFactory;
-use App\Tests\Infrastructure\AMQP\RunUnitTest\RunUnitTest;
+use App\Tests\Infrastructure\AMQP\RunUnitTester\RunUnitTester;
 use PhpAmqpLib\Channel\AMQPChannel;
 use PhpAmqpLib\Message\AMQPMessage;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -16,7 +16,7 @@ class QueueTest extends TestCase
 
     public function testQueue()
     {
-        $envelope = new RunUnitTest();
+        $envelope = new RunUnitTester();
 
         $channel = $this->createMock(AMQPChannel::class);
         $this->AMQPChannelFactory
@@ -38,7 +38,7 @@ class QueueTest extends TestCase
 
     public function testQueueBatch()
     {
-        $envelope = new RunUnitTest();
+        $envelope = new RunUnitTester();
 
         $channel = $this->createMock(AMQPChannel::class);
         $this->AMQPChannelFactory

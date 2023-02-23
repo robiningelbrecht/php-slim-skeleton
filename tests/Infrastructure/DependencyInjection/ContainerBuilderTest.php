@@ -5,7 +5,6 @@ namespace App\Tests\Infrastructure\DependencyInjection;
 use App\Infrastructure\Attribute\ClassAttributeResolver;
 use App\Infrastructure\DependencyInjection\CompilerPass;
 use App\Infrastructure\DependencyInjection\ContainerBuilder;
-use App\Infrastructure\Environment\Settings;
 use DI\CompiledContainer;
 use DI\Container;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -21,13 +20,17 @@ class ContainerBuilderTest extends TestCase
     {
         $compilerPass = $this->createMock(CompilerPass::class);
 
+        $matcher = $this->exactly(2);
         $this->DIContainerBuilder
-            ->expects($this->exactly(2))
+            ->expects($matcher)
             ->method('addDefinitions')
-            ->withConsecutive(
-                ['definition'],
-                [require Settings::getAppRoot().'/config/auto-wires.php']
-            );
+            ->willReturnCallback(function (string $key) use ($matcher) {
+                match ($matcher->numberOfInvocations()) {
+                    1 => $this->assertEquals($key, 'definition'),
+                    2 => $this->assertEquals($key, []),
+                };
+            })
+            ->willReturn($this->createMock(\DI\ContainerBuilder::class));
 
         $this->DIContainerBuilder
             ->expects($this->once())

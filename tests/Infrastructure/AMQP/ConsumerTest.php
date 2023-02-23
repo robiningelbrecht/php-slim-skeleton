@@ -8,7 +8,7 @@ use App\Infrastructure\AMQP\Consumer;
 use App\Infrastructure\AMQP\Queue\Queue;
 use App\Infrastructure\AMQP\Worker\Worker;
 use App\Infrastructure\AMQP\Worker\WorkerMaxLifeTimeOrIterationsExceeded;
-use App\Tests\Infrastructure\AMQP\RunUnitTest\RunUnitTest;
+use App\Tests\Infrastructure\AMQP\RunUnitTester\RunUnitTester;
 use PhpAmqpLib\Channel\AMQPChannel;
 use PhpAmqpLib\Message\AMQPMessage;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -55,7 +55,7 @@ class ConsumerTest extends TestCase
             ->expects($matcher)
             ->method('is_open')
             ->willReturnCallback(function () use ($matcher) {
-                if (1 === $matcher->getInvocationCount()) {
+                if (1 === $matcher->numberOfInvocations()) {
                     return true;
                 }
 
@@ -120,7 +120,7 @@ class ConsumerTest extends TestCase
 
     public function testConsumeCallback()
     {
-        $envelope = new RunUnitTest();
+        $envelope = new RunUnitTester();
         $channel = $this->createMock(AMQPChannel::class);
         $queue = $this->createMock(Queue::class);
         $worker = $this->createMock(Worker::class);
@@ -160,7 +160,7 @@ class ConsumerTest extends TestCase
         $worker = $this->createMock(Worker::class);
 
         $message = new AMQPMessage(
-            serialize(new RunUnitTest()),
+            serialize(new RunUnitTester()),
             ['content_type' => 'text/plain', 'delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT]
         );
         $message->setChannel($channel);
@@ -195,7 +195,7 @@ class ConsumerTest extends TestCase
 
     public function testConsumeCallbackOnException()
     {
-        $envelope = new RunUnitTest();
+        $envelope = new RunUnitTester();
         $channel = $this->createMock(AMQPChannel::class);
         $queue = $this->createMock(Queue::class);
         $worker = $this->createMock(Worker::class);
