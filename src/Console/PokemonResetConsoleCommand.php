@@ -8,7 +8,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-#[AsCommand(name: 'pokemon:reset', description: 'Empty complete DB, votes will be deleted as well')]
+#[AsCommand(name: 'app:pokemon:reset', description: 'Empty complete DB, votes will be deleted as well')]
 class PokemonResetConsoleCommand extends Command
 {
     public function __construct(

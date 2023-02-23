@@ -63,7 +63,7 @@
     "phpstan:generate-baseline": " ./vendor/bin/phpstan analyse --generate-baseline --memory-limit=1G",
     "example:init": [
       "./vendor/bin/doctrine-migrations migrate",
-      "./bin/console pokemon:cache"
+      "./bin/console app:pokemon:cache"
     ],
     "post-create-project-cmd": [
       "cp ./.env.dist ./.env"

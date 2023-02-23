@@ -1,0 +1,6 @@
+[
+    "app:amqp:consume",
+    "app:cache:clear",
+    "app:pokemon:cache",
+    "app:pokemon:reset"
+]

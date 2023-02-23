@@ -28,7 +28,7 @@ class PokemonResetConsoleCommandTest extends ConsoleCommandTestCase
                 };
             });
 
-        $command = $this->getCommandInApplication('pokemon:reset');
+        $command = $this->getCommandInApplication('app:pokemon:reset');
 
         $commandTester = new CommandTester($command);
         $commandTester->execute([

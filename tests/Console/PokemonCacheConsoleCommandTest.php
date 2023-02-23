@@ -53,7 +53,7 @@ class PokemonCacheConsoleCommandTest extends ConsoleCommandTestCase
             ->expects($this->exactly(2))
             ->method('dispatch');
 
-        $command = $this->getCommandInApplication('pokemon:cache');
+        $command = $this->getCommandInApplication('app:pokemon:cache');
 
         $commandTester = new CommandTester($command);
         $commandTester->execute([
