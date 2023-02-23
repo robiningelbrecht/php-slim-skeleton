@@ -19,5 +19,6 @@ class ErrorRendererTest extends WebTestCase
         );
 
         $this->assertEquals(404, $response->getStatusCode());
+        $this->assertMatchesHtmlSnapshot((string) $response->getBody());
     }
 }

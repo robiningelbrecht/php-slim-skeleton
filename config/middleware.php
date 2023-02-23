@@ -16,4 +16,5 @@ return function (App $app) {
     /** @var \Slim\Handlers\ErrorHandler $errorHandler */
     $errorHandler = $errorMiddleware->getDefaultErrorHandler();
     $errorHandler->registerErrorRenderer('text/html', ErrorRenderer::class);
+    $errorHandler->setDefaultErrorRenderer('text/html', ErrorRenderer::class);
 };
