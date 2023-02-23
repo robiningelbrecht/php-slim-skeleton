@@ -76,6 +76,21 @@ parameters:
 			path: src/Infrastructure/Attribute/ClassAttributeResolver.php
 
 		-
+			message: "#^Method App\\\\Infrastructure\\\\DependencyInjection\\\\ContainerBuilder\\:\\:__construct\\(\\) has parameter \\$containerBuilder with generic class DI\\\\ContainerBuilder but does not specify its types\\: ContainerClass$#"
+			count: 1
+			path: src/Infrastructure/DependencyInjection/ContainerBuilder.php
+
+		-
+			message: "#^Parameter \\#3 \\$containerParentClass of method DI\\\\ContainerBuilder\\<DI\\\\Container\\>\\:\\:enableCompilation\\(\\) expects class\\-string\\<DI\\\\CompiledContainer\\>, string given\\.$#"
+			count: 1
+			path: src/Infrastructure/DependencyInjection/ContainerBuilder.php
+
+		-
+			message: "#^Unable to resolve the template type T in call to method DI\\\\ContainerBuilder\\<DI\\\\Container\\>\\:\\:enableCompilation\\(\\)$#"
+			count: 1
+			path: src/Infrastructure/DependencyInjection/ContainerBuilder.php
+
+		-
 			message: "#^Parameter \\#3 \\$depth of function Safe\\\\json_decode expects int\\<1, max\\>, int given\\.$#"
 			count: 1
 			path: src/Infrastructure/Serialization/Json.php
