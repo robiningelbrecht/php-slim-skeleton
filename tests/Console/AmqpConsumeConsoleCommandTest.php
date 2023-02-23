@@ -34,7 +34,7 @@ class AmqpConsumeConsoleCommandTest extends ConsoleCommandTestCase
             ->method('consume')
             ->with($queue);
 
-        $command = $this->getCommandInApplication('amqp:consume');
+        $command = $this->getCommandInApplication('app:amqp:consume');
 
         $commandTester = new CommandTester($command);
         $commandTester->execute([
@@ -46,14 +46,14 @@ class AmqpConsumeConsoleCommandTest extends ConsoleCommandTestCase
     public function testGetSubscribedSignals(): void
     {
         /** @var SignalableCommandInterface $command */
-        $command = $this->getCommandInApplication('amqp:consume');
+        $command = $this->getCommandInApplication('app:amqp:consume');
         $this->assertEquals([SIGTERM, SIGINT], $command->getSubscribedSignals());
     }
 
     public function testHandleSignal(): void
     {
         /** @var SignalableCommandInterface $command */
-        $command = $this->getCommandInApplication('amqp:consume');
+        $command = $this->getCommandInApplication('app:amqp:consume');
 
         $this->consumer
             ->expects($this->once())
