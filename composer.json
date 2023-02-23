@@ -23,7 +23,6 @@
     "doctrine/dbal": "^3.3",
     "doctrine/migrations": "^3.5",
     "doctrine/orm": "^2.12",
-    "guzzlehttp/guzzle": "^7.4",
     "lcobucci/clock": "^2.2",
     "php-amqplib/php-amqplib": "^3.2",
     "php-di/php-di": "^7.0",
