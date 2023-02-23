@@ -36,6 +36,9 @@ class AmqpConsumeConsoleCommand extends Command implements SignalableCommandInte
         return Command::SUCCESS;
     }
 
+    /**
+     * @return int[]
+     */
     public function getSubscribedSignals(): array
     {
         return [SIGTERM, SIGINT];
