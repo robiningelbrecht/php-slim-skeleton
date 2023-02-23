@@ -1,7 +1,6 @@
-
 <?php
 
-  use Slim\App;
+use Slim\App;
 use Slim\Handlers\Strategies\RequestResponseArgs;
 
 return function (App $app) {

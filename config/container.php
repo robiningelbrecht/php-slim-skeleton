@@ -12,6 +12,8 @@ use Doctrine\ORM\ORMSetup;
 use Dotenv\Dotenv;
 use Lcobucci\Clock\Clock;
 use Lcobucci\Clock\SystemClock;
+use Psr\Http\Message\ServerRequestFactoryInterface;
+use Slim\Psr7\Factory\ServerRequestFactory;
 use Symfony\Component\Console\Application;
 use Twig\Environment as TwigEnvironment;
 use Twig\Loader\FilesystemLoader;
@@ -68,4 +70,5 @@ return [
             $rabbitMqConfig['vhost']
         );
     },
+    ServerRequestFactoryInterface::class => \DI\get(ServerRequestFactory::class),
 ];
