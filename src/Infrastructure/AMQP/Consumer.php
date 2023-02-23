@@ -11,6 +11,7 @@ use PhpAmqpLib\Message\AMQPMessage;
 class Consumer
 {
     private ?AMQPChannel $channel = null;
+    private bool $forceShutDown = false;
 
     public function __construct(
         private readonly AMQPStreamConnectionFactory $AMQPStreamConnectionFactory,
@@ -23,19 +24,32 @@ class Consumer
         $this->channel?->close();
     }
 
+    public function shutdown(): void
+    {
+        $this->forceShutDown = true;
+    }
+
     public function consume(Queue $queue): void
     {
         $channel = $this->AMQPChannelFactory->getForQueue($queue);
 
         $callback = static function (AMQPMessage $message) use ($queue) {
+            // Block any incoming exit signals to make sure the current message can be processed.
+            pcntl_sigprocmask(SIG_BLOCK, [SIGTERM, SIGINT]);
             Consumer::consumeCallback($message, $queue);
+            // Unblock any incoming exit signals, message has been processed, consumer can DIE.
+            pcntl_sigprocmask(SIG_UNBLOCK, [SIGTERM, SIGINT]);
+            // Dispatch the exit signals that might've come in.
+            pcntl_signal_dispatch();
         };
 
         try {
             $channel->basic_consume($queue->getName(), '', false, false, false, false, $callback);
 
-            while ($channel->is_open()) {
+            while ($channel->is_open() && !$this->forceShutDown) {
                 $channel->wait();
+                // Dispatch incoming exit signals.
+                pcntl_signal_dispatch();
             }
         } catch (WorkerMaxLifeTimeOrIterationsExceeded|ConnectionLost) {
             $channel->close();
