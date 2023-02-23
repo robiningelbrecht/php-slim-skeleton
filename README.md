@@ -35,6 +35,7 @@ Learn more at these links:
 - [Documentation](https://php-slim-skeleton.robiningelbrecht.be/)
 - [Slim framework](https://www.slimframework.com)
 - [PHP-DI](https://php-di.org/)
+- [Symfony Console Commands](https://symfony.com/doc/current/console.html)
 - [Doctrine migrations](https://www.doctrine-project.org/projects/doctrine-migrations/en/3.6/)
 
 ## Contributing
