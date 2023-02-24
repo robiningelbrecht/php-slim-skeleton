@@ -5,6 +5,7 @@ namespace App\Tests\Infrastructure\Repository;
 use App\Infrastructure\Eventing\DomainEvent;
 use App\Infrastructure\Eventing\EventBus;
 use App\Infrastructure\Serialization\Json;
+use Doctrine\DBAL\Connection;
 use PHPUnit\Framework\TestCase;
 use Spatie\Snapshots\MatchesSnapshots;
 
@@ -23,7 +24,7 @@ class DbalAggregateRootRepositoryTest extends TestCase
                 $this->assertMatchesJsonSnapshot(Json::encode($domainEvents));
             });
 
-        $testRepository = new TestRepository($eventBus);
+        $testRepository = new TestRepository($this->createMock(Connection::class), $eventBus);
         $testRepository->save();
     }
 }
