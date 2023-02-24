@@ -18,7 +18,7 @@ jobs:
     steps:
       # https://github.com/marketplace/actions/setup-php-action
       - name: Setup PHP 8.1 with Xdebug 3.x
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@v3
         with:
           php-version: '8.1'
           coverage: xdebug
