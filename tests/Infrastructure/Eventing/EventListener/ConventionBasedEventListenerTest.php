@@ -38,6 +38,6 @@ class ConventionBasedEventListenerTest extends TestCase
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Event listener App\Tests\Infrastructure\Eventing\EventListener\TestEventListenerNotTagged not tagged with attribute');
 
-        $eventListener = new TestEventListenerNotTagged();
+        new TestEventListenerNotTagged();
     }
 }
