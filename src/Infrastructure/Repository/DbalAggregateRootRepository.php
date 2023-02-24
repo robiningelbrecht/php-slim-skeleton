@@ -3,11 +3,13 @@
 namespace App\Infrastructure\Repository;
 
 use App\Infrastructure\Eventing\EventBus;
+use Doctrine\DBAL\Connection;
 
 abstract class DbalAggregateRootRepository
 {
     public function __construct(
-        protected EventBus $eventBus)
+        protected readonly Connection $connection,
+        protected readonly EventBus $eventBus)
     {
     }
 
