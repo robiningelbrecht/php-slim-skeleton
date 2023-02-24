@@ -32,7 +32,7 @@ docker-compose run --rm php-cli composer install
 
 Learn more at these links:
 
-- [Documentation](https://php-slim-skeleton.robiningelbrecht.be/)
+- [Skeleton Documentation](https://php-slim-skeleton.robiningelbrecht.be/)
 - [Slim framework](https://www.slimframework.com)
 - [PHP-DI](https://php-di.org/)
 - [Symfony Console Commands](https://symfony.com/doc/current/console.html)
