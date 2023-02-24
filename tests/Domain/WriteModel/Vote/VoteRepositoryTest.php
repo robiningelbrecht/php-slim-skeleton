@@ -45,8 +45,8 @@ class VoteRepositoryTest extends DatabaseTestCase
         $this->eventBus = $this->createMock(EventBus::class);
 
         $this->voteRepository = new VoteRepository(
+            $this->getConnection(),
             $this->eventBus,
-            $this->getConnection()
         );
     }
 }
