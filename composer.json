@@ -60,6 +60,7 @@
     "lint:fix": " ./vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php",
     "phpstan:run": " ./vendor/bin/phpstan analyse --memory-limit=1G",
     "phpstan:generate-baseline": " ./vendor/bin/phpstan analyse --generate-baseline --memory-limit=1G",
+    "snapshots:cleanup": "find . -name __snapshots__ -type d -prune -exec rm -rf {} \\; ",
     "post-create-project-cmd": [
       "cp ./.env.dist ./.env"
     ]
