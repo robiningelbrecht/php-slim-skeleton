@@ -46,10 +46,9 @@ abstract class ConventionBasedEventListener implements EventListener
             $methodParams = $method->getParameters();
             $eventFullFqcn = $methodParams[0]->getType()->getName();
             $reflection = new \ReflectionClass($eventFullFqcn);
-            $eventShortName = $reflection->getShortName();
 
             // Method name needs to equal with "prefixEventName()"
-            if ($method->getName() !== $this->eventProcessingMethodPrefix.$eventShortName) {
+            if ($method->getName() !== $this->eventProcessingMethodPrefix.$reflection->getShortName()) {
                 continue;
             }
 
