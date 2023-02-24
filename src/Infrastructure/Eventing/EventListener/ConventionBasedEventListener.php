@@ -42,7 +42,27 @@ abstract class ConventionBasedEventListener implements EventListener
             if (!str_starts_with($method->getName(), $this->eventProcessingMethodPrefix)) {
                 continue;
             }
-            $interestedIn[] = (string) $method->getParameters()[0]->getType();
+
+            $methodParams = $method->getParameters();
+            $eventFullFqcn = $methodParams[0]->getType()->getName();
+            $reflection = new \ReflectionClass($eventFullFqcn);
+
+            // Method name needs to equal with "prefixEventName()"
+            if ($method->getName() !== $this->eventProcessingMethodPrefix.$reflection->getShortName()) {
+                continue;
+            }
+
+            // Guard that there is only one param to the method.
+            if (1 !== count($methodParams)) {
+                continue;
+            }
+
+            // Guard that the one param is of type "DomainEvent".
+            if (!$reflection->newInstanceWithoutConstructor() instanceof DomainEvent) {
+                continue;
+            }
+
+            $interestedIn[] = $eventFullFqcn;
         }
 
         return $interestedIn;

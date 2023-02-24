@@ -66,6 +66,11 @@ parameters:
 			path: src/Infrastructure/DependencyInjection/ContainerBuilder.php
 
 		-
+			message: "#^Cannot call method getName\\(\\) on ReflectionType\\|null\\.$#"
+			count: 1
+			path: src/Infrastructure/Eventing/EventListener/ConventionBasedEventListener.php
+
+		-
 			message: "#^Parameter \\#3 \\$depth of function Safe\\\\json_decode expects int\\<1, max\\>, int given\\.$#"
 			count: 1
 			path: src/Infrastructure/Serialization/Json.php
