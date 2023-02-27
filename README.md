@@ -1,4 +1,4 @@
-<h1 align="center">Event driven Slim Framework skeleton</h1>
+<h1 align="center">Event-driven Slim 4 Framework skeleton</h1>
 
 <p align="center">
 	<img src="https://github.com/robiningelbrecht/slim-skeleton-ddd-amqp/raw/master/readme/slim-new.webp" alt="Slim">
@@ -15,7 +15,7 @@
 ---
 
 <p align="center">
-    An event driven Slim Framework skeleton using AMQP and CQRS
+    An event-driven Slim 4 Framework skeleton using AMQP and CQRS
 </p>
 
 ## Installation
@@ -32,11 +32,12 @@ docker-compose run --rm php-cli composer install
 
 Learn more at these links:
 
-- [Documentation](https://php-slim-skeleton.robiningelbrecht.be/)
+- [Skeleton Documentation](https://php-slim-skeleton.robiningelbrecht.be/)
 - [Slim framework](https://www.slimframework.com)
 - [PHP-DI](https://php-di.org/)
 - [Symfony Console Commands](https://symfony.com/doc/current/console.html)
 - [Doctrine migrations](https://www.doctrine-project.org/projects/doctrine-migrations/en/3.6/)
+- [Twig](https://twig.symfony.com/)
 
 ## Contributing
 
