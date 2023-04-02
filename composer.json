@@ -39,9 +39,9 @@
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^3.9",
-    "phpstan/phpstan": "^1.8",
+    "phpstan/phpstan": "^1.10",
     "phpunit/phpunit": "^10.0",
-    "robiningelbrecht/phpunit-pretty-print": "^0.0.1",
+    "robiningelbrecht/phpunit-pretty-print": "^1.0.0",
     "spatie/phpunit-snapshot-assertions": "^5.0"
   },
   "autoload": {
