@@ -5,6 +5,11 @@
       <directory>tests</directory>
     </testsuite>
   </testsuites>
+  <extensions>
+    <bootstrap class="RobinIngelbrecht\PHPUnitPrettyPrint\PhpUnitExtension">
+
+    </bootstrap>
+  </extensions>
   <coverage>
     <include>
       <directory>src</directory>
