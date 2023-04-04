@@ -8,7 +8,7 @@ use App\Infrastructure\AMQP\Queue\Queue;
 class FailedQueueFactory
 {
     public function __construct(
-        private AMQPChannelFactory $AMQPChannelFactory
+        private readonly AMQPChannelFactory $AMQPChannelFactory
     ) {
     }
 

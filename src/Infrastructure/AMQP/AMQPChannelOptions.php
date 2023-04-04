@@ -2,18 +2,18 @@
 
 namespace App\Infrastructure\AMQP;
 
-class AMQPChannelOptions
+readonly class AMQPChannelOptions
 {
     // See PhpAmqpLib\Channel\AMQPChannel::queue_declare() for explanation for params.
     public function __construct(
-        private readonly bool $passive = false,
-        private readonly bool $durable = false,
-        private readonly bool $exclusive = false,
-        private readonly bool $autoDelete = true,
-        private readonly bool $nowait = false,
+        private bool $passive = false,
+        private bool $durable = false,
+        private bool $exclusive = false,
+        private bool $autoDelete = true,
+        private bool $nowait = false,
         /** @var array<mixed> $arguments */
-        private readonly array $arguments = [],
-        private readonly ?int $ticket = null
+        private array $arguments = [],
+        private ?int $ticket = null
     ) {
     }
 

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\ValueObject\String;
 
-abstract class NonEmptyStringLiteral implements \JsonSerializable, \Stringable, StringLiteral
+abstract readonly class NonEmptyStringLiteral implements \JsonSerializable, \Stringable, StringLiteral
 {
     public function __construct(
-        private readonly string $string,
+        private string $string,
     ) {
         $this->guardNonEmpty($string);
     }
