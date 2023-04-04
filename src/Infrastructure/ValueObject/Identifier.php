@@ -4,7 +4,7 @@ namespace App\Infrastructure\ValueObject;
 
 use App\Infrastructure\ValueObject\String\NonEmptyStringLiteral;
 
-abstract class Identifier extends NonEmptyStringLiteral
+abstract readonly class Identifier extends NonEmptyStringLiteral
 {
     final public function __construct(
         string $identifier
