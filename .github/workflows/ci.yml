@@ -20,7 +20,7 @@ jobs:
       - name: Setup PHP 8.2 with Xdebug 3.x
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2
+          php-version: '8.2'
           coverage: xdebug
 
       # https://github.com/marketplace/actions/checkout
