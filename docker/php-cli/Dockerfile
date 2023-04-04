@@ -1,4 +1,4 @@
-FROM php:8.1-cli
+FROM php:8.2-cli
 
 RUN apt-get update && apt-get install -y zip unzip git curl
 RUN docker-php-ext-install mysqli pdo pdo_mysql sockets pcntl
