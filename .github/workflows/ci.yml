@@ -17,10 +17,10 @@ jobs:
 
     steps:
       # https://github.com/marketplace/actions/setup-php-action
-      - name: Setup PHP 8.1 with Xdebug 3.x
+      - name: Setup PHP 8.2 with Xdebug 3.x
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'
+          php-version: '8.2'
           coverage: xdebug
 
       # https://github.com/marketplace/actions/checkout
@@ -43,7 +43,7 @@ jobs:
         run: vendor/bin/php-cs-fixer fix --dry-run --stop-on-violation --config=.php-cs-fixer.dist.php
 
       - name: Run test suite
-        run: vendor/bin/phpunit --testsuite unit --fail-on-incomplete  --log-junit junit.xml --coverage-clover clover.xml
+        run: vendor/bin/phpunit --no-output --testsuite unit --fail-on-incomplete  --log-junit junit.xml --coverage-clover clover.xml
 
       # https://github.com/marketplace/actions/codecov
       - name: Send test coverage to codecov.io
