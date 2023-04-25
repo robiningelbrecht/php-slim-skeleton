@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd" beStrictAboutChangesToGlobalState="true" beStrictAboutOutputDuringTests="true" colors="true" defaultTestSuite="unit" cacheDirectory=".phpunit.cache">
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.1/phpunit.xsd" beStrictAboutChangesToGlobalState="true" beStrictAboutOutputDuringTests="true" colors="true" defaultTestSuite="unit" cacheDirectory=".phpunit.cache">
   <testsuites>
     <testsuite name="unit">
       <directory>tests</directory>
@@ -10,12 +10,12 @@
 
     </bootstrap>
   </extensions>
-  <coverage>
+  <source>
     <include>
       <directory>src</directory>
     </include>
     <exclude>
       <file>src/Infrastructure/AMQP/AMQPStreamConnectionFactory.php</file>
     </exclude>
-  </coverage>
+  </source>
 </phpunit>

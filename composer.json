@@ -28,7 +28,7 @@
     "php-di/php-di": "^7.0",
     "php-di/slim-bridge": "^3.3",
     "ramsey/uuid": "^4.7",
-    "slim/psr7": "^1.5",
+    "slim/psr7": "^1.6",
     "slim/slim": "^4.11",
     "symfony/cache": "^6.1",
     "symfony/console": "^6.1",
@@ -40,8 +40,8 @@
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^3.16",
     "phpstan/phpstan": "^1.10",
-    "phpunit/phpunit": "^10.0",
-    "robiningelbrecht/phpunit-pretty-print": "^1.0.0",
+    "phpunit/phpunit": "^10.1",
+    "robiningelbrecht/phpunit-pretty-print": "^1.2.0",
     "spatie/phpunit-snapshot-assertions": "^5.0"
   },
   "autoload": {
