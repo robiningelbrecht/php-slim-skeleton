@@ -2,6 +2,7 @@
 
 namespace App\Tests;
 
+use DI\Container;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestFactoryInterface;
@@ -35,7 +36,7 @@ abstract class WebTestCase extends TestCase
         return $this->app;
     }
 
-    public function getContainer(): ContainerInterface
+    public function getContainer(): Container
     {
         return $this->container;
     }

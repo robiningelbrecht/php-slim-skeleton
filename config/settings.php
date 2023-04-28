@@ -14,6 +14,10 @@ return [
         // If false, display only "Slim Application Error" on the PHP log.
         // Doesn't do anything when 'logErrors' is false.
         'logErrorDetails' => $_ENV['LOG_ERROR_DETAILS'],
+        'whoops' => [
+            'enabled' => $_ENV['ENABLE_WHOOPS_ERROR_LOGGING'],
+            'editor' => $_ENV['WHOOPS_EDITOR'],
+        ],
         // Path where Slim will cache the container, compiler passes, ...
         'cache_dir' => Settings::getAppRoot().'/var/cache/slim',
     ],
