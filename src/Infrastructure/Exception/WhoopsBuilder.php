@@ -35,6 +35,15 @@ readonly class WhoopsBuilder
         return new self($handler);
     }
 
+    public function withEditor(string $editor): self
+    {
+        if ($this->handler instanceof PrettyPageHandler) {
+            $this->handler->setEditor($editor);
+        }
+
+        return $this;
+    }
+
     public function build(): Run
     {
         $whoops = new Run();
