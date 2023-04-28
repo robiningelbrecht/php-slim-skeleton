@@ -8,7 +8,7 @@ use Slim\Interfaces\ErrorRendererInterface;
 readonly class WhoopsHtmlErrorRenderer implements ErrorRendererInterface
 {
     public function __construct(
-        private readonly Settings $settings
+        private Settings $settings
     ) {
     }
 
