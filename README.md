@@ -28,6 +28,16 @@ docker-compose up -d --build
 docker-compose run --rm php-cli composer install
 ```
 
+## What does the skeleton include?
+
+- DI container ([docs](https://php-slim-skeleton.robiningelbrecht.be/development-guide/dependency-injection))
+- Console commands ([docs](https://php-slim-skeleton.robiningelbrecht.be/development-guide/console-commands))
+- Domain commands and command handlers ([docs](https://php-slim-skeleton.robiningelbrecht.be/development-guide/cqrs))
+- Eventing ([docs](https://php-slim-skeleton.robiningelbrecht.be/development-guide/eventing))
+- Async processing of commands with RabbitMQ ([docs](https://php-slim-skeleton.robiningelbrecht.be/development-guide/amqp))
+- Database migrations ([docs](https://php-slim-skeleton.robiningelbrecht.be/development-guide/migrations))
+- Templating engine ([docs](https://php-slim-skeleton.robiningelbrecht.be/development-guide/templating))
+
 ## Documentation
 
 Learn more at these links:
