@@ -2,11 +2,11 @@
 
 namespace App\Infrastructure\Exception;
 
-use Slim\Error\Renderers\HtmlErrorRenderer;
+use Slim\Error\Renderers\HtmlErrorRenderer as HtmlErrorRendererBase;
 use Slim\Exception\HttpNotFoundException;
 use Twig\Environment;
 
-class ErrorRenderer extends HtmlErrorRenderer
+class DefaultHtmlErrorRenderer extends HtmlErrorRendererBase
 {
     protected string $defaultErrorTitle = 'Waw, this is embarrassing';
 

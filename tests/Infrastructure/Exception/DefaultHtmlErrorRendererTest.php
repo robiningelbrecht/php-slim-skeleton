@@ -5,9 +5,16 @@ namespace App\Tests\Infrastructure\Exception;
 use App\Tests\WebTestCase;
 use Spatie\Snapshots\MatchesSnapshots;
 
-class ErrorRendererTest extends WebTestCase
+class DefaultHtmlErrorRendererTest extends WebTestCase
 {
     use MatchesSnapshots;
+
+    protected function setup(): void
+    {
+        $_ENV['ENABLE_WHOOPS_ERROR_LOGGING'] = false;
+
+        parent::setup();
+    }
 
     public function testInvokeHttpNotFoundException(): void
     {
@@ -37,5 +44,6 @@ class ErrorRendererTest extends WebTestCase
 
         $this->assertEquals(500, $response->getStatusCode());
         $this->assertStringContainsString('<strong>Message:</strong> WAW, an error!</div>', (string) $response->getBody());
+        $this->assertStringNotContainsString('Whoops', (string) $response->getBody());
     }
 }
