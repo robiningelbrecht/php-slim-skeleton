@@ -332,6 +332,13 @@ Learn more at these links:
 - [Doctrine migrations](https://www.doctrine-project.org/projects/doctrine-migrations/en/3.6/)
 - [Twig](https://twig.symfony.com/)
 
+## Projects using this skeleton
+
+- [Unofficial World Cube Association (WCA) Public API](https://github.com/robiningelbrecht/wca-rest-api)
+- [Database of newly generated Pokemon cards using GPT and Stable Diffusion](https://github.com/robiningelbrecht/gotta-generate-em-all)
+- [A PHP app that generates Pokemon cards by using GPT and Stable Diffusion](https://github.com/robiningelbrecht/pokemon-card-generator)
+- [Generate Full 3D pictures of a Rubiks cube](https://github.com/robiningelbrecht/puzzle-generator)
+
 ## Contributing
 
 Please see [CONTRIBUTING](https://php-slim-skeleton.robiningelbrecht.be/contribute) for details.
